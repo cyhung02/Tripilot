@@ -12,128 +12,6 @@ const Header = ({ title, subtitle, themeColor }) => {
         {/* 日本風格裝飾元素 */}
         <div className="absolute top-0 left-0 w-24 h-24 opacity-20">
           <svg viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="40" fill="#FBD7E8" />
-                <path d="M50,20 L50,5 M50,5 L45,15 M50,5 L55,15" stroke="#16A34A" strokeWidth="2" />
-              </svg>
-            </div>
-          </>
-        );
-      
-      default: // 'sakura'
-        return <Sakura />;
-    }
-  };
-  
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {renderThemeElement()}
-    </div>
-  );
-};
-
-// 主應用元件
-const JapanTravelApp = () => {
-  const [selectedDay, setSelectedDay] = useState(scheduleData[0].id);
-  
-  const handleDayChange = (dayId) => {
-    setSelectedDay(dayId);
-  };
-  
-  const currentDay = scheduleData.find(day => day.id === selectedDay) || scheduleData[0];
-  
-  // 根據當前日期定義主題色彩
-  const themeColorMap = {
-    'sakura': {
-      primary: 'bg-pink-200',
-      secondary: 'bg-pink-100',
-      accent: 'bg-pink-400',
-      background: 'bg-rose-50',
-    },
-    'osaka-castle': {
-      primary: 'bg-amber-200',
-      secondary: 'bg-amber-100',
-      accent: 'bg-amber-400',
-      background: 'bg-amber-50',
-    },
-    'onsen': {
-      primary: 'bg-cyan-200',
-      secondary: 'bg-cyan-100',
-      accent: 'bg-cyan-400',
-      background: 'bg-cyan-50',
-    },
-    'peace-memorial': {
-      primary: 'bg-blue-200',
-      secondary: 'bg-blue-100',
-      accent: 'bg-blue-400',
-      background: 'bg-blue-50',
-    },
-    'torii-gate': {
-      primary: 'bg-red-200',
-      secondary: 'bg-red-100',
-      accent: 'bg-red-400',
-      background: 'bg-red-50',
-    },
-    'onomichi-cat': {
-      primary: 'bg-orange-200',
-      secondary: 'bg-orange-100',
-      accent: 'bg-orange-400',
-      background: 'bg-orange-50',
-    },
-    'tsuyama-castle': {
-      primary: 'bg-emerald-200',
-      secondary: 'bg-emerald-100',
-      accent: 'bg-emerald-400',
-      background: 'bg-emerald-50',
-    },
-    'himeji-castle': {
-      primary: 'bg-purple-200',
-      secondary: 'bg-purple-100',
-      accent: 'bg-purple-400',
-      background: 'bg-purple-50',
-    },
-    'kurashiki': {
-      primary: 'bg-indigo-200',
-      secondary: 'bg-indigo-100',
-      accent: 'bg-indigo-400',
-      background: 'bg-indigo-50',
-    },
-    'okayama-garden': {
-      primary: 'bg-green-200',
-      secondary: 'bg-green-100',
-      accent: 'bg-green-400',
-      background: 'bg-green-50',
-    }
-  };
-  
-  const themeColors = themeColorMap[currentDay.themeElement];
-  
-  return (
-    <div className={`min-h-screen flex flex-col ${themeColors.background} relative overflow-hidden transition-colors duration-500`}>
-      <ThemeElements themeType={currentDay.themeElement} />
-      
-      <Header 
-        title="日本關西與中國地方旅遊手冊" 
-        subtitle={`${currentDay.date} | ${currentDay.title}`}
-        themeColor={themeColors.primary}
-      />
-      
-      <main className="flex-grow container mx-auto px-4 py-8 relative z-10">
-        <Navigation 
-          days={scheduleData} 
-          selectedDay={selectedDay} 
-          onDayChange={handleDayChange} 
-          themeColor={themeColors}
-        />
-        
-        <DailySchedule day={currentDay} themeColor={themeColors} />
-      </main>
-      
-      <Footer themeColor={themeColors} />
-    </div>
-  );
-};
-
-export default JapanTravelApp;">
             <path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="currentColor" strokeWidth="2" />
             <path d="M30,30 L70,30 L70,70 L30,70 Z" fill="none" stroke="currentColor" strokeWidth="2" />
             <path d="M40,40 L60,40 L60,60 L40,60 Z" fill="none" stroke="currentColor" strokeWidth="2" />
@@ -311,110 +189,6 @@ const MustBuyItems = ({ items, themeColor }) => {
         </p>
       </div>
     </div>
-  );
-};
-
-// 每日行程元件
-const DailySchedule = ({ day, themeColor }) => {
-  const [activeTab, setActiveTab] = useState('schedule');
-  
-  return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-500">
-      {/* 日期說明 */}
-      <div className={`${themeColor.primary} p-4 transition-colors duration-500`}>
-        <h2 className="text-2xl font-bold text-gray-800">{day.date} | {day.title}</h2>
-        <p className="text-gray-700">{day.description}</p>
-      </div>
-      
-      {/* 標籤頁切換 */}
-      <div className="flex border-b">
-        <button
-          className={`flex-1 py-3 font-medium text-center transition-colors ${
-            activeTab === 'schedule' 
-              ? `${themeColor.accent} text-white` 
-              : 'text-gray-600 hover:bg-gray-100'
-          }`}
-          onClick={() => setActiveTab('schedule')}
-        >
-          行程安排
-        </button>
-        <button
-          className={`flex-1 py-3 font-medium text-center transition-colors ${
-            activeTab === 'food' 
-              ? `${themeColor.accent} text-white` 
-              : 'text-gray-600 hover:bg-gray-100'
-          }`}
-          onClick={() => setActiveTab('food')}
-        >
-          美食推薦
-        </button>
-        {day.mustBuyItems && day.mustBuyItems.length > 0 && (
-          <button
-            className={`flex-1 py-3 font-medium text-center transition-colors ${
-              activeTab === 'shopping' 
-                ? `${themeColor.accent} text-white` 
-                : 'text-gray-600 hover:bg-gray-100'
-            }`}
-            onClick={() => setActiveTab('shopping')}
-          >
-            必買推薦
-          </button>
-        )}
-      </div>
-      
-      {/* 內容區域 */}
-      <div className="p-4">
-        {activeTab === 'schedule' && (
-          <div className="space-y-4">
-            {/* 主要活動 */}
-            <div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">主要活動</h3>
-              <div className="space-y-3">
-                {day.mainActivities.map((activity, index) => (
-                  <ActivityCard 
-                    key={index} 
-                    title={activity.title} 
-                    details={activity.details || []} 
-                    themeColor={themeColor.secondary}
-                  />
-                ))}
-              </div>
-            </div>
-            
-            {/* 住宿 */}
-            <div className="mt-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-3">住宿</h3>
-              <div className={`${themeColor.secondary} p-4 rounded-lg`}>
-                <p className="text-lg font-medium">{day.accommodation.name}</p>
-                {day.accommodation.location && (
-                  <p className="text-gray-600">{day.accommodation.location}</p>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-        
-        {activeTab === 'food' && (
-          <FoodRecommendation recommendations={day.foodRecommendations} themeColor={themeColor.secondary} />
-        )}
-        
-        {activeTab === 'shopping' && day.mustBuyItems && (
-          <MustBuyItems items={day.mustBuyItems} themeColor={themeColor.secondary} />
-        )}
-      </div>
-    </div>
-  );
-};
-
-// 頁尾元件
-const Footer = ({ themeColor }) => {
-  return (
-    <footer className={`${themeColor.primary} py-4 px-4 text-center text-gray-700 relative z-10 transition-colors duration-500`}>
-      <div className="container mx-auto">
-        <p className="mb-2">日本關西與中國地方旅遊手冊 © {new Date().getFullYear()}</p>
-        <p className="text-sm">祝您旅途愉快！安全健康！</p>
-      </div>
-    </footer>
   );
 };
 
@@ -677,5 +451,225 @@ const ThemeElements = ({ themeType }) => {
                 <path d="M830,120 L850,100 L870,120 Z" fill="#1F2937" />
               </svg>
             </div>
-            <div className="absolute top-40 right-20 w-24 h-24 opacity-20">
-              <svg viewBox="0 0
+          </>
+        );
+        
+      default: // 'sakura'
+        return <Sakura />;
+    }
+  };
+  
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {renderThemeElement()}
+    </div>
+  );
+};
+
+// 每日行程元件
+const DailySchedule = ({ day, themeColor }) => {
+  const [activeTab, setActiveTab] = useState('schedule');
+  
+  return (
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-500">
+      {/* 日期說明 */}
+      <div className={`${themeColor.primary} p-4 transition-colors duration-500`}>
+        <h2 className="text-2xl font-bold text-gray-800">{day.date} | {day.title}</h2>
+        <p className="text-gray-700">{day.description}</p>
+      </div>
+      
+      {/* 標籤頁切換 */}
+      <div className="flex border-b">
+        <button
+          className={`flex-1 py-3 font-medium text-center transition-colors ${
+            activeTab === 'schedule' 
+              ? `${themeColor.accent} text-white` 
+              : 'text-gray-600 hover:bg-gray-100'
+          }`}
+          onClick={() => setActiveTab('schedule')}
+        >
+          行程安排
+        </button>
+        <button
+          className={`flex-1 py-3 font-medium text-center transition-colors ${
+            activeTab === 'food' 
+              ? `${themeColor.accent} text-white` 
+              : 'text-gray-600 hover:bg-gray-100'
+          }`}
+          onClick={() => setActiveTab('food')}
+        >
+          美食推薦
+        </button>
+        {day.mustBuyItems && day.mustBuyItems.length > 0 && (
+          <button
+            className={`flex-1 py-3 font-medium text-center transition-colors ${
+              activeTab === 'shopping' 
+                ? `${themeColor.accent} text-white` 
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+            onClick={() => setActiveTab('shopping')}
+          >
+            必買推薦
+          </button>
+        )}
+      </div>
+      
+      {/* 內容區域 */}
+      <div className="p-4">
+        {activeTab === 'schedule' && (
+          <div className="space-y-4">
+            {/* 主要活動 */}
+            <div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">主要活動</h3>
+              <div className="space-y-3">
+                {day.mainActivities.map((activity, index) => (
+                  <ActivityCard 
+                    key={index} 
+                    title={activity.title} 
+                    details={activity.details || []} 
+                    themeColor={themeColor.secondary}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            {/* 住宿 */}
+            <div className="mt-6">
+              <h3 className="text-xl font-bold text-gray-800 mb-3">住宿</h3>
+              <div className={`${themeColor.secondary} p-4 rounded-lg`}>
+                <p className="text-lg font-medium">{day.accommodation.name}</p>
+                {day.accommodation.location && (
+                  <p className="text-gray-600">{day.accommodation.location}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {activeTab === 'food' && (
+          <FoodRecommendation recommendations={day.foodRecommendations} themeColor={themeColor.secondary} />
+        )}
+        
+        {activeTab === 'shopping' && day.mustBuyItems && (
+          <MustBuyItems items={day.mustBuyItems} themeColor={themeColor.secondary} />
+        )}
+      </div>
+    </div>
+  );
+};
+
+// 頁尾元件
+const Footer = ({ themeColor }) => {
+  return (
+    <footer className={`${themeColor.primary} py-4 px-4 text-center text-gray-700 relative z-10 transition-colors duration-500`}>
+      <div className="container mx-auto">
+        <p className="mb-2">日本關西與中國地方旅遊手冊 © {new Date().getFullYear()}</p>
+        <p className="text-sm">祝您旅途愉快！安全健康！</p>
+      </div>
+    </footer>
+  );
+};
+
+// 主應用元件
+const JapanTravelApp = () => {
+  const [selectedDay, setSelectedDay] = useState(scheduleData[0].id);
+  
+  const handleDayChange = (dayId) => {
+    setSelectedDay(dayId);
+  };
+  
+  const currentDay = scheduleData.find(day => day.id === selectedDay) || scheduleData[0];
+  
+  // 根據當前日期定義主題色彩
+  const themeColorMap = {
+    'sakura': {
+      primary: 'bg-pink-200',
+      secondary: 'bg-pink-100',
+      accent: 'bg-pink-400',
+      background: 'bg-rose-50',
+    },
+    'osaka-castle': {
+      primary: 'bg-amber-200',
+      secondary: 'bg-amber-100',
+      accent: 'bg-amber-400',
+      background: 'bg-amber-50',
+    },
+    'onsen': {
+      primary: 'bg-cyan-200',
+      secondary: 'bg-cyan-100',
+      accent: 'bg-cyan-400',
+      background: 'bg-cyan-50',
+    },
+    'peace-memorial': {
+      primary: 'bg-blue-200',
+      secondary: 'bg-blue-100',
+      accent: 'bg-blue-400',
+      background: 'bg-blue-50',
+    },
+    'torii-gate': {
+      primary: 'bg-red-200',
+      secondary: 'bg-red-100',
+      accent: 'bg-red-400',
+      background: 'bg-red-50',
+    },
+    'onomichi-cat': {
+      primary: 'bg-orange-200',
+      secondary: 'bg-orange-100',
+      accent: 'bg-orange-400',
+      background: 'bg-orange-50',
+    },
+    'tsuyama-castle': {
+      primary: 'bg-emerald-200',
+      secondary: 'bg-emerald-100',
+      accent: 'bg-emerald-400',
+      background: 'bg-emerald-50',
+    },
+    'himeji-castle': {
+      primary: 'bg-purple-200',
+      secondary: 'bg-purple-100',
+      accent: 'bg-purple-400',
+      background: 'bg-purple-50',
+    },
+    'kurashiki': {
+      primary: 'bg-indigo-200',
+      secondary: 'bg-indigo-100',
+      accent: 'bg-indigo-400',
+      background: 'bg-indigo-50',
+    },
+    'okayama-garden': {
+      primary: 'bg-green-200',
+      secondary: 'bg-green-100',
+      accent: 'bg-green-400',
+      background: 'bg-green-50',
+    }
+  };
+  
+  const themeColors = themeColorMap[currentDay.themeElement];
+  
+  return (
+    <div className={`min-h-screen flex flex-col ${themeColors.background} relative overflow-hidden transition-colors duration-500`}>
+      <ThemeElements themeType={currentDay.themeElement} />
+      
+      <Header 
+        title="日本關西與中國地方旅遊手冊" 
+        subtitle={`${currentDay.date} | ${currentDay.title}`}
+        themeColor={themeColors.primary}
+      />
+      
+      <main className="flex-grow container mx-auto px-4 py-8 relative z-10">
+        <Navigation 
+          days={scheduleData} 
+          selectedDay={selectedDay} 
+          onDayChange={handleDayChange} 
+          themeColor={themeColors}
+        />
+        
+        <DailySchedule day={currentDay} themeColor={themeColors} />
+      </main>
+      
+      <Footer themeColor={themeColors} />
+    </div>
+  );
+};
+
+export default JapanTravelApp;
