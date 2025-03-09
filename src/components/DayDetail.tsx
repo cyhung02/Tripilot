@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { DayInfo } from '../data/types';
 import ItineraryItemCard from './ItineraryItemCard';
 import RecommendationSection from './RecommendationSection';
 import AccommodationInfo from './AccommodationInfo';
+import { useItinerary } from '../context/ItineraryContext';
 
 interface DayDetailProps {
     day: DayInfo;
@@ -11,8 +11,8 @@ interface DayDetailProps {
 }
 
 const DayDetail: React.FC<DayDetailProps> = ({ day, isToday }) => {
-    // 控制展開的項目
-    const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+    // 使用 Context 中的展開狀態
+    const { expandedItems, setExpandedItems } = useItinerary();
 
     // 切換展開狀態
     const toggleExpand = (id: string) => {

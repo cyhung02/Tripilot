@@ -1,3 +1,4 @@
+// src/context/ItineraryContext.tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { differenceInDays, isWithinInterval } from 'date-fns';
 import { itineraryData, TRIP_START_DATE, TRIP_END_DATE } from '../data/itineraryData';
@@ -10,6 +11,9 @@ interface ItineraryContextType {
     setSelectedDayIndex: (index: number) => void;
     isToday: (date: string) => boolean;
     today: Date;
+    expandedItems: Record<string, boolean>;
+    setExpandedItems: React.Dispatch<React.SetStateAction<Record<string, boolean>>>;
+    resetExpandedItems: () => void;
 }
 
 // 創建 Context
@@ -33,6 +37,18 @@ export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }
     // 狀態管理
     const [selectedDayIndex, setSelectedDayIndex] = useState(0);
     const [today] = useState(new Date());
+    const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+
+    // 重置所有展開的項目
+    const resetExpandedItems = () => {
+        setExpandedItems({});
+    };
+
+    // 當日期變更時，重置展開的項目
+    const handleDaySelect = (index: number) => {
+        setSelectedDayIndex(index);
+        resetExpandedItems();
+    };
 
     // 初始化選擇日期 (依據當前日期)
     useEffect(() => {
@@ -71,9 +87,12 @@ export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }
     const value = {
         itineraryData,
         selectedDayIndex,
-        setSelectedDayIndex,
+        setSelectedDayIndex: handleDaySelect,
         isToday,
-        today
+        today,
+        expandedItems,
+        setExpandedItems,
+        resetExpandedItems
     };
 
     return (

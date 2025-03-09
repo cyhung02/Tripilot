@@ -88,11 +88,6 @@ const TravelApp: React.FC = () => {
         isToday
     } = useItinerary();
 
-    // 明確定義 index 參數類型
-    const handleDaySelect = (index: number): void => {
-        setSelectedDayIndex(index);
-    };
-
     return (
         <div className="min-h-screen bg-pink-50 text-gray-700 font-sans relative overflow-hidden tracking-wide">
             {/* 櫻花花瓣飄落動畫 */}
@@ -142,7 +137,7 @@ const TravelApp: React.FC = () => {
                         {itineraryData.map((day, index) => (
                             <button
                                 key={index}
-                                onClick={() => handleDaySelect(index)}
+                                onClick={() => setSelectedDayIndex(index)}
                                 className={`px-3 py-2 mx-1 rounded-full text-sm transition-all font-medium ${selectedDayIndex === index
                                     ? 'bg-pink-100 text-pink-800 font-bold shadow-sm'
                                     : 'hover:bg-pink-50 text-gray-600'
