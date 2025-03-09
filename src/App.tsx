@@ -1,11 +1,15 @@
-import TravelApp from './components/japan-travel-app'
+// src/App.tsx
+import TravelApp from './components/japan-travel-app';
+import { ItineraryProvider } from './context/ItineraryContext';
 
 function App() {
-  return (
-    <div>
-      <TravelApp />
-    </div>
-  )
+    return (
+        <ItineraryProvider>
+            <div>
+                <TravelApp />
+            </div>
+        </ItineraryProvider>
+    );
 }
 
-export default App
+export default App;
