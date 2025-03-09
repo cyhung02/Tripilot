@@ -3,7 +3,7 @@ import { DayInfo } from './types';
 
 // 定義旅行的起始日期，方便後續日期計算
 export const TRIP_START_DATE = new Date(2025, 3 - 1, 28); // 月份是從0開始，3月為2
-export const TRIP_END_DATE = new Date(2025, 4 - 1, 6);    // 4月為3
+export const TRIP_END_DATE = new Date(2025, 4 - 1, 6, 23, 59, 59);
 
 export const itineraryData: DayInfo[] = [
     {
