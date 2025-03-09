@@ -4,41 +4,47 @@ import { differenceInDays, isWithinInterval } from 'date-fns';
 
 // 櫻花花瓣組件
 const CherryBlossom = ({ style }) => {
-  return (
-    <motion.div 
-      className="absolute opacity-70 pointer-events-none z-0"
-      style={style}
-      animate={{
-        y: [style.top, window.innerHeight + 100],
-        x: [style.left, style.left + (Math.random() * 150 - 75)],
-        rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)],
-      }}
-      transition={{
-        duration: 10 + Math.random() * 20,
-        ease: "linear",
-        repeat: Infinity,
-        delay: Math.random() * 5,
-      }}
-    >
-      <svg width={style.size} height={style.size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 15 C 55 10, 65 0, 70 5 C 80 10, 95 30, 90 45 C 85 60, 70 80, 50 85 C 30 80, 15 60, 10 45 C 5 30, 20 10, 30 5 C 35 0, 45 10, 50 15" 
-          fill={style.color} />
-      </svg>
-    </motion.div>
-  );
-};
-
+    return (
+      <motion.div 
+        className="absolute opacity-70 pointer-events-none z-0"
+        style={style}
+        animate={{
+          y: [style.top, window.innerHeight + 100],
+          x: [style.left, style.left + (Math.random() * 150 - 75)],
+          rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)],
+        }}
+        transition={{
+          duration: 10 + Math.random() * 20,
+          ease: "linear",
+          repeat: Infinity,
+          delay: Math.random() * 5,
+        }}
+      >
+        <svg width={style.size} height={style.size} viewBox="0 0 100 100" fill="none">
+          {/* 专业级樱花花瓣路径 */}
+          <path d="M 51 18 C 45 15 35 10 30 20 C 25 30 19 45 23 60 C 27 76 35 85 50 95 C 65 85 75 75 77 59 C 78 44 75 30 70 20 C 65 10 55 15 51 18 Z" 
+                fill={style.color}
+                stroke={style.color}
+                strokeWidth="1"/>
+        </svg>
+      </motion.div>
+    );
+  };
 // 櫻花花瓣飄落背景組件
 const CherryBlossomFall = () => {
   const [petals, setPetals] = useState([]);
   
   useEffect(() => {
-    const numberOfPetals = 20; // 花瓣數量
+    const numberOfPetals = 25; // 花瓣數量
     const colors = ["#FBCFE8", "#F9A8D4", "#F472B6", "#FDF2F8"]; // 多種粉色調
+    const MAX_PETAL_SIZE = 20; // 新增最大尺寸限制
     
     const newPetals = Array.from({ length: numberOfPetals }).map((_, i) => ({
       id: i,
-      size: 15 + Math.random() * 30, // 花瓣大小
+      size: Math.min(
+        15 + Math.random() * 5,
+        MAX_PETAL_SIZE
+      ),
       top: -100 - Math.random() * 500, // 開始位置在螢幕上方
       left: Math.random() * window.innerWidth, // 隨機水平位置
       color: colors[Math.floor(Math.random() * colors.length)], // 隨機顏色
