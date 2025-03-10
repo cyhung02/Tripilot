@@ -7,4 +7,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: '/Journify/' // 替換為您的儲存庫名稱
 })

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { ItineraryItem } from '../data/types';
+import { ItineraryItem, Train } from '../data/types';
 
 interface ItineraryItemCardProps {
     item: ItineraryItem;
@@ -76,6 +76,54 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
         }
     };
 
+    // 渲染單一列車卡片
+    const renderTrainCard = (train: Train, index: number) => {
+        return (
+            <div key={index} className="bg-white rounded-lg shadow-sm p-3 mb-3 border border-purple-100">
+                <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                        列車 {index + 1}
+                    </span>
+                    {train.isReserved && (
+                        <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full flex items-center">
+                            <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                            </svg>
+                            已預訂
+                        </span>
+                    )}
+                </div>
+
+                <div className="flex items-center mb-3">
+                    <div className="flex-1">
+                        <p className="text-sm font-medium">{train.from}</p>
+                        {train.departureTime && <p className="text-xs text-pink-500">{train.departureTime}</p>}
+                    </div>
+
+                    <svg className="w-5 h-5 mx-2 text-purple-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+
+                    <div className="flex-1 text-right">
+                        <p className="text-sm font-medium">{train.to}</p>
+                        {train.arrivalTime && <p className="text-xs text-pink-500">{train.arrivalTime}</p>}
+                    </div>
+                </div>
+
+                {train.trainNumber && (
+                    <div className="text-xs flex items-center text-purple-600">
+                        <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                        {train.trainNumber}
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     // 根據項目類型渲染詳情內容
     const renderDetails = () => {
         switch (item.type) {
@@ -112,7 +160,8 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
 
             case '交通':
                 return (
-                    <>
+                    <div className="space-y-4">
+                        {/* 顯示總體交通資訊 */}
                         <div className="flex items-center mb-3">
                             <div className="flex-1">
                                 <p className="text-sm font-medium">{item.from}</p>
@@ -129,13 +178,33 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                             </div>
                         </div>
 
-                        {item.train_info && (
-                            <div className="bg-pink-50 p-3 rounded-lg mb-3 border border-pink-100">
-                                <h4 className="text-sm font-medium mb-1 text-pink-800">列車資訊</h4>
-                                <p className="text-xs">{item.train_info}</p>
+                        {/* 多列車轉乘提示 */}
+                        {item.trains && item.trains.length > 1 && (
+                            <div className="bg-purple-50 p-2 rounded-lg mb-3 border border-purple-100">
+                                <p className="text-xs text-purple-700 flex items-center">
+                                    <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                    </svg>
+                                    此行程需要轉乘 {item.trains.length} 次
+                                </p>
                             </div>
                         )}
-                    </>
+
+                        {/* 列車明細 */}
+                        {item.trains && item.trains.length > 0 && (
+                            <div className="space-y-2">
+                                <h4 className="text-sm font-bold text-purple-800">列車資訊</h4>
+                                {item.trains.map((train, idx) => renderTrainCard(train, idx))}
+                            </div>
+                        )}
+
+                        {/* 其他資訊 */}
+                        {item.description && (
+                            <p className="text-sm mt-3">{item.description}</p>
+                        )}
+                    </div>
                 );
 
             case '餐廳':
