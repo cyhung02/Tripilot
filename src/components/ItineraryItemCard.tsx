@@ -76,24 +76,24 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
         }
     };
 
-    // 渲染垂直時間軸
+    // 渲染垂直時間軸 - 流式佈局版本，不使用絕對定位
     const renderTransportTimeline = (trains: Train[]) => {
         if (!trains || trains.length === 0) return null;
 
         // 建立時間軸上的全部站點（包括起點和終點）
-        const allStations: Array<{station: string, time?: string, isStart?: boolean, isEnd?: boolean}> = [];
-        
+        const allStations: Array<{ station: string, time?: string, isStart?: boolean, isEnd?: boolean }> = [];
+
         // 添加所有列車的起點和終點
         trains.forEach((train, idx) => {
             // 添加出發站（如果是第一個列車或與前一個列車的終點不同）
-            if (idx === 0 || train.from !== trains[idx-1].to) {
+            if (idx === 0 || train.from !== trains[idx - 1].to) {
                 allStations.push({
                     station: train.from,
                     time: train.departureTime,
                     isStart: idx === 0
                 });
             }
-            
+
             // 添加終點站
             allStations.push({
                 station: train.to,
@@ -114,71 +114,65 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                     </svg>
                     轉乘行程
                 </h4>
-                
+
                 <div className="relative">
+                    {/* 垂直時間軸的背景線 - 位置根據新佈局調整 */}
+                    <div className="absolute left-[46px] w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
+
                     {allStations.map((station, idx) => (
-                        <div key={`station-section-${idx}`} className="mb-6 flex items-start">
-                            {/* 時間 */}
-                            <div className="w-12 text-right pr-2 pt-1">
-                                <div className="text-xs text-purple-600 font-medium">
-                                    {station.time || ''}
-                                </div>
-                            </div>
-                            
-                            {/* 圓圈和垂直線 */}
-                            <div className="w-5 flex-shrink-0 relative flex justify-center items-center pt-1">
-                                {/* 垂直線上半部分 - 除了第一個站點外都顯示 */}
-                                {idx > 0 && (
-                                    <div className="absolute w-0.5 bg-purple-300 top-[-30px] h-[30px] z-0"></div>
-                                )}
-                                
-                                {/* 圓圈 */}
-                                <div className={`w-5 h-5 rounded-full border-2 bg-white z-10 relative ${
-                                    station.isStart || station.isEnd 
-                                        ? 'border-purple-500' 
-                                        : 'border-purple-300'
-                                }`}>
-                                </div>
-                                
-                                {/* 垂直線下半部分 - 除了最後一個站點外都顯示 */}
-                                {idx < allStations.length - 1 && (
-                                    <div className="absolute w-0.5 bg-purple-300 top-[6px] h-[36px] z-0"></div>
-                                )}
-                            </div>
-                            
-                            {/* 站點名稱和列車資訊 */}
-                            <div className="ml-2 flex-1">
-                                {/* 站點名稱 */}
-                                <div>
-                                    <div className={`font-medium text-sm ${
-                                        station.isStart || station.isEnd 
-                                            ? 'text-purple-700' 
-                                            : 'text-purple-600'
-                                    }`}>
-                                        {station.station}
+                        <div key={`station-section-${idx}`} className="mb-6">
+                            {/* 使用 grid 佈局將時間和內容放在同一行 */}
+                            <div className="grid grid-cols-[36px_22px_1fr] items-start">
+                                {/* 時間 - 靠左佈局，不使用絕對定位 */}
+                                <div className="text-left pt-1">
+                                    <div className="text-xs text-purple-600 font-semibold">
+                                        {station.time || ''}
                                     </div>
-                                    {station.isStart && <div className="text-xs text-purple-400 font-medium">出發點</div>}
-                                    {station.isEnd && <div className="text-xs text-purple-400 font-medium">抵達點</div>}
                                 </div>
-                                
-                                {/* 列車資訊 */}
-                                {idx < allStations.length - 1 && 
-                                    trains[idx] && trains[idx].from === station.station && (
-                                    <div className="mt-3 mb-1">
-                                        <div className="py-2 px-4 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
-                                            <div className="font-medium text-purple-700 whitespace-nowrap text-xs">{trains[idx].trainNumber}</div>
-                                            {trains[idx].isReserved && (
-                                                <div className="flex items-center text-green-600 text-xs mt-1 whitespace-nowrap">
-                                                    <svg className="w-3 h-3 mr-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                                    </svg>
-                                                    已預訂
-                                                </div>
-                                            )}
+
+                                {/* 圓圈容器 */}
+                                <div className="flex justify-center pt-1 relative">
+                                    {/* 圓圈 */}
+                                    <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd
+                                            ? 'border-purple-500'
+                                            : 'border-purple-300'
+                                        }`}>
+                                    </div>
+                                </div>
+
+                                {/* 站點名稱和列車資訊 */}
+                                <div className="pl-2">
+                                    {/* 站點名稱 */}
+                                    <div>
+                                        <div className={`font-medium text-sm ${station.isStart || station.isEnd
+                                                ? 'text-purple-700'
+                                                : 'text-purple-600'
+                                            }`}>
+                                            {station.station}
                                         </div>
+                                        {station.isStart && <div className="text-xs text-purple-400 font-medium">出發點</div>}
+                                        {station.isEnd && <div className="text-xs text-purple-400 font-medium">抵達點</div>}
                                     </div>
-                                )}
+
+                                    {/* 列車資訊 */}
+                                    {idx < allStations.length - 1 &&
+                                        trains[idx] && trains[idx].from === station.station && (
+                                            <div className="mt-3 mb-1">
+                                                <div className="py-2 px-4 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
+                                                    <div className="font-medium text-purple-700 whitespace-nowrap text-xs">{trains[idx].trainNumber}</div>
+                                                    {trains[idx].isReserved && (
+                                                        <div className="flex items-center text-green-600 text-xs mt-1 whitespace-nowrap">
+                                                            <svg className="w-3 h-3 mr-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                                            </svg>
+                                                            已預訂
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
+                                </div>
                             </div>
                         </div>
                     ))}
