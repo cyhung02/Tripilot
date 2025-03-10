@@ -143,15 +143,13 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                                 {/* 站點名稱和列車資訊 */}
                                 <div className="pl-2">
                                     {/* 站點名稱 */}
-                                    <div>
+                                    <div className="pt-[2px]">
                                         <div className={`font-medium text-sm ${station.isStart || station.isEnd
                                                 ? 'text-purple-700'
                                                 : 'text-purple-600'
                                             }`}>
                                             {station.station}
                                         </div>
-                                        {station.isStart && <div className="text-xs text-purple-400 font-medium">出發點</div>}
-                                        {station.isEnd && <div className="text-xs text-purple-400 font-medium">抵達點</div>}
                                     </div>
 
                                     {/* 列車資訊 */}
