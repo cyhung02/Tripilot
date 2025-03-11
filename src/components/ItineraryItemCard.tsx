@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ItineraryItem, Train } from '../data/types';
+import { Fragment } from 'react';
 
 interface ItineraryItemCardProps {
     item: ItineraryItem;
@@ -138,71 +139,87 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
 
                 {/* 渲染每個轉乘區塊 */}
                 {transportBlocks.map((block, blockIdx) => (
-                    <div
-                        key={`transport-block-${blockIdx}`}
-                        className={`relative mb-6 ${blockIdx > 0 ? 'mt-8 pt-2' : ''}`}
-                    >
+                    <Fragment key={`transport-block-${blockIdx}`}>
+                        {/* 如果不是第一個區塊，添加步行轉乘指示 */}
+                        {blockIdx > 0 && (
+                            <div className="relative py-0 mb-0 grid grid-cols-[36px_22px_1fr] items-center">
+                                <div></div>
 
-                        {/* 區塊內的垂直時間軸線 */}
-                        <div className="absolute left-[46px] w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
+                                {/* 虛線連接 */}
+                                <div className="flex justify-center relative h-full">
+                                    <div className="absolute -my-1 left-1/2 border-l-2 border-dashed border-purple-300 h-full transform -translate-x-1/2"></div>
+                                </div>
 
-                        {/* 渲染區塊內的站點 */}
-                        {block.stations.map((station, stationIdx) => (
-                            <div key={`station-${blockIdx}-${stationIdx}`} className="mb-6">
-                                <div className="grid grid-cols-[36px_22px_1fr] items-start">
-                                    {/* 時間 */}
-                                    <div className="text-left pt-1">
-                                        <div className="text-xs text-purple-600 font-semibold">
-                                            {station.time || ''}
-                                        </div>
-                                    </div>
-
-                                    {/* 圓圈容器 */}
-                                    <div className="flex justify-center pt-1 relative">
-                                        {/* 圓圈 */}
-                                        <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd
-                                            ? 'border-purple-500'
-                                            : 'border-purple-300'
-                                            }`}>
-                                        </div>
-                                    </div>
-
-                                    {/* 站點名稱和列車資訊 */}
-                                    <div className="pl-2">
-                                        {/* 站點名稱 */}
-                                        <div className="pt-[2px]">
-                                            <div className={`font-medium text-sm ${station.isStart || station.isEnd
-                                                ? 'text-purple-700'
-                                                : 'text-purple-600'
-                                                }`}>
-                                                {station.station}
-                                            </div>
-                                        </div>
-
-                                        {/* 列車資訊 - 在站點是列車出發站時顯示 */}
-                                        {station.trainDeparture !== undefined && (
-                                            <div className="mt-3 mb-1">
-                                                <div className="py-2 px-4 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
-                                                    <div className="font-medium text-purple-700 whitespace-nowrap text-xs">
-                                                        {trains[station.trainDeparture].trainNumber}
-                                                    </div>
-                                                    {trains[station.trainDeparture].isReserved && (
-                                                        <div className="flex items-center text-green-600 text-xs mt-1 whitespace-nowrap">
-                                                            <svg className="w-3 h-3 mr-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                                            </svg>
-                                                            已預訂
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
+                                <div className="pl-2 py-3">
+                                    <div className="text-xs text-purple-600">步行前往下一站</div>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        )}
+
+                        <div
+                            className={`relative mb-0`}
+                        >
+                            {/* 區塊內的垂直時間軸線 */}
+                            <div className="absolute left-[46px] w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
+
+                            {/* 渲染區塊內的站點 */}
+                            {block.stations.map((station, stationIdx) => (
+                                <div key={`station-${blockIdx}-${stationIdx}`} className="mb-0">
+                                    <div className="grid grid-cols-[36px_22px_1fr] items-start">
+                                        {/* 時間 */}
+                                        <div className="text-left pt-1">
+                                            <div className="text-xs text-purple-600 font-semibold">
+                                                {station.time || ''}
+                                            </div>
+                                        </div>
+
+                                        {/* 圓圈容器 */}
+                                        <div className="flex justify-center pt-1 relative">
+                                            {/* 圓圈 */}
+                                            <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd
+                                                ? 'border-purple-500'
+                                                : 'border-purple-300'
+                                                }`}>
+                                            </div>
+                                        </div>
+
+                                        {/* 站點名稱和列車資訊 */}
+                                        <div className="pl-2">
+                                            {/* 站點名稱 */}
+                                            <div className="pt-[2px]">
+                                                <div className={`font-medium text-sm ${station.isStart || station.isEnd
+                                                    ? 'text-purple-700'
+                                                    : 'text-purple-600'
+                                                    }`}>
+                                                    {station.station}
+                                                </div>
+                                            </div>
+
+                                            {/* 列車資訊 - 在站點是列車出發站時顯示 */}
+                                            {station.trainDeparture !== undefined && (
+                                                <div className="mt-1 mb-1">
+                                                    <div className="py-2 px-4 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
+                                                        <div className="font-medium text-purple-700 whitespace-nowrap text-xs">
+                                                            {trains[station.trainDeparture].trainNumber}
+                                                        </div>
+                                                        {trains[station.trainDeparture].isReserved && (
+                                                            <div className="flex items-center text-green-600 text-xs mt-1 whitespace-nowrap">
+                                                                <svg className="w-3 h-3 mr-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                                                </svg>
+                                                                已預訂
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </Fragment>
                 ))}
             </div>
         );
