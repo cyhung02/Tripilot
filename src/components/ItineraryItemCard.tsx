@@ -142,27 +142,9 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                         key={`transport-block-${blockIdx}`}
                         className={`relative mb-6 ${blockIdx > 0 ? 'mt-8 pt-2' : ''}`}
                     >
-                        {/* 標示不同轉乘區間 */}
-                        {blockIdx > 0 && (
-                            <div className="absolute top-0 left-0 right-0 border-t border-dashed border-purple-200 -mt-4"></div>
-                        )}
 
                         {/* 區塊內的垂直時間軸線 */}
                         <div className="absolute left-[46px] w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
-
-                        {/* 顯示不同運輸區間的轉乘提示 */}
-                        {blockIdx > 0 && (
-                            <div className="mb-4 text-xs text-purple-500 italic pl-12">
-                                <span className="inline-flex items-center">
-                                    <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="12" y1="8" x2="12" y2="12"></line>
-                                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                                    </svg>
-                                    需轉移至不同車站
-                                </span>
-                            </div>
-                        )}
 
                         {/* 渲染區塊內的站點 */}
                         {block.stations.map((station, stationIdx) => (
