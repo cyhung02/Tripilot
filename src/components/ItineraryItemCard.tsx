@@ -76,29 +76,50 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
         }
     };
 
-    // 渲染垂直時間軸 - 流式佈局版本，不使用絕對定位
+    // 渲染垂直時間軸 - 按區塊分組，每個區塊有獨立的垂直線
     const renderTransportTimeline = (trains: Train[]) => {
         if (!trains || trains.length === 0) return null;
 
-        // 建立時間軸上的全部站點（包括起點和終點）
-        const allStations: Array<{ station: string, time?: string, isStart?: boolean, isEnd?: boolean }> = [];
+        // 將列車分組為不同區塊
+        type StationInfo = {
+            station: string;
+            time?: string;
+            isStart?: boolean;
+            isEnd?: boolean;
+            trainDeparture?: number; // 作為某列車的出發站，存儲列車索引
+        };
 
-        // 添加所有列車的起點和終點
+        type TransportBlock = {
+            stations: StationInfo[];
+        };
+
+        const transportBlocks: TransportBlock[] = [];
+
+        // 遍歷所有列車，構建區塊
         trains.forEach((train, idx) => {
-            // 添加出發站（如果是第一個列車或與前一個列車的終點不同）
-            if (idx === 0 || train.from !== trains[idx - 1].to) {
-                allStations.push({
-                    station: train.from,
-                    time: train.departureTime,
-                    isStart: idx === 0
+            // 檢查是否需要創建新區塊
+            const isNewBlock = idx === 0 || train.from !== transportBlocks.at(-1)!.stations.at(-1)!.station;
+            if (isNewBlock) {
+                // 創建新區塊
+                transportBlocks.push({
+                    stations: [
+                        {
+                            station: train.from,
+                            time: train.departureTime,
+                            isStart: idx === 0,
+                            trainDeparture: idx
+                        }
+                    ]
                 });
+            } else {
+                const prevStation = transportBlocks.at(-1)!.stations.at(-1)!;
+                prevStation.time = train.departureTime;
+                prevStation.trainDeparture = idx;
             }
-
-            // 添加終點站
-            allStations.push({
+            transportBlocks.at(-1)!.stations.push({
                 station: train.to,
                 time: train.arrivalTime,
-                isEnd: idx === trains.length - 1
+                isEnd: idx === trains.length - 1,
             });
         });
 
@@ -115,50 +136,75 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                     轉乘行程
                 </h4>
 
-                <div className="relative">
-                    {/* 垂直時間軸的背景線 - 位置根據新佈局調整 */}
-                    <div className="absolute left-[46px] w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
+                {/* 渲染每個轉乘區塊 */}
+                {transportBlocks.map((block, blockIdx) => (
+                    <div
+                        key={`transport-block-${blockIdx}`}
+                        className={`relative mb-6 ${blockIdx > 0 ? 'mt-8 pt-2' : ''}`}
+                    >
+                        {/* 標示不同轉乘區間 */}
+                        {blockIdx > 0 && (
+                            <div className="absolute top-0 left-0 right-0 border-t border-dashed border-purple-200 -mt-4"></div>
+                        )}
 
-                    {allStations.map((station, idx) => (
-                        <div key={`station-section-${idx}`} className="mb-6">
-                            {/* 使用 grid 佈局將時間和內容放在同一行 */}
-                            <div className="grid grid-cols-[36px_22px_1fr] items-start">
-                                {/* 時間 - 靠左佈局，不使用絕對定位 */}
-                                <div className="text-left pt-1">
-                                    <div className="text-xs text-purple-600 font-semibold">
-                                        {station.time || ''}
-                                    </div>
-                                </div>
+                        {/* 區塊內的垂直時間軸線 */}
+                        <div className="absolute left-[46px] w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
 
-                                {/* 圓圈容器 */}
-                                <div className="flex justify-center pt-1 relative">
-                                    {/* 圓圈 */}
-                                    <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd
-                                            ? 'border-purple-500'
-                                            : 'border-purple-300'
-                                        }`}>
-                                    </div>
-                                </div>
+                        {/* 顯示不同運輸區間的轉乘提示 */}
+                        {blockIdx > 0 && (
+                            <div className="mb-4 text-xs text-purple-500 italic pl-12">
+                                <span className="inline-flex items-center">
+                                    <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                    </svg>
+                                    需轉移至不同車站
+                                </span>
+                            </div>
+                        )}
 
-                                {/* 站點名稱和列車資訊 */}
-                                <div className="pl-2">
-                                    {/* 站點名稱 */}
-                                    <div className="pt-[2px]">
-                                        <div className={`font-medium text-sm ${station.isStart || station.isEnd
-                                                ? 'text-purple-700'
-                                                : 'text-purple-600'
-                                            }`}>
-                                            {station.station}
+                        {/* 渲染區塊內的站點 */}
+                        {block.stations.map((station, stationIdx) => (
+                            <div key={`station-${blockIdx}-${stationIdx}`} className="mb-6">
+                                <div className="grid grid-cols-[36px_22px_1fr] items-start">
+                                    {/* 時間 */}
+                                    <div className="text-left pt-1">
+                                        <div className="text-xs text-purple-600 font-semibold">
+                                            {station.time || ''}
                                         </div>
                                     </div>
 
-                                    {/* 列車資訊 */}
-                                    {idx < allStations.length - 1 &&
-                                        trains[idx] && trains[idx].from === station.station && (
+                                    {/* 圓圈容器 */}
+                                    <div className="flex justify-center pt-1 relative">
+                                        {/* 圓圈 */}
+                                        <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd
+                                            ? 'border-purple-500'
+                                            : 'border-purple-300'
+                                            }`}>
+                                        </div>
+                                    </div>
+
+                                    {/* 站點名稱和列車資訊 */}
+                                    <div className="pl-2">
+                                        {/* 站點名稱 */}
+                                        <div className="pt-[2px]">
+                                            <div className={`font-medium text-sm ${station.isStart || station.isEnd
+                                                ? 'text-purple-700'
+                                                : 'text-purple-600'
+                                                }`}>
+                                                {station.station}
+                                            </div>
+                                        </div>
+
+                                        {/* 列車資訊 - 在站點是列車出發站時顯示 */}
+                                        {station.trainDeparture !== undefined && (
                                             <div className="mt-3 mb-1">
                                                 <div className="py-2 px-4 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
-                                                    <div className="font-medium text-purple-700 whitespace-nowrap text-xs">{trains[idx].trainNumber}</div>
-                                                    {trains[idx].isReserved && (
+                                                    <div className="font-medium text-purple-700 whitespace-nowrap text-xs">
+                                                        {trains[station.trainDeparture].trainNumber}
+                                                    </div>
+                                                    {trains[station.trainDeparture].isReserved && (
                                                         <div className="flex items-center text-green-600 text-xs mt-1 whitespace-nowrap">
                                                             <svg className="w-3 h-3 mr-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -170,11 +216,12 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                                                 </div>
                                             </div>
                                         )}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                ))}
             </div>
         );
     };
