@@ -10,10 +10,6 @@ export const itineraryData: DayInfo[] = [
         date: "3/28",
         day: "星期五",
         title: "出發日",
-        highlights: [
-            { type: "交通", name: "桃園機場 → 大阪關西機場" },
-            { type: "其他", name: "機場領車票" }
-        ],
         itinerary: [
             {
                 type: "交通",
@@ -50,13 +46,6 @@ export const itineraryData: DayInfo[] = [
         date: "3/29",
         day: "星期六",
         title: "大阪探索日",
-        highlights: [
-            { type: "其他", name: "機場領車票" },
-            { type: "景點", name: "大阪城公園 & 天守閣" },
-            { type: "景點", name: "黑門市場" },
-            { type: "景點", name: "新世界 & 通天閣" },
-            { type: "景點", name: "道頓堀 & 心齋橋" }
-        ],
         itinerary: [
             {
                 type: "其他",
@@ -105,10 +94,6 @@ export const itineraryData: DayInfo[] = [
         date: "3/30",
         day: "星期日",
         title: "溫泉放鬆日",
-        highlights: [
-            { type: "景點", name: "有馬溫泉（金湯、銀湯）" },
-            { type: "景點", name: "有馬本街道（湯本坂）逛街散策" }
-        ],
         itinerary: [
             {
                 type: "景點",
@@ -135,13 +120,6 @@ export const itineraryData: DayInfo[] = [
         date: "3/31",
         day: "星期一",
         title: "廣島文化巡禮",
-        highlights: [
-            { type: "交通", name: "有馬溫泉 → 廣島" },
-            { type: "景點", name: "廣島和平紀念公園 & 原爆圓頂" },
-            { type: "景點", name: "縮景園" },
-            { type: "景點", name: "廣島城" },
-            { type: "景點", name: "本通商店街 & 廣島 PARCO" }
-        ],
         itinerary: [
             {
                 type: "交通",
@@ -212,12 +190,6 @@ export const itineraryData: DayInfo[] = [
         date: "4/1",
         day: "星期二",
         title: "神秘宮島之旅",
-        highlights: [
-            { type: "景點", name: "etto宮島交流館（巨大杓子）" },
-            { type: "景點", name: "嚴島神社 & 大鳥居" },
-            { type: "景點", name: "宮島表參道商店街" },
-            { type: "景點", name: "杓子の家（書法老師現場寫字）" }
-        ],
         itinerary: [
             {
                 type: "交通",
@@ -316,14 +288,6 @@ export const itineraryData: DayInfo[] = [
         date: "4/2",
         day: "星期三",
         title: "浪漫尾道漫步",
-        highlights: [
-            { type: "交通", name: "広島 → 尾道" },
-            { type: "餐廳", name: "尾道拉麵 尾道ラーメン 壱番館本店" },
-            { type: "景點", name: "千光寺纜車 & 千光寺公園" },
-            { type: "景點", name: "貓之細道 & 艮神社" },
-            { type: "景點", name: "尾道本通商店街" },
-            { type: "交通", name: "尾道 → 岡山" }
-        ],
         itinerary: [
             {
                 type: "交通",
@@ -426,10 +390,6 @@ export const itineraryData: DayInfo[] = [
         date: "4/3",
         day: "星期四",
         title: "津山歷史文化探索",
-        highlights: [
-            { type: "景點", name: "津山城（鶴山公園）" },
-            { type: "景點", name: "吉備津神社" }
-        ],
         itinerary: [
             {
                 type: "交通",
@@ -496,10 +456,6 @@ export const itineraryData: DayInfo[] = [
         date: "4/4",
         day: "星期五",
         title: "姬路城歷史探訪",
-        highlights: [
-            { type: "景點", name: "姬路城 & 好古園" },
-            { type: "景點", name: "書寫山圓教寺" }
-        ],
         itinerary: [
             {
                 type: "交通",
@@ -566,11 +522,6 @@ export const itineraryData: DayInfo[] = [
         date: "4/5",
         day: "星期六",
         title: "倉敷美觀探索",
-        highlights: [
-            { type: "景點", name: "倉敷美觀" },
-            { type: "景點", name: "大原美術館" },
-            { type: "景點", name: "阿智神社" }
-        ],
         itinerary: [
             {
                 type: "交通",
@@ -645,11 +596,6 @@ export const itineraryData: DayInfo[] = [
         date: "4/6",
         day: "星期日",
         title: "岡山名勝巡禮 & 回程",
-        highlights: [
-            { type: "景點", name: "岡山城 & 後樂園" },
-            { type: "景點", name: "表町商店街" },
-            { type: "交通", name: "岡山機場 → 桃園機場" }
-        ],
         itinerary: [
             {
                 type: "景點",

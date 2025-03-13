@@ -40,7 +40,6 @@ export interface DayInfo {
     date: string;
     day: string;
     title: string;
-    highlights: Array<{ type: string, name: string }>;
     itinerary: ItineraryItem[];
     foodRecommendations?: string[];
     shoppingRecommendations?: string[];
