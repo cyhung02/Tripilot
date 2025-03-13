@@ -222,6 +222,7 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                         <motion.div
                             id={`itinerary-details-${index}`}
                             className="overflow-hidden"
+                            style={{ willChange: "height, opacity" }}
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}

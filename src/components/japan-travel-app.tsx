@@ -15,7 +15,10 @@ const CherryBlossom: React.FC<{ style: CherryBlossomStyle }> = ({ style }) => {
     return (
         <motion.div
             className="absolute opacity-70 pointer-events-none z-0"
-            style={style}
+            style={{
+                ...style,
+                willChange: "transform, opacity"
+            }}
             animate={{
                 y: [style.top, window.innerHeight + 100],
                 x: [style.left, style.left + (Math.random() * 150 - 75)],
