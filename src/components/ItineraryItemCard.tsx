@@ -373,7 +373,12 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
                                 {block.stations.flatMap((station, stationIdx) => {
                                     const result = [
                                         <div key={`station-time-${blockIdx}-${stationIdx}`} className="text-right mr-2 time-column" style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}>
-                                            <div className="text-xs text-purple-600 font-semibold">{station.departureTime || ''}</div>
+                                            {station.arrivalTime && (
+                                                <div className="text-xs text-purple-600 font-semibold">{station.arrivalTime}</div>
+                                            )}
+                                            {station.departureTime && (
+                                                <div className="text-xs text-purple-600 font-semibold">{station.departureTime}</div>
+                                            )}
                                         </div>,
                                         <div key={`station-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative">
                                             <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd ? 'border-purple-500' : 'border-purple-300'} ${stationIdx === 0 ? 'station-circle-first' : ''}`}></div>
