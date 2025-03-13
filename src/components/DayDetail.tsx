@@ -69,19 +69,19 @@ const DayDetail: React.FC<DayDetailProps> = ({ day, isToday }) => {
             </div>
 
             {/* 美食推薦 */}
-            {day.food_recommendations && day.food_recommendations.length > 0 && (
+            {day.foodRecommendations && day.foodRecommendations.length > 0 && (
                 <RecommendationSection
                     title="美食推薦"
-                    items={day.food_recommendations}
+                    items={day.foodRecommendations}
                     iconType="food"
                 />
             )}
 
             {/* 購物推薦 */}
-            {day.shopping_recommendations && day.shopping_recommendations.length > 0 && (
+            {day.shoppingRecommendations && day.shoppingRecommendations.length > 0 && (
                 <RecommendationSection
                     title="購物推薦"
-                    items={day.shopping_recommendations}
+                    items={day.shoppingRecommendations}
                     iconType="shopping"
                 />
             )}

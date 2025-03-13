@@ -1,18 +1,18 @@
 // src/components/TransportTimeline.tsx
 import { Fragment, useRef, useEffect, useState, useMemo } from 'react';
-import { Train } from '../data/types';
+import { Segment } from '../data/types';
 
 // 定義常數
 const TIMELINE_LINE_WIDTH_PX = 2; // 對應 border-l-2 的像素寬度
 
 interface TransportTimelineProps {
-    trains: Train[];
+    segments: Segment[];
 }
 
 /**
  * 顯示轉乘行程時間軸
  */
-const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
+const TransportTimeline: React.FC<TransportTimelineProps> = ({ segments }) => {
     const timelineRef = useRef<HTMLDivElement>(null);
     const [timeColumnWidth, setTimeColumnWidth] = useState<number | null>(null);
 
@@ -42,7 +42,7 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
 
         // 清理 observer
         return () => observer.disconnect();
-    }, [trains]);
+    }, [segments]);
 
     // 根據 timeColumnWidth 定位時間線
     useEffect(() => {
@@ -63,7 +63,7 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
                 (timelineLine as HTMLElement).style.left = `${centerX}px`;
             }
         });
-    }, [trains, timeColumnWidth]);
+    }, [segments, timeColumnWidth]);
 
     // 將火車資料分組為區塊 (基於共同的起點/終點站)
     const transportBlocks = useMemo(() => {
@@ -73,7 +73,7 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
             departureTime?: string;
             isStart?: boolean;
             isEnd?: boolean;
-            trainDeparture?: number;
+            vehicleDeparture?: number;
         };
 
         type TransportBlock = {
@@ -82,39 +82,39 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
 
         const blocks: TransportBlock[] = [];
 
-        trains.forEach((train, idx) => {
+        segments.forEach((segment, idx) => {
             // 判斷是否需要創建新區塊
-            const isNewBlock = idx === 0 || train.from !== blocks.at(-1)!.stations.at(-1)!.station;
+            const isNewBlock = idx === 0 || segment.from !== blocks.at(-1)!.stations.at(-1)!.station;
 
             if (isNewBlock) {
                 // 創建新區塊
                 blocks.push({
                     stations: [
                         {
-                            station: train.from,
-                            departureTime: train.departureTime,
+                            station: segment.from,
+                            departureTime: segment.departureTime,
                             isStart: idx === 0,
-                            trainDeparture: idx,
+                            vehicleDeparture: idx,
                         },
                     ],
                 });
             } else {
                 // 更新既有區塊的最後一個站點
                 const prevStation = blocks.at(-1)!.stations.at(-1)!;
-                prevStation.departureTime = train.departureTime;
-                prevStation.trainDeparture = idx;
+                prevStation.departureTime = segment.departureTime;
+                prevStation.vehicleDeparture = idx;
             }
 
             // 添加目的地站點
             blocks.at(-1)!.stations.push({
-                station: train.to,
-                arrivalTime: train.arrivalTime,
-                isEnd: idx === trains.length - 1,
+                station: segment.to,
+                arrivalTime: segment.arrivalTime,
+                isEnd: idx === segments.length - 1,
             });
         });
 
         return blocks;
-    }, [trains]);
+    }, [segments]);
 
     return (
         <div>
@@ -180,14 +180,14 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
                                     ];
 
                                     // 出發車次資訊
-                                    if (station.trainDeparture !== undefined) {
+                                    if (station.vehicleDeparture !== undefined) {
                                         result.push(
-                                            <div key={`train-time-${blockIdx}-${stationIdx}`} className="text-right mr-2 time-column" style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}></div>,
-                                            <div key={`train-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative"></div>,
-                                            <div key={`train-info-${blockIdx}-${stationIdx}`} className="pl-2 my-3">
+                                            <div key={`vehicle-time-${blockIdx}-${stationIdx}`} className="text-right mr-2 time-column" style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}></div>,
+                                            <div key={`vehicle-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative"></div>,
+                                            <div key={`vehicle-info-${blockIdx}-${stationIdx}`} className="pl-2 my-3">
                                                 <div className="py-2 px-3 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
-                                                    <div className="font-medium text-purple-700 whitespace-nowrap text-xs">{trains[station.trainDeparture].trainNumber}</div>
-                                                    {trains[station.trainDeparture].isReserved && (
+                                                    <div className="font-medium text-purple-700 whitespace-nowrap text-xs">{segments[station.vehicleDeparture].vehicleNumber}</div>
+                                                    {segments[station.vehicleDeparture].isReserved && (
                                                         <div className="flex items-center text-green-600 text-xs mt-1 whitespace-nowrap">
                                                             <svg className="w-3 h-3 mr-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>

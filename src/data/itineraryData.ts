@@ -18,20 +18,22 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "搭乘航班前往關西機場",
-                from: "桃園機場 T1",
-                to: "大阪關西機場 T1",
-                departure_time: "19:35",
-                arrival_time: "23:00",
-                trains: [
-                    {
-                        trainNumber: "航班 IT220",
-                        from: "桃園機場 T1",
-                        to: "大阪關西機場 T1",
-                        departureTime: "19:35",
-                        arrivalTime: "23:00",
-                        isReserved: true
-                    }
-                ]
+                transportation: {
+                    from: "桃園機場 T1",
+                    to: "大阪關西機場 T1",
+                    departureTime: "19:35",
+                    arrivalTime: "23:00",
+                    segments: [
+                        {
+                            vehicleNumber: "航班 IT220",
+                            from: "桃園機場 T1",
+                            to: "大阪關西機場 T1",
+                            departureTime: "19:35",
+                            arrivalTime: "23:00",
+                            isReserved: true
+                        }
+                    ]
+                }
             },
             {
                 type: "其他",
@@ -41,8 +43,8 @@ export const itineraryData: DayInfo[] = [
             }
         ],
         accommodation: "關西機場 ホテル日航関西空港",
-        food_recommendations: ["機上餐"],
-        shopping_recommendations: []
+        foodRecommendations: ["機上餐"],
+        shoppingRecommendations: []
     },
     {
         date: "3/29",
@@ -95,8 +97,8 @@ export const itineraryData: DayInfo[] = [
                 location: "https://goo.gl/maps/BDWRDCgMZHr8KMRCA"
             }
         ],
-        food_recommendations: ["章魚燒", "炸串", "大阪燒", "和牛壽喜燒"],
-        shopping_recommendations: ["大阪限定零食（Pablo起司塔、Calbee薯條）", "藥妝", "美妝用品", "章魚燒造型紀念品"],
+        foodRecommendations: ["章魚燒", "炸串", "大阪燒", "和牛壽喜燒"],
+        shoppingRecommendations: ["大阪限定零食（Pablo起司塔、Calbee薯條）", "藥妝", "美妝用品", "章魚燒造型紀念品"],
         accommodation: "大阪 ホテルオリエンタルエクスプレス大阪心斎橋"
     },
     {
@@ -125,8 +127,8 @@ export const itineraryData: DayInfo[] = [
                 location: "https://goo.gl/maps/ckCURdQ7d2qRHMLv5"
             }
         ],
-        food_recommendations: ["炭酸煎餅", "神戶牛料理", "溫泉蛋", "金泉饅頭"],
-        shopping_recommendations: ["溫泉相關產品", "炭酸煎餅", "金泉饅頭"],
+        foodRecommendations: ["炭酸煎餅", "神戶牛料理", "溫泉蛋", "金泉饅頭"],
+        shoppingRecommendations: ["溫泉相關產品", "炭酸煎餅", "金泉饅頭"],
         accommodation: "有馬溫泉 中の坊 瑞苑"
     },
     {
@@ -144,28 +146,30 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "前往廣島",
-                from: "有馬溫泉",
-                to: "廣島",
-                departure_time: "10:30",
-                arrival_time: "12:30",
-                trains: [
-                    {
-                        trainNumber: "神戶巴士52号",
-                        from: "有馬溫泉",
-                        to: "新神戶站",
-                        departureTime: "10:30",
-                        arrivalTime: "11:10",
-                        isReserved: true
-                    },
-                    {
-                        trainNumber: "ＪＲ新幹線のぞみ13号",
-                        from: "新神戶站",
-                        to: "廣島站",
-                        departureTime: "11:30",
-                        arrivalTime: "12:30",
-                        isReserved: true
-                    }
-                ]
+                transportation: {
+                    from: "有馬溫泉",
+                    to: "廣島",
+                    departureTime: "10:30",
+                    arrivalTime: "12:30",
+                    segments: [
+                        {
+                            vehicleNumber: "神戶巴士52号",
+                            from: "有馬溫泉",
+                            to: "新神戶站",
+                            departureTime: "10:30",
+                            arrivalTime: "11:10",
+                            isReserved: true
+                        },
+                        {
+                            vehicleNumber: "ＪＲ新幹線のぞみ13号",
+                            from: "新神戶站",
+                            to: "廣島站",
+                            departureTime: "11:30",
+                            arrivalTime: "12:30",
+                            isReserved: true
+                        }
+                    ]
+                }
             },
             {
                 type: "景點",
@@ -200,8 +204,8 @@ export const itineraryData: DayInfo[] = [
                 location: "https://goo.gl/maps/zSM71S7dYJFVHVnY7"
             }
         ],
-        food_recommendations: ["廣島燒", "牡蠣料理", "紅葉饅頭", "廣島沾麵"],
-        shopping_recommendations: ["廣島牡蠣醬油", "熊野筆化妝刷（白鳳堂、竹宝堂）"],
+        foodRecommendations: ["廣島燒", "牡蠣料理", "紅葉饅頭", "廣島沾麵"],
+        shoppingRecommendations: ["廣島牡蠣醬油", "熊野筆化妝刷（白鳳堂、竹宝堂）"],
         accommodation: "廣島 広島ワシントンホテル"
     },
     {
@@ -218,28 +222,30 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "前往宮島",
-                from: "廣島",
-                to: "宮島",
-                departure_time: "09:00",
-                arrival_time: "10:00",
-                trains: [
-                    {
-                        trainNumber: "JR山陽本線",
-                        from: "廣島站",
-                        to: "宮島口站",
-                        departureTime: "09:00",
-                        arrivalTime: "09:30",
-                        isReserved: false
-                    },
-                    {
-                        trainNumber: "宮島渡輪",
-                        from: "宮島口碼頭",
-                        to: "宮島碼頭",
-                        departureTime: "09:40",
-                        arrivalTime: "10:00",
-                        isReserved: false
-                    }
-                ]
+                transportation: {
+                    from: "廣島",
+                    to: "宮島",
+                    departureTime: "09:00",
+                    arrivalTime: "10:00",
+                    segments: [
+                        {
+                            vehicleNumber: "JR山陽本線",
+                            from: "廣島站",
+                            to: "宮島口站",
+                            departureTime: "09:00",
+                            arrivalTime: "09:30",
+                            isReserved: false
+                        },
+                        {
+                            vehicleNumber: "宮島渡輪",
+                            from: "宮島口碼頭",
+                            to: "宮島碼頭",
+                            departureTime: "09:40",
+                            arrivalTime: "10:00",
+                            isReserved: false
+                        }
+                    ]
+                }
             },
             {
                 type: "景點",
@@ -276,32 +282,34 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "返回廣島",
-                from: "宮島",
-                to: "廣島",
-                departure_time: "17:00",
-                arrival_time: "18:00",
-                trains: [
-                    {
-                        trainNumber: "宮島渡輪",
-                        from: "宮島碼頭",
-                        to: "宮島口碼頭",
-                        departureTime: "17:00",
-                        arrivalTime: "17:20",
-                        isReserved: false
-                    },
-                    {
-                        trainNumber: "JR山陽本線",
-                        from: "宮島口站",
-                        to: "廣島站",
-                        departureTime: "17:30",
-                        arrivalTime: "18:00",
-                        isReserved: false
-                    }
-                ]
+                transportation: {
+                    from: "宮島",
+                    to: "廣島",
+                    departureTime: "17:00",
+                    arrivalTime: "18:00",
+                    segments: [
+                        {
+                            vehicleNumber: "宮島渡輪",
+                            from: "宮島碼頭",
+                            to: "宮島口碼頭",
+                            departureTime: "17:00",
+                            arrivalTime: "17:20",
+                            isReserved: false
+                        },
+                        {
+                            vehicleNumber: "JR山陽本線",
+                            from: "宮島口站",
+                            to: "廣島站",
+                            departureTime: "17:30",
+                            arrivalTime: "18:00",
+                            isReserved: false
+                        }
+                    ]
+                }
             }
         ],
-        food_recommendations: ["烤牡蠣", "紅葉饅頭", "星鰻飯", "紅葉天婦羅"],
-        shopping_recommendations: ["宮島木製杓子", "星鰻相關食品", "清酒伴手禮"],
+        foodRecommendations: ["烤牡蠣", "紅葉饅頭", "星鰻飯", "紅葉天婦羅"],
+        shoppingRecommendations: ["宮島木製杓子", "星鰻相關食品", "清酒伴手禮"],
         accommodation: "廣島 広島ワシントンホテル"
     },
     {
@@ -320,28 +328,30 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "前往尾道",
-                from: "広島",
-                to: "尾道",
-                departure_time: "09:38",
-                arrival_time: "10:45",
-                trains: [
-                    {
-                        trainNumber: "ＪＲ新幹線こだま844号",
-                        from: "広島站",
-                        to: "三原站",
-                        departureTime: "09:38",
-                        arrivalTime: "10:15",
-                        isReserved: true
-                    },
-                    {
-                        trainNumber: "ＪＲ山陽本線",
-                        from: "三原站",
-                        to: "尾道站",
-                        departureTime: "10:25",
-                        arrivalTime: "10:45",
-                        isReserved: false
-                    }
-                ]
+                transportation: {
+                    from: "広島",
+                    to: "尾道",
+                    departureTime: "09:38",
+                    arrivalTime: "10:45",
+                    segments: [
+                        {
+                            vehicleNumber: "ＪＲ新幹線こだま844号",
+                            from: "広島站",
+                            to: "三原站",
+                            departureTime: "09:38",
+                            arrivalTime: "10:15",
+                            isReserved: true
+                        },
+                        {
+                            vehicleNumber: "ＪＲ山陽本線",
+                            from: "三原站",
+                            to: "尾道站",
+                            departureTime: "10:25",
+                            arrivalTime: "10:45",
+                            isReserved: false
+                        }
+                    ]
+                }
             },
             {
                 type: "其他",
@@ -354,7 +364,7 @@ export const itineraryData: DayInfo[] = [
                 name: "尾道拉麵 壱番館本店",
                 time: "11:30-12:30",
                 description: "尾道著名的拉麵店，以醬油湯底和背脂拉麵聞名。",
-                recommended_dishes: "尾道拉麵、尾道背脂拉麵、叉燒飯",
+                recommendedDishes: "尾道拉麵、尾道背脂拉麵、叉燒飯",
                 location: "https://goo.gl/maps/8eypEvTsj9XQg3Fy5"
             },
             {
@@ -390,24 +400,26 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "前往岡山",
-                from: "尾道",
-                to: "岡山",
-                departure_time: "20:30",
-                arrival_time: "21:50",
-                trains: [
-                    {
-                        trainNumber: "JR山陽本線",
-                        from: "尾道站",
-                        to: "岡山站",
-                        departureTime: "20:30",
-                        arrivalTime: "21:50",
-                        isReserved: false
-                    }
-                ]
+                transportation: {
+                    from: "尾道",
+                    to: "岡山",
+                    departureTime: "20:30",
+                    arrivalTime: "21:50",
+                    segments: [
+                        {
+                            vehicleNumber: "JR山陽本線",
+                            from: "尾道站",
+                            to: "岡山站",
+                            departureTime: "20:30",
+                            arrivalTime: "21:50",
+                            isReserved: false
+                        }
+                    ]
+                }
             }
         ],
-        food_recommendations: ["尾道拉麵", "鯛魚料理", "文青麵包"],
-        shopping_recommendations: ["尾道文創商品", "手作工藝品"],
+        foodRecommendations: ["尾道拉麵", "鯛魚料理", "文青麵包"],
+        shoppingRecommendations: ["尾道文創商品", "手作工藝品"],
         accommodation: "岡山 ホテルアベストグランデ 岡山 なごみの湯"
     },
     {
@@ -422,20 +434,22 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "前往津山",
-                from: "岡山",
-                to: "津山",
-                departure_time: "08:30",
-                arrival_time: "09:40",
-                trains: [
-                    {
-                        trainNumber: "JR津山線",
-                        from: "岡山站",
-                        to: "津山站",
-                        departureTime: "08:30",
-                        arrivalTime: "09:40",
-                        isReserved: false
-                    }
-                ]
+                transportation: {
+                    from: "岡山",
+                    to: "津山",
+                    departureTime: "08:30",
+                    arrivalTime: "09:40",
+                    segments: [
+                        {
+                            vehicleNumber: "JR津山線",
+                            from: "岡山站",
+                            to: "津山站",
+                            departureTime: "08:30",
+                            arrivalTime: "09:40",
+                            isReserved: false
+                        }
+                    ]
+                }
             },
             {
                 type: "景點",
@@ -456,24 +470,26 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "返回岡山",
-                from: "津山",
-                to: "岡山",
-                departure_time: "17:00",
-                arrival_time: "18:10",
-                trains: [
-                    {
-                        trainNumber: "JR津山線",
-                        from: "津山站",
-                        to: "岡山站",
-                        departureTime: "17:00",
-                        arrivalTime: "18:10",
-                        isReserved: false
-                    }
-                ]
+                transportation: {
+                    from: "津山",
+                    to: "岡山",
+                    departureTime: "17:00",
+                    arrivalTime: "18:10",
+                    segments: [
+                        {
+                            vehicleNumber: "JR津山線",
+                            from: "津山站",
+                            to: "岡山站",
+                            departureTime: "17:00",
+                            arrivalTime: "18:10",
+                            isReserved: false
+                        }
+                    ]
+                }
             }
         ],
-        food_recommendations: ["津山ホルモンうどん（內臟烏龍麵）", "津山牛（燒烤、肉乾）", "羊羹"],
-        shopping_recommendations: ["津山特產", "吉備津神社護身符"],
+        foodRecommendations: ["津山ホルモンうどん（內臟烏龍麵）", "津山牛（燒烤、肉乾）", "羊羹"],
+        shoppingRecommendations: ["津山特產", "吉備津神社護身符"],
         accommodation: "岡山 ホテルアベストグランデ 岡山 なごみの湯"
     },
     {
@@ -488,20 +504,22 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "前往姬路",
-                from: "岡山",
-                to: "姬路",
-                departure_time: "08:20",
-                arrival_time: "09:00",
-                trains: [
-                    {
-                        trainNumber: "JR山陽新幹線",
-                        from: "岡山站",
-                        to: "姬路站",
-                        departureTime: "08:20",
-                        arrivalTime: "09:00",
-                        isReserved: true
-                    }
-                ]
+                transportation: {
+                    from: "岡山",
+                    to: "姬路",
+                    departureTime: "08:20",
+                    arrivalTime: "09:00",
+                    segments: [
+                        {
+                            vehicleNumber: "JR山陽新幹線",
+                            from: "岡山站",
+                            to: "姬路站",
+                            departureTime: "08:20",
+                            arrivalTime: "09:00",
+                            isReserved: true
+                        }
+                    ]
+                }
             },
             {
                 type: "景點",
@@ -522,24 +540,26 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "返回岡山",
-                from: "姬路",
-                to: "岡山",
-                departure_time: "18:00",
-                arrival_time: "18:40",
-                trains: [
-                    {
-                        trainNumber: "JR山陽新幹線",
-                        from: "姬路站",
-                        to: "岡山站",
-                        departureTime: "18:00",
-                        arrivalTime: "18:40",
-                        isReserved: true
-                    }
-                ]
+                transportation: {
+                    from: "姬路",
+                    to: "岡山",
+                    departureTime: "18:00",
+                    arrivalTime: "18:40",
+                    segments: [
+                        {
+                            vehicleNumber: "JR山陽新幹線",
+                            from: "姬路站",
+                            to: "岡山站",
+                            departureTime: "18:00",
+                            arrivalTime: "18:40",
+                            isReserved: true
+                        }
+                    ]
+                }
             }
         ],
-        food_recommendations: ["姬路名物穴子飯", "播州素麵", "夢前味噌料理"],
-        shopping_recommendations: ["姬路城紀念品", "播州織布製品"],
+        foodRecommendations: ["姬路名物穴子飯", "播州素麵", "夢前味噌料理"],
+        shoppingRecommendations: ["姬路城紀念品", "播州織布製品"],
         accommodation: "岡山 ホテルアベストグランデ 岡山 なごみの湯"
     },
     {
@@ -555,20 +575,22 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "前往倉敷",
-                from: "岡山",
-                to: "倉敷",
-                departure_time: "09:00",
-                arrival_time: "09:15",
-                trains: [
-                    {
-                        trainNumber: "JR山陽本線",
-                        from: "岡山站",
-                        to: "倉敷站",
-                        departureTime: "09:00",
-                        arrivalTime: "09:15",
-                        isReserved: false
-                    }
-                ]
+                transportation: {
+                    from: "岡山",
+                    to: "倉敷",
+                    departureTime: "09:00",
+                    arrivalTime: "09:15",
+                    segments: [
+                        {
+                            vehicleNumber: "JR山陽本線",
+                            from: "岡山站",
+                            to: "倉敷站",
+                            departureTime: "09:00",
+                            arrivalTime: "09:15",
+                            isReserved: false
+                        }
+                    ]
+                }
             },
             {
                 type: "景點",
@@ -597,24 +619,26 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "返回岡山",
-                from: "倉敷",
-                to: "岡山",
-                departure_time: "17:30",
-                arrival_time: "17:45",
-                trains: [
-                    {
-                        trainNumber: "JR山陽本線",
-                        from: "倉敷站",
-                        to: "岡山站",
-                        departureTime: "17:30",
-                        arrivalTime: "17:45",
-                        isReserved: false
-                    }
-                ]
+                transportation: {
+                    from: "倉敷",
+                    to: "岡山",
+                    departureTime: "17:30",
+                    arrivalTime: "17:45",
+                    segments: [
+                        {
+                            vehicleNumber: "JR山陽本線",
+                            from: "倉敷站",
+                            to: "岡山站",
+                            departureTime: "17:30",
+                            arrivalTime: "17:45",
+                            isReserved: false
+                        }
+                    ]
+                }
             }
         ],
-        food_recommendations: ["倉敷牛排", "桃太郎壽司", "倉敷布丁", "麝香葡萄甜點"],
-        shopping_recommendations: ["倉敷帆布包", "倉敷牛仔製品"],
+        foodRecommendations: ["倉敷牛排", "桃太郎壽司", "倉敷布丁", "麝香葡萄甜點"],
+        shoppingRecommendations: ["倉敷帆布包", "倉敷牛仔製品"],
         accommodation: "岡山 ホテルアベストグランデ 岡山 なごみの湯"
     },
     {
@@ -646,42 +670,46 @@ export const itineraryData: DayInfo[] = [
             {
                 type: "交通",
                 name: "前往岡山機場",
-                from: "岡山市區",
-                to: "岡山機場",
-                departure_time: "15:30",
-                arrival_time: "16:30",
-                trains: [
-                    {
-                        trainNumber: "岡山機場巴士",
-                        from: "岡山站",
-                        to: "岡山機場",
-                        departureTime: "15:30",
-                        arrivalTime: "16:30",
-                        isReserved: false
-                    }
-                ]
+                transportation: {
+                    from: "岡山市區",
+                    to: "岡山機場",
+                    departureTime: "15:30",
+                    arrivalTime: "16:30",
+                    segments: [
+                        {
+                            vehicleNumber: "岡山機場巴士",
+                            from: "岡山站",
+                            to: "岡山機場",
+                            departureTime: "15:30",
+                            arrivalTime: "16:30",
+                            isReserved: false
+                        }
+                    ]
+                }
             },
             {
                 type: "交通",
                 name: "返回台灣",
-                from: "岡山機場",
-                to: "桃園機場 T1",
-                departure_time: "17:55",
-                arrival_time: "20:00",
-                trains: [
-                    {
-                        trainNumber: "航班 IT715",
-                        from: "岡山機場",
-                        to: "桃園機場 T1",
-                        departureTime: "17:55",
-                        arrivalTime: "20:00",
-                        isReserved: true
-                    }
-                ]
+                transportation: {
+                    from: "岡山機場",
+                    to: "桃園機場 T1",
+                    departureTime: "17:55",
+                    arrivalTime: "20:00",
+                    segments: [
+                        {
+                            vehicleNumber: "航班 IT715",
+                            from: "岡山機場",
+                            to: "桃園機場 T1",
+                            departureTime: "17:55",
+                            arrivalTime: "20:00",
+                            isReserved: true
+                        }
+                    ]
+                }
             }
         ],
-        food_recommendations: ["岡山壽司", "桃子甜點", "吉備團子", "白桃果凍", "千屋牛"],
-        shopping_recommendations: ["岡山白桃果凍", "吉備團子", "岡山葡萄酒"],
+        foodRecommendations: ["岡山壽司", "桃子甜點", "吉備團子", "白桃果凍", "千屋牛"],
+        shoppingRecommendations: ["岡山白桃果凍", "吉備團子", "岡山葡萄酒"],
         accommodation: ""
     }
 ];

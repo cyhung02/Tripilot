@@ -1,13 +1,22 @@
 // src/data/types.ts
 
-// 新增列車介面
-export interface Train {
-    trainNumber: string;      // 列車編號
+// 將原本的 Train 改名為 Segment
+export interface Segment {
+    vehicleNumber: string;    // 載具編號（如列車編號、航班編號、巴士編號等）
     from: string;             // 出發地
     to: string;               // 目的地
     departureTime?: string;   // 出發時間，可為空
     arrivalTime?: string;     // 抵達時間，可為空
     isReserved: boolean;      // 是否已預訂
+}
+
+// 新增 Transportation 介面，封裝交通相關資訊
+export interface Transportation {
+    from?: string;             // 出發地
+    to?: string;               // 目的地
+    departureTime?: string;    // 出發時間
+    arrivalTime?: string;      // 抵達時間
+    segments?: Segment[];      // 交通路段
 }
 
 // 行程項目介面
@@ -18,15 +27,12 @@ export interface ItineraryItem {
     description?: string;
     tips?: string;
     location?: string;
-    // 交通相關欄位 - 整個交通行程的資訊
-    from?: string;
-    to?: string;
-    departure_time?: string;
-    arrival_time?: string;
-    // 新增 trains 陣列，用於儲存多筆列車資訊(轉乘段落)
-    trains?: Train[];
-    // 餐廳相關欄位
-    recommended_dishes?: string;
+
+    // 移除原有的交通相關欄位，改用 transportation 封裝
+    transportation?: Transportation;
+
+    // 餐廳相關欄位 - 也改為駱駝式命名
+    recommendedDishes?: string;
 }
 
 // 每日資訊介面
@@ -36,7 +42,7 @@ export interface DayInfo {
     title: string;
     highlights: Array<{ type: string, name: string }>;
     itinerary: ItineraryItem[];
-    food_recommendations?: string[];
-    shopping_recommendations?: string[];
+    foodRecommendations?: string[];
+    shoppingRecommendations?: string[];
     accommodation?: string;
 }

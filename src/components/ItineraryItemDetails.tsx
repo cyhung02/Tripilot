@@ -60,25 +60,36 @@ const SightDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
 };
 
 const TransportDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
+    // 確保 item.transportation 存在
+    if (!item.transportation) {
+        return (
+            <div className="text-sm text-gray-500">
+                無交通資訊
+            </div>
+        );
+    }
+
+    const { from, to, departureTime, arrivalTime, segments } = item.transportation;
+
     return (
         <div className="space-y-4">
             {/* 行程摘要 */}
             <div className="flex items-center bg-purple-50 p-3 rounded-lg">
                 <div className="flex-1">
-                    <p className="text-sm font-medium text-purple-700">{item.from}</p>
-                    <p className="text-xs text-purple-500">{item.departure_time}</p>
+                    <p className="text-sm font-medium text-purple-700">{from}</p>
+                    <p className="text-xs text-purple-500">{departureTime}</p>
                 </div>
                 <svg className="w-5 h-5 mx-2 text-purple-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                 </svg>
                 <div className="flex-1 text-right">
-                    <p className="text-sm font-medium text-purple-700">{item.to}</p>
-                    <p className="text-xs text-purple-500">{item.arrival_time}</p>
+                    <p className="text-sm font-medium text-purple-700">{to}</p>
+                    <p className="text-xs text-purple-500">{arrivalTime}</p>
                 </div>
             </div>
 
             {/* 轉乘提示 */}
-            {item.trains && item.trains.length > 1 && (
+            {segments && segments.length > 1 && (
                 <div className="bg-purple-50 p-2 rounded-lg mb-3 border border-purple-100">
                     <p className="text-xs text-purple-700 flex items-center">
                         <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -86,13 +97,13 @@ const TransportDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
                             <line x1="12" y1="8" x2="12" y2="12"></line>
                             <line x1="12" y1="16" x2="12.01" y2="16"></line>
                         </svg>
-                        此行程需要轉乘 {item.trains.length - 1} 次
+                        此行程需要轉乘 {segments.length - 1} 次
                     </p>
                 </div>
             )}
 
             {/* 列車時間軸 */}
-            {item.trains && item.trains.length > 0 && <TransportTimeline trains={item.trains} />}
+            {segments && segments.length > 0 && <TransportTimeline segments={segments} />}
 
             {/* 額外說明 */}
             {item.description && (
@@ -109,10 +120,10 @@ const RestaurantDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
         <>
             {item.description && <p className="text-sm mb-3">{item.description}</p>}
 
-            {item.recommended_dishes && (
+            {item.recommendedDishes && (
                 <div className="bg-pink-50 p-3 rounded-lg mb-3 border border-pink-100">
                     <h4 className="text-sm font-medium mb-1 text-pink-800">推薦菜色</h4>
-                    <p className="text-xs">{item.recommended_dishes}</p>
+                    <p className="text-xs">{item.recommendedDishes}</p>
                 </div>
             )}
 
