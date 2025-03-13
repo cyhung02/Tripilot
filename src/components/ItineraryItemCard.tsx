@@ -208,7 +208,7 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                             <div className="relative timeline-block">
                                 <div className="grid grid-cols-[minmax(auto,max-content)_auto_1fr] items-center">
                                     {/* 虛線連接 */}
-                                    <div className="timeline-line absolute border-l-2 border-purple-300 border-dashed z-0" style={{ width: `${TIMELINE_LINE_WIDTH_PX}px` }}></div>
+                                    <div className="timeline-line absolute border-l-2 border-purple-300 border-dashed top-2 bottom-2 z-0" style={{ width: `${TIMELINE_LINE_WIDTH_PX}px` }}></div>
                                     <div
                                         className="time-column mr-2"
                                         style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}
