@@ -144,80 +144,77 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                         {blockIdx > 0 && (
                             <div className="relative py-0 mb-0 grid grid-cols-[auto_auto_1fr] items-center">
                                 <div></div>
-
                                 {/* 虛線連接 */}
                                 <div className="flex justify-center relative h-full">
                                     <div className="absolute -my-1 left-1/2 border-l-2 border-dashed border-purple-300 h-full transform -translate-x-1/2"></div>
                                 </div>
-
                                 <div className="pl-2 py-3">
                                     <div className="text-xs text-purple-600">步行前往下一站</div>
                                 </div>
                             </div>
                         )}
 
-                        <div
-                            className={`relative mb-0`}
-                        >
+                        <div className={`relative mb-0`}>
                             {/* 區塊內的垂直時間軸線 */}
                             <div className="absolute left-[46px] w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
 
-                            {/* 渲染區塊內的站點 */}
-                            {block.stations.map((station, stationIdx) => (
-                                <div key={`station-${blockIdx}-${stationIdx}`} className="mb-0">
-                                    <div className="grid grid-cols-[auto_auto_1fr] items-start">
-                                        {/* 時間 */}
-                                        <div className="text-right mr-2">
+                            {/* 創建單一的 grid 包含站點和列車資訊 */}
+                            <div className="grid grid-cols-[auto_auto_1fr] items-center">
+                                {/* 將每個站點及其可能的列車資訊平鋪在同一個 grid 中 */}
+                                {block.stations.flatMap((station, stationIdx) => {
+                                    // 創建結果陣列，先放入站點資訊
+                                    const result = [
+                                        // 站點資訊 - 時間
+                                        <div key={`station-time-${blockIdx}-${stationIdx}`} className="text-right mr-2">
                                             <div className="text-xs text-purple-600 font-semibold">
                                                 {station.time || ''}
                                             </div>
-                                        </div>
-
-                                        {/* 圓圈容器 */}
-                                        <div className="flex justify-center relative">
-                                            {/* 圓圈 */}
-                                            <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd
-                                                ? 'border-purple-500'
-                                                : 'border-purple-300'
+                                        </div>,
+                                        // 站點資訊 - 圓圈
+                                        <div key={`station-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative">
+                                            <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd ? 'border-purple-500' : 'border-purple-300'
                                                 }`}>
                                             </div>
+                                        </div>,
+                                        // 站點資訊 - 名稱
+                                        <div key={`station-name-${blockIdx}-${stationIdx}`} className="pl-2">
+                                            <div className={`font-medium text-sm ${station.isStart || station.isEnd ? 'text-purple-700' : 'text-purple-600'
+                                                }`}>
+                                                {station.station}
+                                            </div>
                                         </div>
+                                    ];
 
-                                        {/* 站點名稱和列車資訊 */}
-                                        <div className="pl-2">
-                                            {/* 站點名稱 */}
-                                            <div>
-                                                <div className={`font-medium text-sm leading-tight ${station.isStart || station.isEnd
-                                                    ? 'text-purple-700'
-                                                    : 'text-purple-600'
-                                                    }`}>
-                                                    {station.station}
+                                    // 如果是列車出發站，添加列車資訊行
+                                    if (station.trainDeparture !== undefined) {
+                                        result.push(
+                                            // 列車資訊 - 時間欄位為空
+                                            <div key={`train-time-${blockIdx}-${stationIdx}`} className="text-right mr-2"></div>,
+                                            // 列車資訊 - 圓圈欄位為空
+                                            <div key={`train-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative"></div>,
+                                            // 列車資訊 - 詳情
+                                            <div key={`train-info-${blockIdx}-${stationIdx}`} className="pl-2 mt-1 mb-3">
+                                                <div className="py-2 px-4 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
+                                                    <div className="font-medium text-purple-700 whitespace-nowrap text-xs">
+                                                        {trains[station.trainDeparture].trainNumber}
+                                                    </div>
+                                                    {trains[station.trainDeparture].isReserved && (
+                                                        <div className="flex items-center text-green-600 text-xs mt-1 whitespace-nowrap">
+                                                            <svg className="w-3 h-3 mr-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                                            </svg>
+                                                            已預訂
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
+                                        );
+                                    }
 
-                                            {/* 列車資訊 - 在站點是列車出發站時顯示 */}
-                                            {station.trainDeparture !== undefined && (
-                                                <div className="my-2">
-                                                    <div className="py-2 px-4 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
-                                                        <div className="font-medium text-purple-700 whitespace-nowrap text-xs">
-                                                            {trains[station.trainDeparture].trainNumber}
-                                                        </div>
-                                                        {trains[station.trainDeparture].isReserved && (
-                                                            <div className="flex items-center text-green-600 text-xs mt-1 whitespace-nowrap">
-                                                                <svg className="w-3 h-3 mr-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                                                </svg>
-                                                                已預訂
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+                                    return result;
+                                })}
+                            </div>
                         </div>
                     </Fragment>
                 ))}
