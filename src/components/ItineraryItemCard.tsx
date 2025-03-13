@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ItineraryItem, Train } from '../data/types';
-import { Fragment } from 'react';
+import { Fragment, useRef, useEffect } from 'react';
 
 interface ItineraryItemCardProps {
     item: ItineraryItem;
@@ -15,6 +15,40 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
     isExpanded,
     toggleExpand
 }) => {
+    // 使用 useRef 儲存區塊參考
+    const transportBlockRef = useRef<HTMLDivElement>(null);
+    
+    // 用 useEffect 在組件渲染後定位所有區塊的時間軸線
+    useEffect(() => {
+        if (!isExpanded || !transportBlockRef.current) return;
+        
+        // 使用 setTimeout 確保 DOM 已完全渲染
+        setTimeout(() => {
+            // 找到所有區塊的容器
+            const blockContainers = transportBlockRef.current?.querySelectorAll('.timeline-block');
+            if (!blockContainers?.length) return;
+            
+            // 為每個區塊設置時間軸線
+            blockContainers.forEach(block => {
+                // 找到該區塊中的第一個圓圈和時間軸線
+                const firstCircle = block.querySelector('.station-circle-first');
+                const timelineLine = block.querySelector('.timeline-line');
+                
+                if (firstCircle && timelineLine) {
+                    // 獲取位置資訊
+                    const circleRect = firstCircle.getBoundingClientRect();
+                    const blockRect = block.getBoundingClientRect();
+                    
+                    // 計算圓圈中心相對於區塊的水平位置
+                    const centerX = circleRect.left - blockRect.left + circleRect.width / 2;
+                    
+                    // 設置時間軸線的位置
+                    (timelineLine as HTMLElement).style.left = `${centerX}px`;
+                }
+            });
+        }, 0);
+    }, [isExpanded]); // 當展開狀態變化時重新計算
+
     // 基於項目類型決定卡片背景色
     const getCardBackgroundColor = () => {
         switch (item.type) {
@@ -154,12 +188,12 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                             </div>
                         )}
 
-                        <div className={`relative mb-0`}>
-                            {/* 區塊內的垂直時間軸線 */}
-                            <div className="absolute left-[46px] w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
+                        <div className="relative mb-0 timeline-block">
+                            {/* 使用相對定位方式設定垂直時間軸的位置 */}
+                            <div className="grid grid-cols-[auto_auto_1fr] items-center relative">
+                                {/* 添加一條完整的垂直時間軸線 */}
+                                <div className="timeline-line absolute w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
 
-                            {/* 創建單一的 grid 包含站點和列車資訊 */}
-                            <div className="grid grid-cols-[auto_auto_1fr] items-center">
                                 {/* 將每個站點及其可能的列車資訊平鋪在同一個 grid 中 */}
                                 {block.stations.flatMap((station, stationIdx) => {
                                     // 創建結果陣列，先放入站點資訊
@@ -172,8 +206,11 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                                         </div>,
                                         // 站點資訊 - 圓圈
                                         <div key={`station-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative">
-                                            <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd ? 'border-purple-500' : 'border-purple-300'
-                                                }`}>
+                                            <div 
+                                                className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${
+                                                  station.isStart || station.isEnd ? 'border-purple-500' : 'border-purple-300'
+                                                } ${stationIdx === 0 ? 'station-circle-first' : ''}`}
+                                             >
                                             </div>
                                         </div>,
                                         // 站點資訊 - 名稱
@@ -291,7 +328,9 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                         )}
 
                         {/* 垂直時間軸列車資訊 */}
-                        {item.trains && item.trains.length > 0 && renderTransportTimeline(item.trains)}
+                        <div ref={transportBlockRef}>
+                            {item.type === '交通' && item.trains && item.trains.length > 0 && renderTransportTimeline(item.trains)}
+                        </div>
 
                         {/* 其他資訊 */}
                         {item.description && (
