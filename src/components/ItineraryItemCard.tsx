@@ -205,14 +205,15 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                     <Fragment key={`transport-block-${blockIdx}`}>
                         {/* 如果不是第一個區塊，添加步行轉乘指示 */}
                         {blockIdx > 0 && (
-                            <div className="relative py-0 mb-0 grid grid-cols-[auto_auto_1fr] items-center">
+                            <div className="relative py-0 mb-0 grid grid-cols-[minmax(auto,max-content)_auto_1fr] items-center">
+                                {/* 虛線連接 */}
+                                <div className="timeline-line absolute bg-purple-300 border-dashed top-2 bottom-2 z-0" style={{ width: `${TIMELINE_LINE_WIDTH_PX}px` }}></div>
                                 <div
-                                    className="time-column"
+                                    className="time-column mr-2"
                                     style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}
                                 ></div>
-                                {/* 虛線連接 */}
-                                <div className="flex justify-center relative h-full">
-                                    <div className="absolute -my-1 left-1/2 border-l-2 border-dashed border-purple-300 h-full transform -translate-x-1/2"></div>
+                                <div className="flex justify-center relative">
+                                    <div className="w-4 h-4 rounded-full border-2 border-solid bg-white z-10 opacity-0"></div>
                                 </div>
                                 <div className="pl-2 py-3">
                                     <div className="text-xs text-purple-600">步行前往下一站</div>
