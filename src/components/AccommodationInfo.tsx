@@ -1,17 +1,12 @@
 import { motion } from 'framer-motion';
+import { Accommodation } from '../data/types';
 
 interface AccommodationInfoProps {
-    accommodation: string;
-    checkInTime?: string;
-    checkOutTime?: string;
-    address?: string;
+    accommodation: Accommodation;
 }
 
 const AccommodationInfo: React.FC<AccommodationInfoProps> = ({
-    accommodation,
-    checkInTime = "15:00",
-    checkOutTime = "11:00",
-    address
+    accommodation
 }) => {
     // 動畫設定
     const containerVariants = {
@@ -51,37 +46,25 @@ const AccommodationInfo: React.FC<AccommodationInfoProps> = ({
                     </div>
 
                     <div>
-                        <h4 className="font-medium text-pink-800 text-base">{accommodation}</h4>
+                        <h4 className="font-medium text-pink-800 text-base">{accommodation.name}</h4>
+                        <p className="text-sm text-gray-600 mt-1">{accommodation.city}</p>
 
-                        {address && (
-                            <p className="text-sm text-gray-600 mt-1">{address}</p>
+                        {accommodation.locationURL && (
+                            <div className="flex items-center text-xs text-pink-500 mt-2">
+                                <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M12 2c-3.31 0-6 2.69-6 6 0 4.5 6 12 6 12s6-7.5 6-12c0-3.31-2.69-6-6-6zm0 9a3 3 0 100-6 3 3 0 000 6z"></path>
+                                </svg>
+                                <a
+                                    href={accommodation.locationURL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="underline hover:text-pink-700 transition-colors font-medium"
+                                    aria-label={`在 Google Maps 中查看 ${accommodation.name} 的位置`}
+                                >
+                                    在 Google Maps 中查看位置
+                                </a>
+                            </div>
                         )}
-
-                        <div className="mt-2 flex flex-wrap gap-2">
-                            <div className="bg-pink-50 px-3 py-1 rounded-full flex items-center text-xs text-pink-700">
-                                <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                入住: {checkInTime}
-                            </div>
-
-                            <div className="bg-pink-50 px-3 py-1 rounded-full flex items-center text-xs text-pink-700">
-                                <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 8 14"></polyline>
-                                </svg>
-                                退房: {checkOutTime}
-                            </div>
-                        </div>
-
-                        <div className="mt-3 text-xs text-pink-600 flex items-center">
-                            <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            已預訂
-                        </div>
                     </div>
                 </div>
 

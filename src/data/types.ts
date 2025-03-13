@@ -19,6 +19,13 @@ export interface Transportation {
     segments?: Segment[];      // 交通路段
 }
 
+// 新增 Accommodation 介面
+export interface Accommodation {
+    city: string;            // 飯店所在城市
+    name: string;            // 飯店名稱
+    locationURL: string;     // Google Maps URL of hotel
+}
+
 // 行程項目介面
 export interface ItineraryItem {
     type: '景點' | '交通' | '餐廳' | '購物' | '其他';
@@ -43,5 +50,5 @@ export interface DayInfo {
     itinerary: ItineraryItem[];
     foodRecommendations?: string[];
     shoppingRecommendations?: string[];
-    accommodation?: string;
+    accommodation?: Accommodation;
 }

@@ -21,7 +21,7 @@ export const itineraryData: DayInfo[] = [
                     arrivalTime: "23:00",
                     segments: [
                         {
-                            vehicleNumber: "航班 IT220",
+                            vehicleNumber: "IT220",
                             from: "桃園機場 T1",
                             to: "大阪關西機場 T1",
                             departureTime: "19:35",
@@ -38,8 +38,12 @@ export const itineraryData: DayInfo[] = [
                 description: "抵達後於機場領取預約的車票"
             }
         ],
-        accommodation: "關西機場 ホテル日航関西空港",
-        foodRecommendations: ["機上餐"],
+        accommodation: {
+            city: "大阪關西機場",
+            name: "ホテル日航関西空港",
+            locationURL: "https://goo.gl/maps/YzLYK8DKEeEJQq6V7"
+        },
+        foodRecommendations: [],
         shoppingRecommendations: []
     },
     {
@@ -88,7 +92,11 @@ export const itineraryData: DayInfo[] = [
         ],
         foodRecommendations: ["章魚燒", "炸串", "大阪燒", "和牛壽喜燒"],
         shoppingRecommendations: ["大阪限定零食（Pablo起司塔、Calbee薯條）", "藥妝", "美妝用品", "章魚燒造型紀念品"],
-        accommodation: "大阪 ホテルオリエンタルエクスプレス大阪心斎橋"
+        accommodation: {
+            city: "大阪",
+            name: "ホテルオリエンタルエクスプレス大阪心斎橋",
+            locationURL: "https://goo.gl/maps/3LVzVqQNEzf5MTUC7"
+        }
     },
     {
         date: "3/30",
@@ -114,7 +122,11 @@ export const itineraryData: DayInfo[] = [
         ],
         foodRecommendations: ["炭酸煎餅", "神戶牛料理", "溫泉蛋", "金泉饅頭"],
         shoppingRecommendations: ["溫泉相關產品", "炭酸煎餅", "金泉饅頭"],
-        accommodation: "有馬溫泉 中の坊 瑞苑"
+        accommodation: {
+            city: "有馬溫泉",
+            name: "中の坊 瑞苑",
+            locationURL: "https://goo.gl/maps/KL4xg2XjxPz8nSrB6"
+        }
     },
     {
         date: "3/31",
@@ -184,7 +196,11 @@ export const itineraryData: DayInfo[] = [
         ],
         foodRecommendations: ["廣島燒", "牡蠣料理", "紅葉饅頭", "廣島沾麵"],
         shoppingRecommendations: ["廣島牡蠣醬油", "熊野筆化妝刷（白鳳堂、竹宝堂）"],
-        accommodation: "廣島 広島ワシントンホテル"
+        accommodation: {
+            city: "廣島",
+            name: "広島ワシントンホテル",
+            locationURL: "https://goo.gl/maps/yVRQwThU7JLU9bgU7"
+        }
     },
     {
         date: "4/1",
@@ -282,7 +298,11 @@ export const itineraryData: DayInfo[] = [
         ],
         foodRecommendations: ["烤牡蠣", "紅葉饅頭", "星鰻飯", "紅葉天婦羅"],
         shoppingRecommendations: ["宮島木製杓子", "星鰻相關食品", "清酒伴手禮"],
-        accommodation: "廣島 広島ワシントンホテル"
+        accommodation: {
+            city: "廣島",
+            name: "広島ワシントンホテル",
+            locationURL: "https://goo.gl/maps/yVRQwThU7JLU9bgU7"
+        }
     },
     {
         date: "4/2",
@@ -384,7 +404,11 @@ export const itineraryData: DayInfo[] = [
         ],
         foodRecommendations: ["尾道拉麵", "鯛魚料理", "文青麵包"],
         shoppingRecommendations: ["尾道文創商品", "手作工藝品"],
-        accommodation: "岡山 ホテルアベストグランデ 岡山 なごみの湯"
+        accommodation: {
+            city: "岡山",
+            name: "ホテルアベストグランデ 岡山 なごみの湯",
+            locationURL: "https://goo.gl/maps/SYkKSgkzkUvFXeUm6"
+        }
     },
     {
         date: "4/3",
@@ -450,7 +474,11 @@ export const itineraryData: DayInfo[] = [
         ],
         foodRecommendations: ["津山ホルモンうどん（內臟烏龍麵）", "津山牛（燒烤、肉乾）", "羊羹"],
         shoppingRecommendations: ["津山特產", "吉備津神社護身符"],
-        accommodation: "岡山 ホテルアベストグランデ 岡山 なごみの湯"
+        accommodation: {
+            city: "岡山",
+            name: "ホテルアベストグランデ 岡山 なごみの湯",
+            locationURL: "https://goo.gl/maps/SYkKSgkzkUvFXeUm6"
+        }
     },
     {
         date: "4/4",
@@ -516,7 +544,11 @@ export const itineraryData: DayInfo[] = [
         ],
         foodRecommendations: ["姬路名物穴子飯", "播州素麵", "夢前味噌料理"],
         shoppingRecommendations: ["姬路城紀念品", "播州織布製品"],
-        accommodation: "岡山 ホテルアベストグランデ 岡山 なごみの湯"
+        accommodation: {
+            city: "岡山",
+            name: "ホテルアベストグランデ 岡山 なごみの湯",
+            locationURL: "https://goo.gl/maps/SYkKSgkzkUvFXeUm6"
+        }
     },
     {
         date: "4/5",
@@ -590,7 +622,11 @@ export const itineraryData: DayInfo[] = [
         ],
         foodRecommendations: ["倉敷牛排", "桃太郎壽司", "倉敷布丁", "麝香葡萄甜點"],
         shoppingRecommendations: ["倉敷帆布包", "倉敷牛仔製品"],
-        accommodation: "岡山 ホテルアベストグランデ 岡山 なごみの湯"
+        accommodation: {
+            city: "岡山",
+            name: "ホテルアベストグランデ 岡山 なごみの湯",
+            locationURL: "https://goo.gl/maps/SYkKSgkzkUvFXeUm6"
+        }
     },
     {
         date: "4/6",
@@ -643,7 +679,7 @@ export const itineraryData: DayInfo[] = [
                     arrivalTime: "20:00",
                     segments: [
                         {
-                            vehicleNumber: "航班 IT715",
+                            vehicleNumber: "IT715",
                             from: "岡山機場",
                             to: "桃園機場 T1",
                             departureTime: "17:55",
@@ -656,6 +692,6 @@ export const itineraryData: DayInfo[] = [
         ],
         foodRecommendations: ["岡山壽司", "桃子甜點", "吉備團子", "白桃果凍", "千屋牛"],
         shoppingRecommendations: ["岡山白桃果凍", "吉備團子", "岡山葡萄酒"],
-        accommodation: ""
+        accommodation: undefined
     }
 ];
