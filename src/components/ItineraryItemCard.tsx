@@ -69,7 +69,7 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                     const blockRect = block.getBoundingClientRect();
 
                     // 計算圓圈中心相對於區塊的水平位置
-                    const centerX = circleRect.left - blockRect.left + circleRect.width / 2 - (TIMELINE_LINE_WIDTH_PX / 2);
+                    const centerX = Math.round(circleRect.left - blockRect.left + (circleRect.width / 2) - (TIMELINE_LINE_WIDTH_PX / 2));
 
                     // 設置時間軸線的位置
                     (timelineLine as HTMLElement).style.left = `${centerX}px`;
@@ -205,18 +205,20 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                     <Fragment key={`transport-block-${blockIdx}`}>
                         {/* 如果不是第一個區塊，添加步行轉乘指示 */}
                         {blockIdx > 0 && (
-                            <div className="relative py-0 mb-0 grid grid-cols-[minmax(auto,max-content)_auto_1fr] items-center">
-                                {/* 虛線連接 */}
-                                <div className="timeline-line absolute bg-purple-300 border-dashed top-2 bottom-2 z-0" style={{ width: `${TIMELINE_LINE_WIDTH_PX}px` }}></div>
-                                <div
-                                    className="time-column mr-2"
-                                    style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}
-                                ></div>
-                                <div className="flex justify-center relative">
-                                    <div className="w-4 h-4 rounded-full border-2 border-solid bg-white z-10 opacity-0"></div>
-                                </div>
-                                <div className="pl-2 py-3">
-                                    <div className="text-xs text-purple-600">步行前往下一站</div>
+                            <div className="relative timeline-block">
+                                <div className="grid grid-cols-[minmax(auto,max-content)_auto_1fr] items-center">
+                                    {/* 虛線連接 */}
+                                    <div className="timeline-line absolute border-l-2 border-purple-300 border-dashed z-0" style={{ width: `${TIMELINE_LINE_WIDTH_PX}px` }}></div>
+                                    <div
+                                        className="time-column mr-2"
+                                        style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}
+                                    ></div>
+                                    <div className="flex justify-center relative station-circle-first">
+                                        <div className="w-4 h-4 rounded-full border-2 border-solid z-10 opacity-0"></div>
+                                    </div>
+                                    <div className="pl-2 py-3">
+                                        <div className="text-xs text-purple-600">步行前往下一站</div>
+                                    </div>
                                 </div>
                             </div>
                         )}
