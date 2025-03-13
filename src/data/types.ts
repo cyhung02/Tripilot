@@ -21,7 +21,7 @@ export interface Transportation {
 
 // 行程項目介面
 export interface ItineraryItem {
-    type: '景點' | '交通' | '餐廳' | '其他';
+    type: '景點' | '交通' | '餐廳' | '購物' | '其他';
     name: string;
     time?: string;
     description?: string;
