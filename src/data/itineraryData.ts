@@ -174,7 +174,7 @@ export const itineraryData: DayInfo[] = [
                 location: "https://goo.gl/maps/UX87dJPUH3HoJBsQ8"
             },
             {
-                type: "景點",
+                type: "購物",
                 name: "本通商店街 & 廣島 PARCO",
                 time: "18:30-20:30",
                 description: "廣島主要購物區，有多家百貨公司和特色商店。",

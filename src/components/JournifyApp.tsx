@@ -1,4 +1,4 @@
-// src/components/japan-travel-app.tsx
+// src/components/JournifyApp.tsx
 import { useMemo } from 'react';
 import { useItinerary } from '../context/ItineraryContext';
 import DayDetail from './DayDetail';
@@ -111,7 +111,7 @@ const Footer = () => {
 };
 
 // 主應用元件
-const TravelApp: React.FC = () => {
+const JournifyApp: React.FC = () => {
     // 使用 Context API 獲取狀態
     const { itineraryData, selectedDayIndex, isToday } = useItinerary();
 
@@ -145,4 +145,4 @@ const TravelApp: React.FC = () => {
     );
 };
 
-export default TravelApp;
+export default JournifyApp;

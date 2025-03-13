@@ -1,12 +1,12 @@
 // src/App.tsx
-import TravelApp from './components/japan-travel-app';
+import JournifyApp from './components/JournifyApp';
 import { ItineraryProvider } from './context/ItineraryContext';
 
 function App() {
     return (
         <ItineraryProvider>
             <div>
-                <TravelApp />
+                <JournifyApp />
             </div>
         </ItineraryProvider>
     );
