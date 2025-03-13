@@ -1,6 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ItineraryItem, Train } from '../data/types';
-import { Fragment, useRef, useEffect } from 'react';
+import { Fragment, useRef, useEffect, useState } from 'react';
+
+// 定義常數
+const TIMELINE_LINE_WIDTH_PX = 2; // 對應 w-0.5 的寬度，單位為 px
 
 interface ItineraryItemCardProps {
     item: ItineraryItem;
@@ -17,37 +20,63 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
 }) => {
     // 使用 useRef 儲存區塊參考
     const transportBlockRef = useRef<HTMLDivElement>(null);
-    
-    // 用 useEffect 在組件渲染後定位所有區塊的時間軸線
+    // 儲存時間欄寬度
+    const [timeColumnWidth, setTimeColumnWidth] = useState<number | null>(null);
+
+    // 用 useEffect 計算和設置時間欄最大寬度
     useEffect(() => {
         if (!isExpanded || !transportBlockRef.current) return;
-        
+
         // 使用 setTimeout 確保 DOM 已完全渲染
+        setTimeout(() => {
+            // 找到所有時間欄
+            const timeColumns = transportBlockRef.current?.querySelectorAll('.time-column');
+            if (!timeColumns?.length) return;
+
+            // 找出最大寬度
+            let maxWidth = 0;
+            timeColumns.forEach(column => {
+                const width = column.getBoundingClientRect().width;
+                if (width > maxWidth) {
+                    maxWidth = width;
+                }
+            });
+
+            // 設置最大寬度（增加一點邊距）
+            setTimeColumnWidth(maxWidth);
+        }, 10);
+    }, [isExpanded]); // 當展開狀態變化時重新計算
+
+    // 用 useEffect 在時間欄寬度計算後定位所有區塊的時間軸線
+    useEffect(() => {
+        if (!isExpanded || !transportBlockRef.current || timeColumnWidth === null) return;
+
+        // 使用 setTimeout 確保 DOM 已完全渲染且時間欄寬度已應用
         setTimeout(() => {
             // 找到所有區塊的容器
             const blockContainers = transportBlockRef.current?.querySelectorAll('.timeline-block');
             if (!blockContainers?.length) return;
-            
+
             // 為每個區塊設置時間軸線
             blockContainers.forEach(block => {
                 // 找到該區塊中的第一個圓圈和時間軸線
                 const firstCircle = block.querySelector('.station-circle-first');
                 const timelineLine = block.querySelector('.timeline-line');
-                
+
                 if (firstCircle && timelineLine) {
                     // 獲取位置資訊
                     const circleRect = firstCircle.getBoundingClientRect();
                     const blockRect = block.getBoundingClientRect();
-                    
+
                     // 計算圓圈中心相對於區塊的水平位置
-                    const centerX = circleRect.left - blockRect.left + circleRect.width / 2;
-                    
+                    const centerX = circleRect.left - blockRect.left + circleRect.width / 2 - (TIMELINE_LINE_WIDTH_PX / 2);
+
                     // 設置時間軸線的位置
                     (timelineLine as HTMLElement).style.left = `${centerX}px`;
                 }
             });
-        }, 0);
-    }, [isExpanded]); // 當展開狀態變化時重新計算
+        }, 20);
+    }, [isExpanded, timeColumnWidth]); // 當展開狀態或時間欄寬度變化時重新計算
 
     // 基於項目類型決定卡片背景色
     const getCardBackgroundColor = () => {
@@ -159,7 +188,7 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
         });
 
         return (
-            <div className="pt-2 pb-2">
+            <div>
                 <h4 className="text-sm font-bold text-purple-700 mb-4 flex items-center">
                     <svg className="w-4 h-4 mr-1 text-purple-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -177,7 +206,10 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                         {/* 如果不是第一個區塊，添加步行轉乘指示 */}
                         {blockIdx > 0 && (
                             <div className="relative py-0 mb-0 grid grid-cols-[auto_auto_1fr] items-center">
-                                <div></div>
+                                <div
+                                    className="time-column"
+                                    style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}
+                                ></div>
                                 {/* 虛線連接 */}
                                 <div className="flex justify-center relative h-full">
                                     <div className="absolute -my-1 left-1/2 border-l-2 border-dashed border-purple-300 h-full transform -translate-x-1/2"></div>
@@ -190,27 +222,30 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
 
                         <div className="relative mb-0 timeline-block">
                             {/* 使用相對定位方式設定垂直時間軸的位置 */}
-                            <div className="grid grid-cols-[auto_auto_1fr] items-center relative">
+                            <div className="grid grid-cols-[minmax(auto,max-content)_auto_1fr] items-center relative">
                                 {/* 添加一條完整的垂直時間軸線 */}
-                                <div className="timeline-line absolute w-0.5 bg-purple-300 top-2 bottom-2 z-0"></div>
+                                <div className="timeline-line absolute bg-purple-300 top-2 bottom-2 z-0" style={{ width: `${TIMELINE_LINE_WIDTH_PX}px` }}></div>
 
                                 {/* 將每個站點及其可能的列車資訊平鋪在同一個 grid 中 */}
                                 {block.stations.flatMap((station, stationIdx) => {
                                     // 創建結果陣列，先放入站點資訊
                                     const result = [
                                         // 站點資訊 - 時間
-                                        <div key={`station-time-${blockIdx}-${stationIdx}`} className="text-right mr-2">
+                                        <div
+                                            key={`station-time-${blockIdx}-${stationIdx}`}
+                                            className="text-right mr-2 time-column"
+                                            style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}
+                                        >
                                             <div className="text-xs text-purple-600 font-semibold">
                                                 {station.time || ''}
                                             </div>
                                         </div>,
                                         // 站點資訊 - 圓圈
                                         <div key={`station-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative">
-                                            <div 
-                                                className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${
-                                                  station.isStart || station.isEnd ? 'border-purple-500' : 'border-purple-300'
-                                                } ${stationIdx === 0 ? 'station-circle-first' : ''}`}
-                                             >
+                                            <div
+                                                className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd ? 'border-purple-500' : 'border-purple-300'
+                                                    } ${stationIdx === 0 ? 'station-circle-first' : ''}`}
+                                            >
                                             </div>
                                         </div>,
                                         // 站點資訊 - 名稱
@@ -226,7 +261,11 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                                     if (station.trainDeparture !== undefined) {
                                         result.push(
                                             // 列車資訊 - 時間欄位為空
-                                            <div key={`train-time-${blockIdx}-${stationIdx}`} className="text-right mr-2"></div>,
+                                            <div
+                                                key={`train-time-${blockIdx}-${stationIdx}`}
+                                                className="text-right mr-2 time-column"
+                                                style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}
+                                            ></div>,
                                             // 列車資訊 - 圓圈欄位為空
                                             <div key={`train-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative"></div>,
                                             // 列車資訊 - 詳情
