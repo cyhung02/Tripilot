@@ -382,8 +382,8 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
                                         result.push(
                                             <div key={`train-time-${blockIdx}-${stationIdx}`} className="text-right mr-2 time-column" style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}></div>,
                                             <div key={`train-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative"></div>,
-                                            <div key={`train-info-${blockIdx}-${stationIdx}`} className="pl-2 mt-1 mb-3">
-                                                <div className="py-2 px-4 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
+                                            <div key={`train-info-${blockIdx}-${stationIdx}`} className="pl-2 my-3">
+                                                <div className="py-2 px-3 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
                                                     <div className="font-medium text-purple-700 whitespace-nowrap text-xs">{trains[station.trainDeparture].trainNumber}</div>
                                                     {trains[station.trainDeparture].isReserved && (
                                                         <div className="flex items-center text-green-600 text-xs mt-1 whitespace-nowrap">
