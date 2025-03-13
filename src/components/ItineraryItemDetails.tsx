@@ -13,7 +13,8 @@ const ItineraryItemDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => 
     // 根據項目類型渲染不同的詳細資訊
     switch (item.type) {
         case '景點':
-            return <SightDetails item={item} />;
+        case '購物':
+            return <BasicDetails item={item} />;
         case '交通':
             return <TransportDetails item={item} />;
         case '餐廳':
@@ -27,7 +28,7 @@ const ItineraryItemDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => 
     }
 };
 
-const SightDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
+const BasicDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
     return (
         <>
             {item.description && <p className="text-sm mb-3 leading-relaxed">{item.description}</p>}

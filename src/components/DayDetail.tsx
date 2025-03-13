@@ -23,7 +23,7 @@ const DayDetail: React.FC<DayDetailProps> = ({ day, isToday }) => {
     };
 
     return (
-        <div>
+        <div className="relative z-[2]">
             {/* 日期標題 */}
             <div className="mb-6">
                 <div className="flex items-center">

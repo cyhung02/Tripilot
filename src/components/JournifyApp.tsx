@@ -117,11 +117,11 @@ const JournifyApp: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-pink-50 text-gray-700 font-sans relative overflow-hidden tracking-wide">
-            {/* 櫻花花瓣飄落動畫 */}
-            <CherryBlossomFall />
-
             {/* 背景櫻花裝飾 */}
             <BackgroundDecoration />
+
+            {/* 櫻花花瓣飄落動畫 */}
+            <CherryBlossomFall />
 
             {/* 頁面標題 */}
             <Header />
@@ -130,7 +130,7 @@ const JournifyApp: React.FC = () => {
             <DateNavigation />
 
             {/* 主要內容區 */}
-            <main className="container mx-auto p-4">
+            <main className="container mx-auto p-4 z-[2]">
                 <ErrorBoundary>
                     <DayDetail
                         day={itineraryData[selectedDayIndex]}
