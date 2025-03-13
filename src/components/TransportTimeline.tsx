@@ -126,7 +126,7 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ segments }) => {
                     <path d="M9 18h6"></path>
                     <path d="M9 10h6"></path>
                 </svg>
-                轉乘行程
+                詳細行程
             </h4>
 
             <div ref={timelineRef}>
