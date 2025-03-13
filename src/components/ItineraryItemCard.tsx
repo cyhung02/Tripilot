@@ -299,7 +299,8 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
     const transportBlocks = useMemo(() => {
         type StationInfo = {
             station: string;
-            time?: string;
+            arrivalTime?: string;
+            departureTime?: string;
             isStart?: boolean;
             isEnd?: boolean;
             trainDeparture?: number;
@@ -315,7 +316,7 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
                     stations: [
                         {
                             station: train.from,
-                            time: train.departureTime,
+                            departureTime: train.departureTime,
                             isStart: idx === 0,
                             trainDeparture: idx,
                         },
@@ -323,12 +324,12 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
                 });
             } else {
                 const prevStation = blocks.at(-1)!.stations.at(-1)!;
-                prevStation.time = train.departureTime;
+                prevStation.departureTime = train.departureTime;
                 prevStation.trainDeparture = idx;
             }
             blocks.at(-1)!.stations.push({
                 station: train.to,
-                time: train.arrivalTime,
+                arrivalTime: train.arrivalTime,
                 isEnd: idx === trains.length - 1,
             });
         });
@@ -372,7 +373,7 @@ const TransportTimeline: React.FC<TransportTimelineProps> = ({ trains }) => {
                                 {block.stations.flatMap((station, stationIdx) => {
                                     const result = [
                                         <div key={`station-time-${blockIdx}-${stationIdx}`} className="text-right mr-2 time-column" style={timeColumnWidth ? { width: timeColumnWidth, minWidth: timeColumnWidth } : {}}>
-                                            <div className="text-xs text-purple-600 font-semibold">{station.time || ''}</div>
+                                            <div className="text-xs text-purple-600 font-semibold">{station.departureTime || ''}</div>
                                         </div>,
                                         <div key={`station-circle-${blockIdx}-${stationIdx}`} className="flex justify-center relative">
                                             <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd ? 'border-purple-500' : 'border-purple-300'} ${stationIdx === 0 ? 'station-circle-first' : ''}`}></div>
