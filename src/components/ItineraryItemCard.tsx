@@ -142,7 +142,7 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                     <Fragment key={`transport-block-${blockIdx}`}>
                         {/* 如果不是第一個區塊，添加步行轉乘指示 */}
                         {blockIdx > 0 && (
-                            <div className="relative py-0 mb-0 grid grid-cols-[36px_22px_1fr] items-center">
+                            <div className="relative py-0 mb-0 grid grid-cols-[auto_auto_1fr] items-center">
                                 <div></div>
 
                                 {/* 虛線連接 */}
@@ -165,16 +165,16 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                             {/* 渲染區塊內的站點 */}
                             {block.stations.map((station, stationIdx) => (
                                 <div key={`station-${blockIdx}-${stationIdx}`} className="mb-0">
-                                    <div className="grid grid-cols-[36px_22px_1fr] items-start">
+                                    <div className="grid grid-cols-[auto_auto_1fr] items-start">
                                         {/* 時間 */}
-                                        <div className="text-left pt-1">
+                                        <div className="text-right mr-2">
                                             <div className="text-xs text-purple-600 font-semibold">
                                                 {station.time || ''}
                                             </div>
                                         </div>
 
                                         {/* 圓圈容器 */}
-                                        <div className="flex justify-center pt-1 relative">
+                                        <div className="flex justify-center relative">
                                             {/* 圓圈 */}
                                             <div className={`w-4 h-4 rounded-full border-2 border-solid bg-white z-10 ${station.isStart || station.isEnd
                                                 ? 'border-purple-500'
@@ -186,8 +186,8 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                                         {/* 站點名稱和列車資訊 */}
                                         <div className="pl-2">
                                             {/* 站點名稱 */}
-                                            <div className="pt-[2px]">
-                                                <div className={`font-medium text-sm ${station.isStart || station.isEnd
+                                            <div>
+                                                <div className={`font-medium text-sm leading-tight ${station.isStart || station.isEnd
                                                     ? 'text-purple-700'
                                                     : 'text-purple-600'
                                                     }`}>
@@ -197,7 +197,7 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
 
                                             {/* 列車資訊 - 在站點是列車出發站時顯示 */}
                                             {station.trainDeparture !== undefined && (
-                                                <div className="mt-1 mb-1">
+                                                <div className="my-2">
                                                     <div className="py-2 px-4 bg-white rounded-lg shadow-sm border border-purple-100 text-xs inline-block hover:bg-purple-50 transition-all duration-200">
                                                         <div className="font-medium text-purple-700 whitespace-nowrap text-xs">
                                                             {trains[station.trainDeparture].trainNumber}
