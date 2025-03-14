@@ -1,9 +1,11 @@
 // src/components/JournifyApp.tsx
-import { useMemo } from 'react';
+import { useMemo, lazy, Suspense, useState, useEffect } from 'react';
 import { useItinerary } from '../context/ItineraryContext';
 import DayDetail from './DayDetail';
-import CherryBlossomFall from './CherryBlossomFall';
 import ErrorBoundary from './ErrorBoundary';
+
+// 懶加載櫻花元件而不是直接導入
+const CherryBlossomFall = lazy(() => import('./CherryBlossomFall'));
 
 // 背景櫻花裝飾元件
 const BackgroundDecoration = () => {
@@ -114,14 +116,31 @@ const Footer = () => {
 const JournifyApp: React.FC = () => {
     // 使用 Context API 獲取狀態
     const { itineraryData, selectedDayIndex, isToday } = useItinerary();
+    
+    // 新增狀態控制何時顯示櫻花效果
+    const [showEffects, setShowEffects] = useState(false);
+    
+    // 在頁面主要內容載入後延遲顯示效果
+    useEffect(() => {
+        // 設定一個短暫延遲，讓主要內容先載入
+        const timer = setTimeout(() => {
+            setShowEffects(true);
+        }, 1200); // 延遲1.2秒後載入
+        
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <div className="min-h-screen bg-pink-50 text-gray-700 font-sans relative overflow-hidden tracking-wide">
             {/* 背景櫻花裝飾 */}
             <BackgroundDecoration />
 
-            {/* 櫻花花瓣飄落動畫 */}
-            <CherryBlossomFall />
+            {/* 條件式載入櫻花花瓣飄落動畫 */}
+            {showEffects && (
+                <Suspense fallback={null}>
+                    <CherryBlossomFall />
+                </Suspense>
+            )}
 
             {/* 頁面標題 */}
             <Header />
