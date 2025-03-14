@@ -1,5 +1,7 @@
+// src/components/AccommodationInfo.tsx
 import { motion } from 'framer-motion';
 import { Accommodation } from '../data/types';
+import { SakuraIcon, HomeIcon, LocationIcon } from './common/SvgIcons';
 
 interface AccommodationInfoProps {
     accommodation: Accommodation;
@@ -25,10 +27,7 @@ const AccommodationInfo: React.FC<AccommodationInfoProps> = ({
         <div className="mb-6">
             <h3 className="text-xl font-bold mb-3 text-pink-800 flex items-center">
                 住宿資訊
-                <svg className="w-4 h-4 ml-1 text-pink-400" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 15 C 55 10, 65 0, 70 5 C 80 10, 95 30, 90 45 C 85 60, 70 80, 50 85 C 30 80, 15 60, 10 45 C 5 30, 20 10, 30 5 C 35 0, 45 10, 50 15"
-                        fill="currentColor" />
-                </svg>
+                <SakuraIcon size={16} className="ml-1 text-pink-400" />
             </h3>
 
             <motion.div
@@ -39,10 +38,7 @@ const AccommodationInfo: React.FC<AccommodationInfoProps> = ({
             >
                 <div className="flex items-start">
                     <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center mr-3 shrink-0">
-                        <svg className="w-5 h-5 text-pink-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                        </svg>
+                        <HomeIcon size={20} className="text-pink-600" />
                     </div>
 
                     <div>
@@ -51,9 +47,7 @@ const AccommodationInfo: React.FC<AccommodationInfoProps> = ({
 
                         {accommodation.locationURL && (
                             <div className="flex items-center text-xs text-pink-500 mt-2">
-                                <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M12 2c-3.31 0-6 2.69-6 6 0 4.5 6 12 6 12s6-7.5 6-12c0-3.31-2.69-6-6-6zm0 9a3 3 0 100-6 3 3 0 000 6z"></path>
-                                </svg>
+                                <LocationIcon size={12} className="mr-1" />
                                 <a
                                     href={accommodation.locationURL}
                                     target="_blank"
