@@ -60,9 +60,7 @@ const CherryBlossomFall = () => {
     const [petals, setPetals] = useState<CherryBlossomStyle[]>([]);
 
     useEffect(() => {
-        // 根據設備性能調整花瓣數量
-        const isMobile = window.innerWidth < 768;
-        const numberOfPetals = isMobile ? 12 : 25; // 移動裝置減少花瓣數量
+        const numberOfPetals = 12; // 花瓣數量
 
         const colors = ["#FBCFE8", "#F9A8D4", "#F472B6", "#FDF2F8"]; // 多種粉色調
         const MAX_PETAL_SIZE = 20; // 最大尺寸限制
