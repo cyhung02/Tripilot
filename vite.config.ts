@@ -1,16 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import viteCompression from 'vite-plugin-compression'
 
 export default defineConfig({
     plugins: [
         react(),
-        tailwindcss(),
-        viteCompression({
-            algorithm: 'gzip', // 或 'brotliCompress'
-            threshold: 10240, // 大於 10kb 的檔案才會被壓縮
-        })
+        tailwindcss()
     ],
     base: '/',
     build: {
