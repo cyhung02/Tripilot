@@ -12,7 +12,7 @@ export default defineConfig({
             threshold: 10240, // 大於 10kb 的檔案才會被壓縮
         })
     ],
-    base: '/Journify/',
+    base: '/',
     build: {
         minify: 'terser', // 使用 terser 進行更強的壓縮
         terserOptions: {
