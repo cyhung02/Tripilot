@@ -34,12 +34,12 @@ const BasicDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
     const config = typeConfig[item.type] || typeConfig['其他'];
     return (
         <>
-            {item.description && <p className="text-sm mb-3 leading-relaxed">{item.description}</p>}
+            {item.description && <p className="text-sm mb-3 leading-relaxed whitespace-pre-wrap">{item.description}</p>}
 
             {item.tips && (
                 <div className={`${config.detailPanel} p-3 rounded-lg mb-3 border`}>
                     <h4 className="text-sm font-bold mb-1 text-pink-800">小提示</h4>
-                    <p className="text-xs leading-relaxed">{item.tips}</p>
+                    <p className="text-xs leading-relaxed whitespace-pre-wrap">{item.tips}</p>
                 </div>
             )}
 

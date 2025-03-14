@@ -27,14 +27,14 @@
             {
                 "type": "其他",
                 "name": "機場領車票",
-                "time": "23:00-23:30",
-                "description": "抵達後於機場領取預約的車票"
+                "time": "",
+                "description": "領取預約的車票。能夠在有標示e5489的售票機領取！領取優惠車票時，需要附 IC 晶片的護照與信用卡。"
             }
         ],
         "accommodation": {
             "city": "大阪關西機場",
             "name": "ホテル日航関西空港",
-            "locationURL": "https://goo.gl/maps/YzLYK8DKEeEJQq6V7"
+            "locationURL": "https://maps.app.goo.gl/5anU6zyLfSBS4yX39"
         },
         "foodRecommendations": [],
         "shoppingRecommendations": []
@@ -48,7 +48,7 @@
                 "type": "其他",
                 "name": "機場領車票",
                 "time": "",
-                "description": "領取預約的車票"
+                "description": "領取預約的車票。能夠在有標示e5489的售票機領取！領取優惠車票時，需要附 IC 晶片的護照與信用卡。"
             },
             {
                 "type": "景點",
@@ -56,38 +56,62 @@
                 "time": "",
                 "description": "日本著名歷史景點，可欣賞大阪城天守閣及其周圍美麗的公園。",
                 "tips": "參觀天守閣需要額外購票，建議提前在官網查詢開放時間。",
-                "location": "https://goo.gl/maps/YpJK6wNwQDmVnvhZ7"
+                "location": "https://maps.app.goo.gl/a7SVZEMGwoGjJSCb6"
+            },
+            {
+                "type": "購物",
+                "name": "uka store Osaka LUCUA 1100",
+                "time": "",
+                "description": "uka 是一家專注於美甲、美髮、身體護理的時尚精品店，販售各種天然成分的保養品與香氛商品。店內設計簡約時尚，提供高品質的個人護理體驗。",
+                "tips": "建議提前查詢店內熱門商品，如護手霜、指緣油等，部分限定商品可能會提早售罄。若想諮詢護理建議或試用產品，店員通常十分親切專業，不妨多交流！",
+                "location": "https://maps.app.goo.gl/Gr4E5kRZbANmw5aQ7"
             },
             {
                 "type": "景點",
                 "name": "黑門市場",
                 "time": "",
-                "description": "大阪著名的美食街市，提供新鮮海鮮和當地小吃。",
-                "tips": "建議品嚐章魚燒和新鮮生魚片，用餐高峰期可能需要排隊。",
-                "location": "https://goo.gl/maps/YCcWvUshGtAxPU4x9"
+                "description": "黑門市場是大阪著名的傳統市場，被譽為「大阪的廚房」，擁有超過百年歷史。市場內販售新鮮海產、和牛、生魚片、日式甜點等各式美食，是品嚐地道大阪風味的絕佳場所。",
+                "tips": "市場早上營業較早，建議上午前往以享受最新鮮的食材。部分攤位只收現金，建議攜帶足夠日幣。此外，市場內人潮眾多，邊走邊吃時要留意禮儀，避免影響他人通行。",
+                "location": "https://maps.app.goo.gl/cXtnNeUaWyCxUUG99"
             },
             {
                 "type": "景點",
-                "name": "新世界 & 通天閣",
+                "name": "通天閣",
                 "time": "",
-                "description": "充滿昭和時代氛圍的懷舊區域，通天閣是大阪的地標性建築。",
-                "tips": "可以在附近品嚐大阪著名的串炸料理，推薦參觀比利肯神像。",
-                "location": "https://goo.gl/maps/8KjS27hgcYmvvzGp9"
+                "description": "通天閣是大阪象徵性的地標建築，位於新世界區，自1912年落成以來一直是人氣觀光景點。登上觀景台可俯瞰整個大阪市景，塔內還供奉著帶來好運的比利肯神像，是旅客拍照打卡的必訪之地。",
+                "tips": "建議傍晚時分前往，可以同時欣賞日落與夜景。附近的新世界商店街有許多串炸名店，不妨安排品嚐美食的行程。此外，通天閣內部有紀念品店，販售比利肯相關商品，是帶回大阪回憶的好選擇！",
+                "location": "https://maps.app.goo.gl/APNy9GsbGH2DxquBA"
             },
             {
-                "type": "景點",
+                "type": "購物",
+                "name": "HUMAN MADE 心斎橋PARCO",
+                "time": "",
+                "description": "HUMAN MADE 是由 NIGO® 創立的知名潮流品牌，融合復古美學與現代設計，心齋橋PARCO店內展示了各式服飾、配件及限定商品，是潮流愛好者不可錯過的打卡點。",
+                "tips": "店內有時會推出限定聯名商品，建議提前關注官方社群媒體以掌握最新消息。",
+                "location": "https://maps.app.goo.gl/e5pSUmswWk1onR8v7"
+            },
+            {
+                "type": "購物",
                 "name": "道頓堀 & 心齋橋",
                 "time": "",
-                "description": "大阪最繁華的購物和美食區域，有著名的固力果跑者廣告牌。",
-                "tips": "晚上霓虹燈非常壯觀，適合拍照。可以在此品嚐道頓堀名店的大阪燒。",
-                "location": "https://goo.gl/maps/BDWRDCgMZHr8KMRCA"
+                "description": "道頓堀與心齋橋是大阪最具代表性的購物與美食區域，結合傳統與現代風情。道頓堀沿河一帶充滿霓虹燈招牌與各式美食，如章魚燒、蟹道樂等；心齋橋筋商店街則匯集時尚品牌、藥妝店與特色小店，是購物與品味大阪文化的必訪之地。",
+                "tips": "建議預留充裕時間，白天逛街購物，晚上沿著道頓堀河欣賞璀璨夜景。藥妝店、服飾店經常有折扣活動，記得帶護照享受免稅優惠。此外，熱門餐廳如一蘭拉麵與金龍拉麵常有排隊人潮，建議避開用餐尖峰時段！",
+                "location": "https://maps.app.goo.gl/HxvDZbevSi9BcR4L6"
+            },
+            {
+                "type": "購物",
+                "name": "@Cosme store",
+                "time": "",
+                "description": "@Cosme store 是一家知名的美妝連鎖店，提供各式各樣的化妝品、保養品、髮品、身體護理及美容周邊商品。店內匯集了眾多日本及國際品牌，無論是人氣商品或是小眾品牌都能在這裡找到。許多商品都提供試用，讓顧客可以親身體驗後再購買。這裡非常適合美妝愛好者發掘新品、回購愛用品。",
+                "tips": "1. 注意店內是否有季節限定或聯名商品，通常具有收藏價值。\n2. 善用店內的試用品，親自體驗產品的質地、顏色和效果。\n3. 若有選購上的疑問，可以向店員諮詢，他們通常能提供專業建議。\n4. 可以留意是否有會員制度或集點活動，長期下來可以享有優惠。\n5. 參考店內的產品排行榜或顧客評價，有助於了解熱門商品和口碑產品。",
+                "location": "https://maps.app.goo.gl/GH4tuaFe36WJR8EV8"
             }
         ],
         "foodRecommendations": [
             "章魚燒",
-            "炸串",
+            "串炸",
             "大阪燒",
-            "和牛壽喜燒"
+            "拉麵"
         ],
         "shoppingRecommendations": [
             "大阪限定零食（Pablo起司塔、Calbee薯條）",
@@ -98,7 +122,7 @@
         "accommodation": {
             "city": "大阪",
             "name": "ホテルオリエンタルエクスプレス大阪心斎橋",
-            "locationURL": "https://goo.gl/maps/3LVzVqQNEzf5MTUC7"
+            "locationURL": "https://maps.app.goo.gl/fYLo3CFwoCkqzzXk9"
         }
     },
     {
