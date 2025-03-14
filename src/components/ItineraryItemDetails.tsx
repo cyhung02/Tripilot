@@ -2,6 +2,7 @@
 import { ItineraryItem } from '../data/types';
 import { typeConfig } from '../utils/ItemTypeConfig';
 import TransportTimeline from './TransportTimeline';
+import { LocationIcon } from './common/SvgIcons';
 
 interface ItineraryItemDetailsProps {
     item: ItineraryItem;
@@ -44,9 +45,7 @@ const BasicDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
 
             {item.location && (
                 <div className="flex items-center text-xs text-pink-500 mt-2">
-                    <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 2c-3.31 0-6 2.69-6 6 0 4.5 6 12 6 12s6-7.5 6-12c0-3.31-2.69-6-6-6zm0 9a3 3 0 100-6 3 3 0 000 6z"></path>
-                    </svg>
+                    <LocationIcon size={12} className="mr-1" />
                     <a
                         href={item.location}
                         target="_blank"
@@ -56,7 +55,7 @@ const BasicDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
                     >
                         在 Google Maps 中查看位置
                     </a>
-                </div>
+                </div >
             )}
         </>
     );
@@ -120,9 +119,7 @@ const RestaurantDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
 
             {item.location && (
                 <div className="flex items-center text-xs text-pink-500 mt-2">
-                    <svg className="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 2c-3.31 0-6 2.69-6 6 0 4.5 6 12 6 12s6-7.5 6-12c0-3.31-2.69-6-6-6zm0 9a3 3 0 100-6 3 3 0 000 6z"></path>
-                    </svg>
+                    <LocationIcon size={12} className="mr-1" />
                     <a
                         href={item.location}
                         target="_blank"
@@ -132,7 +129,7 @@ const RestaurantDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
                     >
                         在 Google Maps 中查看位置
                     </a>
-                </div>
+                </div >
             )}
         </>
     );

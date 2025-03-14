@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ItineraryItem } from '../data/types';
 import ItineraryItemDetails from './ItineraryItemDetails';
 import { typeConfig } from '../utils/ItemTypeConfig';
+import { ArrowDownIcon } from './common/SvgIcons';
 
 interface ItineraryItemCardProps {
     item: ItineraryItem;
@@ -12,10 +13,6 @@ interface ItineraryItemCardProps {
     toggleExpand: () => void;
 }
 
-/**
- * 行程項目卡片元件
- * 顯示一個行程項目的摘要和可展開的詳細資訊
- */
 const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
     item,
     index,
@@ -50,21 +47,12 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
                             {item.time && <p className="text-xs text-pink-500 font-medium">{item.time}</p>}
                         </div>
                     </div>
-                    <svg
-                        className={`w-5 h-5 text-pink-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path d="M6 9l6 6 6-6"></path>
-                    </svg>
+                    <ArrowDownIcon
+                        className={`text-pink-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                        size={20}
+                    />
                 </div>
-                
+
                 {/* 可展開的詳細內容 */}
                 <AnimatePresence initial={false}>
                     {isExpanded && (
@@ -91,5 +79,4 @@ const ItineraryItemCard: React.FC<ItineraryItemCardProps> = ({
     );
 };
 
-// 使用 memo 避免不必要的重新渲染
 export default memo(ItineraryItemCard);
