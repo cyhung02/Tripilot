@@ -2,12 +2,17 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import { differenceInDays, isWithinInterval, format, parse } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
-import { itineraryData, TRIP_START_DATE, TRIP_END_DATE } from '../data/itineraryData';
 import { DayInfo } from '../data/types';
+
+// 定義旅行的起始日期，方便後續日期計算
+const TRIP_START_DATE = new Date(2025, 3 - 1, 28); // 月份是從0開始，3月為2
+const TRIP_END_DATE = new Date(2025, 4 - 1, 6, 23, 59, 59);
 
 // 定義 Context 的值類型
 interface ItineraryContextType {
     itineraryData: DayInfo[];
+    isLoading: boolean;
+    error: string | null;
     selectedDayIndex: number;
     setSelectedDayIndex: (index: number) => void;
     isToday: (date: string) => boolean;
@@ -37,9 +42,39 @@ interface ItineraryProviderProps {
 
 export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }) => {
     // 狀態管理
+    const [itineraryData, setItineraryData] = useState<DayInfo[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [selectedDayIndex, setSelectedDayIndex] = useState(0);
     const [today] = useState(new Date());
     const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+
+    // 載入行程資料
+    useEffect(() => {
+        const loadItineraryData = async () => {
+            try {
+                setIsLoading(true);
+                // 使用 import.meta.env.BASE_URL 來處理基本路徑問題
+                const basePath = import.meta.env.BASE_URL || '/';
+                const response = await fetch(`${basePath}data/itinerary.json`);
+
+                if (!response.ok) {
+                    throw new Error(`無法載入行程資料: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                setItineraryData(data);
+                setError(null);
+            } catch (err) {
+                console.error('載入行程資料時發生錯誤:', err);
+                setError(err instanceof Error ? err.message : '載入行程資料時發生未知錯誤');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadItineraryData();
+    }, []);
 
     // 重置所有展開的項目
     const resetExpandedItems = useCallback(() => {
@@ -68,6 +103,8 @@ export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }
 
     // 初始化選擇日期 (依據當前日期)
     useEffect(() => {
+        if (itineraryData.length === 0) return;
+
         try {
             // 檢查當前日期是否在旅行期間內
             if (isWithinInterval(today, { start: TRIP_START_DATE, end: TRIP_END_DATE })) {
@@ -81,7 +118,7 @@ export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }
             // 在錯誤情況下設定為第一天
             setSelectedDayIndex(0);
         }
-    }, [today]);
+    }, [today, itineraryData]);
 
     // 檢查日期是否為今天
     const isToday = useCallback((date: string): boolean => {
@@ -105,6 +142,8 @@ export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }
     // 提供 Context 值
     const value = {
         itineraryData,
+        isLoading,
+        error,
         selectedDayIndex,
         setSelectedDayIndex: handleDaySelect,
         isToday,

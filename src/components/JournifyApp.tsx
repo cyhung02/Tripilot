@@ -3,6 +3,8 @@ import { useMemo, lazy, Suspense, useState, useEffect } from 'react';
 import { useItinerary } from '../context/ItineraryContext';
 import DayDetail from './DayDetail';
 import ErrorBoundary from './ErrorBoundary';
+import LoadingState from './LoadingState';
+import ErrorState from './ErrorState';
 import { SakuraIcon } from './common/SvgIcons';
 
 // 懶加載櫻花元件而不是直接導入
@@ -54,8 +56,8 @@ const DateNavigation = () => {
                 key={index}
                 onClick={() => setSelectedDayIndex(index)}
                 className={`px-3 py-2 mx-1 rounded-full text-sm transition-all font-medium ${selectedDayIndex === index
-                        ? 'bg-pink-100 text-pink-800 font-bold shadow-sm'
-                        : 'hover:bg-pink-50 text-gray-600'
+                    ? 'bg-pink-100 text-pink-800 font-bold shadow-sm'
+                    : 'hover:bg-pink-50 text-gray-600'
                     } ${isToday(day.date) ? 'ring-1 ring-pink-300' : ''
                     }`}
                 aria-pressed={selectedDayIndex === index}
@@ -96,10 +98,42 @@ const Footer = () => {
     );
 };
 
+// 無資料狀態元件
+const EmptyState = () => {
+    return (
+        <div className="container mx-auto p-8 text-center">
+            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6 max-w-lg mx-auto">
+                <svg
+                    className="w-12 h-12 text-yellow-500 mx-auto mb-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <h2 className="text-xl font-bold text-yellow-700 mb-3">無行程資料</h2>
+                <p className="text-yellow-600 mb-4">沒有找到任何行程資料。</p>
+                <button
+                    onClick={() => window.location.reload()}
+                    className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+                >
+                    重新載入
+                </button>
+            </div>
+        </div>
+    );
+};
+
 // 主應用元件
 const JournifyApp: React.FC = () => {
     // 使用 Context API 獲取狀態
-    const { itineraryData, selectedDayIndex, isToday } = useItinerary();
+    const { itineraryData, selectedDayIndex, isToday, isLoading, error } = useItinerary();
 
     // 新增狀態控制何時顯示櫻花效果
     const [showEffects, setShowEffects] = useState(false);
@@ -113,6 +147,36 @@ const JournifyApp: React.FC = () => {
 
         return () => clearTimeout(timer);
     }, []);
+
+    // 渲染不同狀態
+    const renderContent = () => {
+        // 載入中狀態
+        if (isLoading) {
+            return <LoadingState />;
+        }
+
+        // 錯誤狀態
+        if (error) {
+            return <ErrorState message={error} />;
+        }
+
+        // 無資料狀態
+        if (itineraryData.length === 0) {
+            return <EmptyState />;
+        }
+
+        // 正常顯示行程
+        return (
+            <main className="container mx-auto p-4 z-[2] flex-grow">
+                <ErrorBoundary>
+                    <DayDetail
+                        day={itineraryData[selectedDayIndex]}
+                        isToday={isToday(itineraryData[selectedDayIndex].date)}
+                    />
+                </ErrorBoundary>
+            </main>
+        );
+    };
 
     return (
         <div className="min-h-screen bg-pink-50 text-gray-700 font-sans relative overflow-hidden tracking-wide flex flex-col">
@@ -129,18 +193,11 @@ const JournifyApp: React.FC = () => {
             {/* 頁面標題 */}
             <Header />
 
-            {/* 日期導航列 */}
-            <DateNavigation />
+            {/* 日期導航列 - 僅在有資料且沒有錯誤時顯示 */}
+            {!isLoading && !error && itineraryData.length > 0 && <DateNavigation />}
 
             {/* 主要內容區 */}
-            <main className="container mx-auto p-4 z-[2] flex-grow">
-                <ErrorBoundary>
-                    <DayDetail
-                        day={itineraryData[selectedDayIndex]}
-                        isToday={isToday(itineraryData[selectedDayIndex].date)}
-                    />
-                </ErrorBoundary>
-            </main>
+            {renderContent()}
 
             {/* 頁尾 */}
             <Footer />
