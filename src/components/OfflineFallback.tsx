@@ -1,19 +1,66 @@
 // src/components/OfflineFallback.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { usePWAStatus } from '../hooks/usePWAStatus';
 import { SakuraIcon } from './common/SvgIcons';
 
 /**
- * 離線備用頁面元件 - 極簡版
+ * 離線備用頁面元件 - 使用 usePWAStatus Hook
  * 當用戶離線且沒有快取的行程資料時顯示
  */
 const OfflineFallback: React.FC = () => {
+    const { isOnline } = usePWAStatus();
     const [isRetrying, setIsRetrying] = useState(false);
+    const [lastOnlineTime, setLastOnlineTime] = useState<string | null>(null);
+
+    // 獲取上次在線時間
+    useEffect(() => {
+        try {
+            const storedTime = localStorage.getItem('lastOnlineTime');
+            if (storedTime) {
+                setLastOnlineTime(storedTime);
+            }
+        } catch (e) {
+            console.error('無法獲取最後在線時間', e);
+        }
+    }, []);
 
     // 重試連接
     const handleRetry = () => {
         setIsRetrying(true);
-        window.location.reload();
+        // 短暫延遲後重新載入頁面
+        setTimeout(() => {
+            window.location.reload();
+        }, 800);
     };
+
+    // 格式化時間顯示
+    const formatLastOnlineTime = () => {
+        if (!lastOnlineTime) return null;
+
+        try {
+            const date = new Date(lastOnlineTime);
+            const options: Intl.DateTimeFormatOptions = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return new Intl.DateTimeFormat('zh-TW', options).format(date);
+        } catch (e) {
+            console.error('時間格式化錯誤', e);
+            return null;
+        }
+    };
+
+    // 當連線狀態改變時
+    useEffect(() => {
+        if (isOnline && isRetrying) {
+            window.location.reload();
+        }
+    }, [isOnline, isRetrying]);
+
+    const formattedTime = formatLastOnlineTime();
 
     return (
         <div className="min-h-screen bg-pink-50 text-gray-700 font-sans flex flex-col">
@@ -46,6 +93,12 @@ const OfflineFallback: React.FC = () => {
                         <div className="text-pink-600 space-y-2">
                             <p>您目前處於離線狀態，且尚未載入行程資料。</p>
                             <p className="text-sm">請連線至網路後再試。</p>
+
+                            {formattedTime && (
+                                <p className="text-xs text-pink-500 mt-2">
+                                    上次連接時間: {formattedTime}
+                                </p>
+                            )}
                         </div>
                     </div>
 

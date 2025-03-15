@@ -1,13 +1,14 @@
 // src/components/JournifyApp.tsx
 import { useMemo, lazy, Suspense, useState, useEffect } from 'react';
 import { useItinerary } from '../context/ItineraryContext';
+import { usePWAStatus } from '../hooks/usePWAStatus';
 import DayDetail from './DayDetail';
 import ErrorBoundary from './ErrorBoundary';
 import LoadingState from './LoadingState';
 import ErrorState from './ErrorState';
 import { SakuraIcon } from './common/SvgIcons';
 
-// 懶加載櫻花元件而不是直接導入
+// 懶加載櫻花元件
 const CherryBlossomFall = lazy(() => import('./CherryBlossomFall'));
 
 // 背景櫻花裝飾元件
@@ -100,6 +101,8 @@ const Footer = () => {
 
 // 無資料狀態元件
 const EmptyState = () => {
+    const { isOnline } = usePWAStatus();
+
     return (
         <div className="container mx-auto p-8 text-center">
             <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6 max-w-lg mx-auto">
@@ -118,7 +121,11 @@ const EmptyState = () => {
                     <line x1="12" y1="16" x2="12.01" y2="16" />
                 </svg>
                 <h2 className="text-xl font-bold text-yellow-700 mb-3">無行程資料</h2>
-                <p className="text-yellow-600 mb-4">沒有找到任何行程資料。</p>
+                <p className="text-yellow-600 mb-4">
+                    {isOnline
+                        ? "沒有找到任何行程資料。"
+                        : "您處於離線狀態，且尚未載入任何行程資料。"}
+                </p>
                 <button
                     onClick={() => window.location.reload()}
                     className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
@@ -134,6 +141,8 @@ const EmptyState = () => {
 const JournifyApp: React.FC = () => {
     // 使用 Context API 獲取狀態
     const { itineraryData, selectedDayIndex, isToday, isLoading, error } = useItinerary();
+    // 注意：主組件不需要直接使用網路狀態
+    // EmptyState 組件內部已經使用 usePWAStatus 來獲取 isOnline
 
     // 新增狀態控制何時顯示櫻花效果
     const [showEffects, setShowEffects] = useState(false);

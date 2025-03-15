@@ -8,7 +8,7 @@ export default defineConfig({
         react(),
         tailwindcss(),
         VitePWA({
-            registerType: 'autoUpdate',
+            registerType: 'prompt', // 改為 prompt: 讓用戶自己決定是否更新
             includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg', 'sakura-icon.svg'],
             manifest: {
                 name: '日本關西中國地方旅遊手冊',
@@ -18,12 +18,9 @@ export default defineConfig({
                 background_color: '#FDF2F8',
                 display: 'standalone',
                 orientation: 'portrait',
-                id: '/',
                 start_url: '/?source=pwa',
                 scope: '/',
                 lang: 'zh-TW',
-                dir: 'ltr',
-                prefer_related_applications: false,
                 icons: [
                     {
                         src: 'pwa-64x64.png',
@@ -61,174 +58,74 @@ export default defineConfig({
                         form_factor: 'wide'
                     }
                 ],
-                categories: ['travel', 'lifestyle', 'navigation'],
                 shortcuts: [
                     {
                         name: '今日行程',
                         url: '/?today=true',
                         description: '查看今天的行程安排'
-                    },
-                    {
-                        name: '行程總覽',
-                        url: '/',
-                        description: '查看完整行程'
                     }
                 ]
             },
             workbox: {
-                // 預緩存模式 - 確保這些檔案在離線狀態下可用
+                // 預緩存模式 - 修正 glob 模式以匹配 Vite 的輸出結構
                 globPatterns: [
-                    '**/*.{js,css,html,ico,png,svg,woff2}',
-                    'data/itinerary.json' // 核心資料：一定要預緩存行程資料
+                    // Vite 將 JS、CSS 文件放在 assets 目錄下
+                    'assets/**/*.{js,css}',
+                    // 靜態資源
+                    '**/*.{ico,png,svg,webp}',
+                    // 核心 HTML 和數據文件
+                    'index.html',
+                    'offline.html',
+                    'data/**/*.json'
                 ],
 
                 // 離線模式處理
                 navigateFallback: 'index.html',
-                navigateFallbackDenylist: [
-                    /^\/api\//,
-                    /\.(png|jpg|jpeg|svg|gif|webp|json)$/i,
-                    /^\/manifest\.webmanifest$/i
-                ],
 
                 // 離線頁面設定
                 offlineGoogleAnalytics: false,
 
                 // 運行時緩存策略
                 runtimeCaching: [
-                    // 網路字體 - 緩存優先策略
-                    // 適用於不常變更的資源
+                    // 核心資源策略: 先顯示舊的，同時更新 (適用於 API、行程資料)
                     {
-                        urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-                        handler: 'CacheFirst',
-                        options: {
-                            cacheName: 'google-fonts-cache',
-                            expiration: {
-                                maxEntries: 10,
-                                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 年
-                            },
-                            cacheableResponse: {
-                                statuses: [0, 200]
-                            }
-                        }
-                    },
-                    {
-                        urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
-                        handler: 'CacheFirst',
-                        options: {
-                            cacheName: 'gstatic-fonts-cache',
-                            expiration: {
-                                maxEntries: 10,
-                                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 年
-                            },
-                            cacheableResponse: {
-                                statuses: [0, 200]
-                            }
-                        }
-                    },
-
-                    // 圖片資源 - 先顯示舊的，同時更新策略
-                    {
-                        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
+                        urlPattern: /\/data\/.*\.json$/,
                         handler: 'StaleWhileRevalidate',
                         options: {
-                            cacheName: 'images-cache',
+                            cacheName: 'api-cache',
                             expiration: {
-                                maxEntries: 60,
-                                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 天
-                            },
-                            cacheableResponse: {
-                                statuses: [0, 200]
+                                maxEntries: 20,
+                                maxAgeSeconds: 60 * 60 * 24 * 3 // 3 天
                             }
                         }
                     },
 
-                    // 靜態資源 - 改為 CacheFirst
+                    // 靜態資源策略: 優先使用緩存 (適用於圖片、字體等)
                     {
-                        urlPattern: /\.(?:js|css)$/,
-                        handler: 'CacheFirst',
-                        options: {
-                            cacheName: 'static-resources',
-                            expiration: {
-                                maxEntries: 30,
-                                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 天
-                            },
-                            cacheableResponse: {
-                                statuses: [0, 200]
-                            }
-                        }
-                    },
-
-                    // 行程資料 - 核心資料策略
-                    // StaleWhileRevalidate: 立即使用快取版本同時更新
-                    // 這保證了離線時有資料可用，同時確保在有網路時資料會更新
-                    {
-                        urlPattern: /\/data\/itinerary\.json$/,
+                        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|woff2)$/,
                         handler: 'StaleWhileRevalidate',
                         options: {
-                            cacheName: 'itinerary-data', // 統一的快取名稱
+                            cacheName: 'assets-cache',
                             expiration: {
-                                maxEntries: 5,
-                                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 天
-                            },
-                            cacheableResponse: {
-                                statuses: [0, 200]
+                                maxEntries: 50,
+                                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 天
                             }
                         }
                     },
 
-                    // 離線頁面 - 使用快取優先策略
+                    // Google Fonts 策略
                     {
-                        urlPattern: /offline\.html$/,
+                        urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com/,
                         handler: 'CacheFirst',
                         options: {
-                            cacheName: 'offline-page',
+                            cacheName: 'google-fonts',
                             expiration: {
-                                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 天
-                            },
-                            cacheableResponse: {
-                                statuses: [0, 200]
-                            }
-                        }
-                    },
-
-                    // HTML 請求 - 網路優先但有備用
-                    {
-                        urlPattern: /\/index\.html$/,
-                        handler: 'NetworkFirst',
-                        options: {
-                            cacheName: 'html-cache',
-                            networkTimeoutSeconds: 5,
-                            expiration: {
-                                maxEntries: 10,
-                                maxAgeSeconds: 60 * 60 * 24 // 1 天
-                            },
-                            cacheableResponse: {
-                                statuses: [0, 200]
-                            }
-                        }
-                    },
-
-                    // 其他網路請求
-                    {
-                        urlPattern: /^https:\/\//,
-                        handler: 'NetworkFirst',
-                        options: {
-                            cacheName: 'others',
-                            networkTimeoutSeconds: 5,
-                            expiration: {
-                                maxEntries: 32,
-                                maxAgeSeconds: 60 * 60 * 24 // 1 天
-                            },
-                            cacheableResponse: {
-                                statuses: [0, 200]
+                                maxEntries: 20,
+                                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 年
                             }
                         }
                     }
-                ],
-
-                // Service Worker 控制
-                skipWaiting: true,
-                clientsClaim: true
+                ]
             }
         })
     ],

@@ -2,54 +2,38 @@
 import { registerSW } from 'virtual:pwa-register';
 
 /**
- * 註冊 Service Worker 並添加離線頁面安裝功能
+ * 註冊 Service Worker
+ * 簡化版本 - PWAManager 會處理更新提示和離線就緒通知
  */
 export function registerServiceWorker() {
-    // 註冊 Service Worker
-    const updateSW = registerSW({
-        onNeedRefresh() {
-            // 新版本可用時
-            console.info('有新版本可用');
-
-            // 可以在此實現提示用戶更新的 UI
-            const shouldUpdate = confirm('有新內容可用。要更新嗎？');
-            if (shouldUpdate) {
-                updateSW();
+    // 在 PWAManager 中處理更詳細的 Service Worker 生命週期事件
+    // 這裡只記錄初始註冊結果
+    try {
+        registerSW({
+            immediate: true,
+            onRegisterError(error) {
+                console.error('Service Worker 註冊失敗:', error);
             }
-        },
-        onOfflineReady() {
-            // Service Worker 已準備好處理離線操作
-            console.info('應用已準備好離線使用');
+        });
 
-            // 緩存離線頁面 - 確保離線頁面可用
-            cacheOfflinePage();
-        },
-        onRegisterError(error) {
-            console.error('Service Worker 註冊失敗:', error);
-        }
-    });
-
-    // 預緩存離線頁面
-    async function cacheOfflinePage() {
-        if ('caches' in window) {
+        // 記錄最後在線時間，用於離線頁面顯示
+        window.addEventListener('online', () => {
             try {
-                const cache = await caches.open('offline-page');
-                // 嘗試緩存離線頁面
-                cache.add(new Request('offline.html', { cache: 'reload' }))
-                    .then(() => console.info('離線頁面已緩存'))
-                    .catch(err => console.error('緩存離線頁面失敗:', err));
-            } catch (error) {
-                console.error('無法開啟快取:', error);
+                localStorage.setItem('lastOnlineTime', new Date().toISOString());
+            } catch (e) {
+                // 忽略儲存錯誤
+            }
+        });
+
+        // 初始設置
+        if (navigator.onLine) {
+            try {
+                localStorage.setItem('lastOnlineTime', new Date().toISOString());
+            } catch (e) {
+                // 忽略儲存錯誤
             }
         }
+    } catch (error) {
+        console.error('Service Worker 啟動失敗:', error);
     }
-
-    // 頁面載入時緩存離線頁面
-    window.addEventListener('load', () => {
-        if ('serviceWorker' in navigator) {
-            cacheOfflinePage().catch(console.error);
-        }
-    });
-
-    return updateSW;
 }

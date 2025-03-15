@@ -1,8 +1,9 @@
-// src/context/ItineraryContext.tsx
+// src/context/ItineraryContext.tsx - 簡化離線邏輯
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import { differenceInDays, isWithinInterval, format, parse } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
 import { DayInfo } from '../data/types';
+import { usePWAStatus } from '../hooks/usePWAStatus';
 
 // 定義旅行的起始日期，方便後續日期計算
 const TRIP_START_DATE = new Date(2025, 3 - 1, 28); // 月份是從0開始，3月為2
@@ -49,7 +50,10 @@ export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }
     const [today] = useState(new Date());
     const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
 
-    // 簡化的載入行程資料函數 - 完全依賴 Service Worker 的快取策略
+    // 使用 PWA 狀態 hook 獲取網路狀態
+    const { isOnline } = usePWAStatus();
+
+    // 優化的載入行程資料函數
     useEffect(() => {
         const loadItineraryData = async () => {
             try {
@@ -60,7 +64,7 @@ export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }
                 const basePath = import.meta.env.BASE_URL || '/';
                 const url = `${basePath}data/itinerary.json`;
 
-                // 使用普通的 fetch 請求 - Service Worker 會自動處理快取策略
+                // 使用 fetch 請求 - Service Worker 會自動處理快取策略
                 const response = await fetch(url);
 
                 if (response.ok) {
@@ -71,14 +75,20 @@ export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }
                 }
             } catch (err) {
                 console.error('載入行程資料時發生錯誤:', err);
-                setError(err instanceof Error ? err.message : '載入資料時發生未知錯誤');
+
+                // 離線狀態下的錯誤處理
+                if (!isOnline) {
+                    setError('您目前處於離線狀態，且沒有已快取的行程資料');
+                } else {
+                    setError(err instanceof Error ? err.message : '載入資料時發生未知錯誤');
+                }
             } finally {
                 setIsLoading(false);
             }
         };
 
         loadItineraryData();
-    }, []);
+    }, [isOnline]); // 依賴 isOnline，這樣在網路狀態變化時會重新嘗試
 
     // 重置所有展開的項目
     const resetExpandedItems = useCallback(() => {
