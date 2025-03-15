@@ -9,7 +9,7 @@ export default defineConfig({
         tailwindcss(),
         VitePWA({
             registerType: 'autoUpdate',
-            includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+            includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg', 'sakura-icon.svg'],
             manifest: {
                 name: '日本關西中國地方旅遊手冊',
                 short_name: '日本旅遊手冊',
@@ -18,7 +18,18 @@ export default defineConfig({
                 background_color: '#FDF2F8',
                 display: 'standalone',
                 orientation: 'portrait',
+                id: '/',
+                start_url: '/?source=pwa',
+                scope: '/',
+                lang: 'zh-TW',
+                dir: 'ltr',
+                prefer_related_applications: false,
                 icons: [
+                    {
+                        src: 'pwa-64x64.png',
+                        sizes: '64x64',
+                        type: 'image/png'
+                    },
                     {
                         src: 'pwa-192x192.png',
                         sizes: '192x192',
@@ -30,18 +41,56 @@ export default defineConfig({
                         type: 'image/png'
                     },
                     {
-                        src: 'pwa-512x512.png',
+                        src: 'maskable-icon-512x512.png',
                         sizes: '512x512',
                         type: 'image/png',
-                        purpose: 'any maskable'
+                        purpose: 'maskable'
                     }
                 ],
-                start_url: '/',
-                categories: ['travel', 'lifestyle', 'navigation']
+                screenshots: [
+                    {
+                        src: 'screenshot-narrow.png',
+                        sizes: '540x720',
+                        type: 'image/png',
+                        form_factor: 'narrow'
+                    },
+                    {
+                        src: 'screenshot-wide.png',
+                        sizes: '720x540',
+                        type: 'image/png',
+                        form_factor: 'wide'
+                    }
+                ],
+                categories: ['travel', 'lifestyle', 'navigation'],
+                shortcuts: [
+                    {
+                        name: '今日行程',
+                        url: '/?today=true',
+                        description: '查看今天的行程安排'
+                    },
+                    {
+                        name: '行程總覽',
+                        url: '/',
+                        description: '查看完整行程'
+                    }
+                ]
             },
             workbox: {
-                globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+                // 進階設定，改進離線經驗
+                globPatterns: [
+                    '**/*.{js,css,html,ico,png,svg,woff2}',
+                    'data/itinerary.json'
+                ],
+                // 調整導航回退條件，避免誤判
+                navigateFallbackDenylist: [
+                    /^\/api\//,
+                    /\.(png|jpg|jpeg|svg|gif|webp|json)$/i,  // 不對資源檔案使用回退
+                    /^\/manifest\.webmanifest$/i  // 不對 manifest 使用回退
+                ],
+                navigateFallback: 'index.html',  // 改用 index.html 作為回退，而非特定的離線頁面
+                // 更精細的緩存策略
                 runtimeCaching: [
+                    // 優先使用緩存的資源（離線優先）
                     {
                         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
                         handler: 'CacheFirst',
@@ -70,9 +119,10 @@ export default defineConfig({
                             }
                         }
                     },
+                    // 圖片資源
                     {
                         urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-                        handler: 'CacheFirst',
+                        handler: 'StaleWhileRevalidate',  // 改為 StaleWhileRevalidate，先顯示緩存，後台更新
                         options: {
                             cacheName: 'images-cache',
                             expiration: {
@@ -81,6 +131,7 @@ export default defineConfig({
                             }
                         }
                     },
+                    // 靜態資源
                     {
                         urlPattern: /\.(?:js|css)$/,
                         handler: 'StaleWhileRevalidate',
@@ -92,19 +143,58 @@ export default defineConfig({
                             }
                         }
                     },
+                    // 行程數據 - 改為緩存優先，但後台更新
                     {
                         urlPattern: /\/data\/itinerary\.json$/,
-                        handler: 'StaleWhileRevalidate',
+                        handler: 'StaleWhileRevalidate',  // 改為 StaleWhileRevalidate 策略
                         options: {
                             cacheName: 'itinerary-data',
                             expiration: {
                                 maxEntries: 5,
                                 maxAgeSeconds: 60 * 60 * 24 // 1 天
+                            },
+                            cacheableResponse: {
+                                statuses: [0, 200]
+                            }
+                        }
+                    },
+                    // HTML 請求 - 網路優先但不太嚴格的超時
+                    {
+                        urlPattern: /\/index\.html$/,
+                        handler: 'NetworkFirst',
+                        options: {
+                            cacheName: 'html-cache',
+                            networkTimeoutSeconds: 5, // 增加網絡超時時間
+                            expiration: {
+                                maxEntries: 10,
+                                maxAgeSeconds: 60 * 60 * 24 // 1 天
+                            },
+                            cacheableResponse: {
+                                statuses: [0, 200]
+                            }
+                        }
+                    },
+                    // 其餘請求的默認處理
+                    {
+                        urlPattern: /^https:\/\//,
+                        handler: 'NetworkFirst',
+                        options: {
+                            cacheName: 'others',
+                            networkTimeoutSeconds: 5, // 增加超時時間
+                            expiration: {
+                                maxEntries: 32,
+                                maxAgeSeconds: 60 * 60 * 24 // 1 天
+                            },
+                            cacheableResponse: {
+                                statuses: [0, 200]
                             }
                         }
                     }
-                ]
-            },
+                ],
+                // SW 控制
+                skipWaiting: true, // 新 SW 立即接管
+                clientsClaim: true // 新 SW 立即控制所有客戶端
+            }
         })
     ],
     base: '/',
