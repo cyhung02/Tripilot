@@ -1,45 +1,18 @@
 // src/components/OfflineFallback.tsx
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SakuraIcon } from './common/SvgIcons';
 
 /**
- * 離線備用頁面組件 - 優化版
- * 當用戶離線且訪問未快取的頁面時顯示
+ * 離線備用頁面元件 - 極簡版
+ * 當用戶離線且沒有快取的行程資料時顯示
  */
 const OfflineFallback: React.FC = () => {
-    const [lastOnlineTime, setLastOnlineTime] = useState<string>('');
-    const [retryCount, setRetryCount] = useState(0);
-
-    // 嘗試獲取最後在線時間
-    useEffect(() => {
-        try {
-            const storedTime = localStorage.getItem('lastOnlineTime');
-            if (storedTime) {
-                // 格式化時間顯示
-                const date = new Date(storedTime);
-                const formattedTime = new Intl.DateTimeFormat('zh-TW', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }).format(date);
-                setLastOnlineTime(formattedTime);
-            }
-        } catch (error) {
-            console.error('無法獲取最後在線時間', error);
-        }
-    }, []);
+    const [isRetrying, setIsRetrying] = useState(false);
 
     // 重試連接
     const handleRetry = () => {
-        setRetryCount(prev => prev + 1);
+        setIsRetrying(true);
         window.location.reload();
-    };
-
-    // 返回首頁
-    const handleBackHome = () => {
-        window.location.href = '/';
     };
 
     return (
@@ -71,28 +44,19 @@ const OfflineFallback: React.FC = () => {
                         <h2 className="text-xl font-bold text-pink-800 mb-2">離線狀態</h2>
 
                         <div className="text-pink-600 space-y-2">
-                            <p>您目前處於離線狀態，無法載入此頁面。</p>
-                            {lastOnlineTime && (
-                                <p className="text-sm text-pink-500">
-                                    您上次連接網路的時間: {lastOnlineTime}
-                                </p>
-                            )}
+                            <p>您目前處於離線狀態，且尚未載入行程資料。</p>
+                            <p className="text-sm">請連線至網路後再試。</p>
                         </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-center gap-3 mt-8">
-                        <button
-                            onClick={handleBackHome}
-                            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
-                        >
-                            返回首頁
-                        </button>
+                    <div className="flex justify-center">
                         <button
                             onClick={handleRetry}
                             className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors flex items-center justify-center"
+                            disabled={isRetrying}
                         >
                             <svg
-                                className={`w-4 h-4 mr-1.5 ${retryCount > 0 ? 'animate-spin' : ''}`}
+                                className={`w-4 h-4 mr-1.5 ${isRetrying ? 'animate-spin' : ''}`}
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -103,22 +67,8 @@ const OfflineFallback: React.FC = () => {
                             >
                                 <path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16" />
                             </svg>
-                            重新連接
+                            {isRetrying ? '重新連接中...' : '重新連接'}
                         </button>
-                    </div>
-
-                    <div className="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-                        <h3 className="text-sm font-medium text-yellow-800 mb-1 flex items-center">
-                            <svg className="w-4 h-4 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="8" x2="12" y2="12"></line>
-                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                            </svg>
-                            小提示
-                        </h3>
-                        <p className="text-xs text-yellow-700">
-                            您可以安裝此應用到您的裝置上，以便在離線狀態下查看已訪問過的頁面。首頁和主要行程頁面已經可以離線瀏覽。
-                        </p>
                     </div>
                 </div>
             </main>

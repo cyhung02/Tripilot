@@ -76,11 +76,12 @@ export default defineConfig({
                 ]
             },
             workbox: {
-                // 預緩存模式和模式
+                // 預緩存模式 - 確保這些檔案在離線狀態下可用
                 globPatterns: [
                     '**/*.{js,css,html,ico,png,svg,woff2}',
-                    'data/itinerary.json' // 一定要預緩存行程數據
+                    'data/itinerary.json' // 核心資料：一定要預緩存行程資料
                 ],
+
                 // 離線模式處理
                 navigateFallback: 'index.html',
                 navigateFallbackDenylist: [
@@ -88,11 +89,14 @@ export default defineConfig({
                     /\.(png|jpg|jpeg|svg|gif|webp|json)$/i,
                     /^\/manifest\.webmanifest$/i
                 ],
-                // 離線頁面設定 - 確保 offline.html 被緩存
+
+                // 離線頁面設定
                 offlineGoogleAnalytics: false,
+
                 // 運行時緩存策略
                 runtimeCaching: [
-                    // 網路字體 - 緩存優先
+                    // 網路字體 - 緩存優先策略
+                    // 適用於不常變更的資源
                     {
                         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
                         handler: 'CacheFirst',
@@ -121,7 +125,8 @@ export default defineConfig({
                             }
                         }
                     },
-                    // 圖片資源 - 先顯示舊的，同時更新
+
+                    // 圖片資源 - 先顯示舊的，同時更新策略
                     {
                         urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
                         handler: 'StaleWhileRevalidate',
@@ -136,7 +141,8 @@ export default defineConfig({
                             }
                         }
                     },
-                    // 靜態資源 - 先顯示舊的，同時更新
+
+                    // 靜態資源 - 先顯示舊的，同時更新策略
                     {
                         urlPattern: /\.(?:js|css)$/,
                         handler: 'StaleWhileRevalidate',
@@ -151,7 +157,10 @@ export default defineConfig({
                             }
                         }
                     },
-                    // 行程數據 - 最關鍵的部分，使用 StaleWhileRevalidate 策略
+
+                    // 行程資料 - 核心資料策略
+                    // StaleWhileRevalidate: 立即使用快取版本同時更新
+                    // 這保證了離線時有資料可用，同時確保在有網路時資料會更新
                     {
                         urlPattern: /\/data\/itinerary\.json$/,
                         handler: 'StaleWhileRevalidate',
@@ -159,14 +168,15 @@ export default defineConfig({
                             cacheName: 'itinerary-data', // 統一的快取名稱
                             expiration: {
                                 maxEntries: 5,
-                                maxAgeSeconds: 60 * 60 * 24 * 7 // 延長到 7 天
+                                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 天
                             },
                             cacheableResponse: {
                                 statuses: [0, 200]
                             }
                         }
                     },
-                    // 離線頁面 - 確保可用
+
+                    // 離線頁面 - 使用快取優先策略
                     {
                         urlPattern: /offline\.html$/,
                         handler: 'CacheFirst',
@@ -180,6 +190,7 @@ export default defineConfig({
                             }
                         }
                     },
+
                     // HTML 請求 - 網路優先但有備用
                     {
                         urlPattern: /\/index\.html$/,
@@ -196,6 +207,7 @@ export default defineConfig({
                             }
                         }
                     },
+
                     // 其他網路請求
                     {
                         urlPattern: /^https:\/\//,
@@ -213,6 +225,7 @@ export default defineConfig({
                         }
                     }
                 ],
+
                 // Service Worker 控制
                 skipWaiting: true,
                 clientsClaim: true

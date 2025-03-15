@@ -49,25 +49,29 @@ export const ItineraryProvider: React.FC<ItineraryProviderProps> = ({ children }
     const [today] = useState(new Date());
     const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
 
-    // 載入行程資料
+    // 簡化的載入行程資料函數 - 完全依賴 Service Worker 的快取策略
     useEffect(() => {
         const loadItineraryData = async () => {
             try {
                 setIsLoading(true);
+                setError(null);
+
                 // 使用 import.meta.env.BASE_URL 來處理基本路徑問題
                 const basePath = import.meta.env.BASE_URL || '/';
-                const response = await fetch(`${basePath}data/itinerary.json`);
+                const url = `${basePath}data/itinerary.json`;
 
-                if (!response.ok) {
+                // 使用普通的 fetch 請求 - Service Worker 會自動處理快取策略
+                const response = await fetch(url);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setItineraryData(data);
+                } else {
                     throw new Error(`無法載入行程資料: ${response.status} ${response.statusText}`);
                 }
-
-                const data = await response.json();
-                setItineraryData(data);
-                setError(null);
             } catch (err) {
                 console.error('載入行程資料時發生錯誤:', err);
-                setError(err instanceof Error ? err.message : '載入行程資料時發生未知錯誤');
+                setError(err instanceof Error ? err.message : '載入資料時發生未知錯誤');
             } finally {
                 setIsLoading(false);
             }
