@@ -76,21 +76,23 @@ export default defineConfig({
                 ]
             },
             workbox: {
-                // 進階設定，改進離線經驗
+                // 預緩存模式和模式
                 globPatterns: [
                     '**/*.{js,css,html,ico,png,svg,woff2}',
-                    'data/itinerary.json'
+                    'data/itinerary.json' // 一定要預緩存行程數據
                 ],
-                // 調整導航回退條件，避免誤判
+                // 離線模式處理
+                navigateFallback: 'index.html',
                 navigateFallbackDenylist: [
                     /^\/api\//,
-                    /\.(png|jpg|jpeg|svg|gif|webp|json)$/i,  // 不對資源檔案使用回退
-                    /^\/manifest\.webmanifest$/i  // 不對 manifest 使用回退
+                    /\.(png|jpg|jpeg|svg|gif|webp|json)$/i,
+                    /^\/manifest\.webmanifest$/i
                 ],
-                navigateFallback: 'index.html',  // 改用 index.html 作為回退，而非特定的離線頁面
-                // 更精細的緩存策略
+                // 離線頁面設定 - 確保 offline.html 被緩存
+                offlineGoogleAnalytics: false,
+                // 運行時緩存策略
                 runtimeCaching: [
-                    // 優先使用緩存的資源（離線優先）
+                    // 網路字體 - 緩存優先
                     {
                         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
                         handler: 'CacheFirst',
@@ -119,19 +121,22 @@ export default defineConfig({
                             }
                         }
                     },
-                    // 圖片資源
+                    // 圖片資源 - 先顯示舊的，同時更新
                     {
                         urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-                        handler: 'StaleWhileRevalidate',  // 改為 StaleWhileRevalidate，先顯示緩存，後台更新
+                        handler: 'StaleWhileRevalidate',
                         options: {
                             cacheName: 'images-cache',
                             expiration: {
                                 maxEntries: 60,
                                 maxAgeSeconds: 60 * 60 * 24 * 30 // 30 天
+                            },
+                            cacheableResponse: {
+                                statuses: [0, 200]
                             }
                         }
                     },
-                    // 靜態資源
+                    // 靜態資源 - 先顯示舊的，同時更新
                     {
                         urlPattern: /\.(?:js|css)$/,
                         handler: 'StaleWhileRevalidate',
@@ -140,31 +145,48 @@ export default defineConfig({
                             expiration: {
                                 maxEntries: 30,
                                 maxAgeSeconds: 60 * 60 * 24 * 7 // 7 天
-                            }
-                        }
-                    },
-                    // 行程數據 - 改為緩存優先，但後台更新
-                    {
-                        urlPattern: /\/data\/itinerary\.json$/,
-                        handler: 'StaleWhileRevalidate',  // 改為 StaleWhileRevalidate 策略
-                        options: {
-                            cacheName: 'itinerary-data',
-                            expiration: {
-                                maxEntries: 5,
-                                maxAgeSeconds: 60 * 60 * 24 // 1 天
                             },
                             cacheableResponse: {
                                 statuses: [0, 200]
                             }
                         }
                     },
-                    // HTML 請求 - 網路優先但不太嚴格的超時
+                    // 行程數據 - 最關鍵的部分，使用 StaleWhileRevalidate 策略
+                    {
+                        urlPattern: /\/data\/itinerary\.json$/,
+                        handler: 'StaleWhileRevalidate',
+                        options: {
+                            cacheName: 'itinerary-data', // 統一的快取名稱
+                            expiration: {
+                                maxEntries: 5,
+                                maxAgeSeconds: 60 * 60 * 24 * 7 // 延長到 7 天
+                            },
+                            cacheableResponse: {
+                                statuses: [0, 200]
+                            }
+                        }
+                    },
+                    // 離線頁面 - 確保可用
+                    {
+                        urlPattern: /offline\.html$/,
+                        handler: 'CacheFirst',
+                        options: {
+                            cacheName: 'offline-page',
+                            expiration: {
+                                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 天
+                            },
+                            cacheableResponse: {
+                                statuses: [0, 200]
+                            }
+                        }
+                    },
+                    // HTML 請求 - 網路優先但有備用
                     {
                         urlPattern: /\/index\.html$/,
                         handler: 'NetworkFirst',
                         options: {
                             cacheName: 'html-cache',
-                            networkTimeoutSeconds: 5, // 增加網絡超時時間
+                            networkTimeoutSeconds: 5,
                             expiration: {
                                 maxEntries: 10,
                                 maxAgeSeconds: 60 * 60 * 24 // 1 天
@@ -174,13 +196,13 @@ export default defineConfig({
                             }
                         }
                     },
-                    // 其餘請求的默認處理
+                    // 其他網路請求
                     {
                         urlPattern: /^https:\/\//,
                         handler: 'NetworkFirst',
                         options: {
                             cacheName: 'others',
-                            networkTimeoutSeconds: 5, // 增加超時時間
+                            networkTimeoutSeconds: 5,
                             expiration: {
                                 maxEntries: 32,
                                 maxAgeSeconds: 60 * 60 * 24 // 1 天
@@ -191,30 +213,27 @@ export default defineConfig({
                         }
                     }
                 ],
-                // SW 控制
-                skipWaiting: true, // 新 SW 立即接管
-                clientsClaim: true // 新 SW 立即控制所有客戶端
+                // Service Worker 控制
+                skipWaiting: true,
+                clientsClaim: true
             }
         })
     ],
     base: '/',
     build: {
-        minify: 'terser', // 使用 terser 進行更強的壓縮
+        minify: 'terser',
         terserOptions: {
             compress: {
-                drop_console: true, // 移除 console.*
-                drop_debugger: true, // 移除 debugger
-                pure_funcs: ['console.log'] // 將純函數調用視為副作用
+                drop_console: true,
+                drop_debugger: true,
+                pure_funcs: ['console.log']
             }
         },
         rollupOptions: {
             output: {
                 manualChunks: {
-                    // 將 React 相關庫單獨打包
                     'react-vendor': ['react', 'react-dom'],
-                    // 將日期處理庫單獨打包
                     'date-vendor': ['date-fns'],
-                    // 將動畫庫單獨打包
                     'animation-vendor': ['framer-motion']
                 }
             }
