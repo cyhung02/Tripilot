@@ -142,15 +142,15 @@ export default defineConfig({
                         }
                     },
 
-                    // 靜態資源 - 先顯示舊的，同時更新策略
+                    // 靜態資源 - 改為 CacheFirst
                     {
                         urlPattern: /\.(?:js|css)$/,
-                        handler: 'StaleWhileRevalidate',
+                        handler: 'CacheFirst',
                         options: {
                             cacheName: 'static-resources',
                             expiration: {
                                 maxEntries: 30,
-                                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 天
+                                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 天
                             },
                             cacheableResponse: {
                                 statuses: [0, 200]
