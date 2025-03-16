@@ -57,6 +57,22 @@ function validateDayInfo(day: any, dayIndex: number): string[] {
     const errors: string[] = [];
     const dayName = `第 ${dayIndex + 1} 天 (${day.date || '未知日期'})`;
 
+    // 檢查是否有未定義的欄位
+    const allowedFields = [
+        'date', 'title', 'itinerary',
+        'foodRecommendations', 'shoppingRecommendations', 'accommodation'
+    ];
+
+    // 檢查是否包含 day 欄位，這是不允許的
+    if ('day' in day) {
+        errors.push(`${dayName}: 包含 'day' 欄位，但此欄位應由系統自動生成，請從 JSON 中移除`);
+    }
+
+    const extraFields = Object.keys(day).filter(key => !allowedFields.includes(key) && key !== 'day');
+    if (extraFields.length > 0) {
+        errors.push(`${dayName}: 包含未定義的欄位: ${extraFields.join(', ')}`);
+    }
+
     // 檢查必填欄位
     if (!day.date) {
         errors.push(`${dayName}: 缺少必要欄位 'date'`);
@@ -68,9 +84,8 @@ function validateDayInfo(day: any, dayIndex: number): string[] {
         }
     }
 
-    if (!day.day) {
-        errors.push(`${dayName}: 缺少必要欄位 'day'`);
-    }
+    // 不需要檢查 day 欄位，因為它不應該出現在 JSON 中
+    // 如果存在 day 欄位，已在前面報告錯誤
 
     if (!day.title) {
         errors.push(`${dayName}: 缺少必要欄位 'title'`);
@@ -135,6 +150,17 @@ function validateItineraryItem(item: any, itemIndex: number, dayName: string): s
     const errors: string[] = [];
     const itemName = `${dayName} 行程項目 #${itemIndex + 1} (${item.name || '未命名項目'})`;
 
+    // 檢查是否有未定義的欄位
+    const allowedFields = [
+        'type', 'name', 'time', 'description', 'tips', 'location',
+        'transportation', 'recommendedDishes'
+    ];
+
+    const extraFields = Object.keys(item).filter(key => !allowedFields.includes(key));
+    if (extraFields.length > 0) {
+        errors.push(`${itemName}: 包含未定義的欄位: ${extraFields.join(', ')}`);
+    }
+
     // 檢查必填欄位
     if (!item.type) {
         errors.push(`${itemName}: 缺少必要欄位 'type'`);
@@ -178,6 +204,16 @@ function validateItineraryItem(item: any, itemIndex: number, dayName: string): s
 function validateTransportation(transportation: any, itemName: string): string[] {
     const errors: string[] = [];
 
+    // 檢查是否有未定義的欄位
+    const allowedFields = [
+        'from', 'to', 'departureTime', 'arrivalTime', 'segments'
+    ];
+
+    const extraFields = Object.keys(transportation).filter(key => !allowedFields.includes(key));
+    if (extraFields.length > 0) {
+        errors.push(`${itemName} 交通資訊: 包含未定義的欄位: ${extraFields.join(', ')}`);
+    }
+
     // 檢查時間格式 (如存在，必須是 HH:MM 格式)
     if (transportation.departureTime) {
         const timeFormatRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
@@ -219,6 +255,16 @@ function validateTransportation(transportation: any, itemName: string): string[]
 function validateSegment(segment: any, segmentIndex: number, itemName: string): string[] {
     const errors: string[] = [];
     const segmentName = `${itemName} 交通路段 #${segmentIndex + 1}`;
+
+    // 檢查是否有未定義的欄位
+    const allowedFields = [
+        'vehicleNumber', 'from', 'to', 'departureTime', 'arrivalTime', 'isReserved'
+    ];
+
+    const extraFields = Object.keys(segment).filter(key => !allowedFields.includes(key));
+    if (extraFields.length > 0) {
+        errors.push(`${segmentName}: 包含未定義的欄位: ${extraFields.join(', ')}`);
+    }
 
     // 檢查必填欄位
     if (!segment.vehicleNumber) {
@@ -266,6 +312,16 @@ function validateSegment(segment: any, segmentIndex: number, itemName: string): 
  */
 function validateAccommodation(accommodation: any, dayName: string): string[] {
     const errors: string[] = [];
+
+    // 檢查是否有未定義的欄位
+    const allowedFields = [
+        'city', 'name', 'locationURL'
+    ];
+
+    const extraFields = Object.keys(accommodation).filter(key => !allowedFields.includes(key));
+    if (extraFields.length > 0) {
+        errors.push(`${dayName} 住宿: 包含未定義的欄位: ${extraFields.join(', ')}`);
+    }
 
     // 檢查必填欄位
     if (!accommodation.city) {

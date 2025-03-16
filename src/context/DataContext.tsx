@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { DayInfo } from '../data/types';
 import { usePWAStatus } from '../hooks/usePWAStatus';
 import { validateItineraryData } from '../utils/jsonValidator';
+import { formatWeekday } from '../utils/dateUtils';
 
 // 定義 Context 的值類型
 interface DataContextType {
@@ -62,8 +63,16 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
                     throw new Error(errorMsg);
                 }
 
-                // 驗證通過後設置資料
-                setItineraryData(data);
+                // 驗證通過後處理資料，自動計算 day 欄位
+                const processedData = data.map((item: any) => {
+                    const dayInfo = { ...item };
+                    // 為所有項目重新計算 day 欄位，無論原本是否存在
+                    dayInfo.day = formatWeekday(dayInfo.date);
+                    return dayInfo;
+                });
+
+                // 設置處理後的資料
+                setItineraryData(processedData);
             } else {
                 throw new Error(`無法載入行程資料: ${response.status} ${response.statusText}`);
             }

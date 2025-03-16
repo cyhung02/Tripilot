@@ -3,6 +3,36 @@ import { differenceInDays, isWithinInterval, format, parseISO } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
 import { DayInfo } from '../data/types';
 
+/**
+ * 將日期格式化為星期幾
+ * 將 "YYYY-MM-DD" 格式轉換為 "星期X" 格式
+ */
+export const formatWeekday = (dateStr: string): string => {
+    try {
+        // 使用 parseISO 解析 YYYY-MM-DD 格式的日期字串
+        const parsedDate = parseISO(dateStr);
+
+        // 獲取星期數 (0-6，其中 0 表示星期日)
+        const weekdayNum = parsedDate.getDay();
+
+        // 星期數到中文星期的映射
+        const weekdayMap = [
+            '星期日',
+            '星期一',
+            '星期二',
+            '星期三',
+            '星期四',
+            '星期五',
+            '星期六',
+        ];
+
+        return weekdayMap[weekdayNum];
+    } catch (error) {
+        console.error('日期格式化錯誤:', error);
+        return '未知';
+    }
+};
+
 const DEFAULT_DATE = {
     START_DATE: new Date(2025, 1 - 1, 1),
     END_DATE: new Date(2025, 1 - 1, 1, 23, 59, 59)

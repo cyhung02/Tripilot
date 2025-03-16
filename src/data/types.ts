@@ -45,7 +45,7 @@ export interface ItineraryItem {
 // 每日資訊介面
 export interface DayInfo {
     date: string;  // 行程日期，格式為 "YYYY-MM-DD"
-    day: string;   // 星期幾，如 "星期五"
+    day: string;   // 星期幾，如 "星期五"，JSON 中不應包含此欄位，將由系統根據 date 自動計算
     title: string; // 當日行程標題
     itinerary: ItineraryItem[];
     foodRecommendations?: string[];
