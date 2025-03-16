@@ -2,6 +2,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { DayInfo } from '../data/types';
 import { usePWAStatus } from '../hooks/usePWAStatus';
+import { validateItineraryData } from '../utils/jsonValidator';
 
 // 定義 Context 的值類型
 interface DataContextType {
@@ -52,6 +53,16 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
 
             if (response.ok) {
                 const data = await response.json();
+
+                // 在這裡添加數據驗證
+                const validationResult = validateItineraryData(data);
+                if (!validationResult.isValid) {
+                    // 如果驗證失敗，設置錯誤訊息並返回
+                    const errorMsg = '行程資料格式錯誤:\n' + validationResult.errors.join('\n');
+                    throw new Error(errorMsg);
+                }
+
+                // 驗證通過後設置資料
                 setItineraryData(data);
             } else {
                 throw new Error(`無法載入行程資料: ${response.status} ${response.statusText}`);
@@ -60,7 +71,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
             console.error('載入行程資料時發生錯誤:', err);
 
             // 網路錯誤時自動重試 (最多3次)
-            if (isOnline && retryCount < 3) {
+            if (isOnline && retryCount < 3 && !(err instanceof Error && err.message.includes('行程資料格式錯誤'))) {
                 console.log(`嘗試重新載入 (${retryCount + 1}/3)...`);
                 setTimeout(() => loadItineraryData(retryCount + 1), 1000 * (retryCount + 1));
                 return;
