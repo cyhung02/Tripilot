@@ -69,8 +69,8 @@ export const UIStateProvider: React.FC<UIStateProviderProps> = ({ children }) =>
         if (itineraryData.length === 0) return;
 
         try {
-            // 檢查當前日期是否在旅行期間內
-            const tripDayIndex = getCurrentTripDayIndex();
+            // 檢查當前日期是否在旅行期間內，傳入行程資料
+            const tripDayIndex = getCurrentTripDayIndex(itineraryData);
             if (tripDayIndex !== null) {
                 // 確保索引在有效範圍內
                 const validIndex = Math.max(0, Math.min(tripDayIndex, itineraryData.length - 1));
