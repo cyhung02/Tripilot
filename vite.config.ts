@@ -8,7 +8,7 @@ export default defineConfig({
         react(),
         tailwindcss(),
         VitePWA({
-            registerType: 'prompt', // 改為 prompt: 讓用戶自己決定是否更新
+            registerType: 'autoUpdate',
             includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg', 'sakura-icon.svg'],
             manifest: {
                 name: '日本關西中國地方旅遊手冊',

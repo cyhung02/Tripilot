@@ -82,38 +82,63 @@ export function usePWAStatus(): UsePWAStatusReturn {
         };
     }, []);
 
-    // 檢查是否有 Service Worker 更新
+    // 檢查是否有 Service Worker 更新並自動應用
     useEffect(() => {
-        // 這裡整合 vite-plugin-pwa 提供的 registerSW 功能
-        // 實際專案中可能需要使用 virtual:pwa-register
-
-        // 簡化示範
-        const checkForUpdates = () => {
-            // 假設註冊 SW 並獲取更新回調的功能
+        try {
+            // 註冊 PWA 並處理更新
             import('virtual:pwa-register').then(({ registerSW }) => {
+                // 自動更新處理
                 const updateSW = registerSW({
                     onNeedRefresh() {
+                        // 檢測到新版本時自動更新
+                        console.log("發現新版本，正在自動更新...");
+                        // 仍設置狀態，以便其他組件可能使用
                         setIsUpdateAvailable(true);
-                        setUpdateCallback(() => updateSW);
+
+                        // 立即執行更新
+                        updateSW()
+                            .then(() => {
+                                console.log("更新已成功應用");
+                                setIsUpdateAvailable(false);
+                                // 觸發自定義事件通知應用已更新
+                                window.dispatchEvent(new CustomEvent('pwa:update-applied'));
+                            })
+                            .catch((error) => {
+                                console.error("自動更新失敗:", error);
+                                // 保持更新可用狀態，以便用戶可以手動更新
+                                setUpdateCallback(() => updateSW);
+                            });
                     },
                     onOfflineReady() {
                         // 離線就緒
+                        window.dispatchEvent(new CustomEvent('pwa:offline-ready'));
                     },
                     onRegistered(registration) {
                         // 檢查更新
                         if (registration) {
+                            // 設置定期檢查 - 每小時檢查一次更新
                             setInterval(() => {
+                                console.log("檢查 Service Worker 更新...");
                                 registration.update().catch(console.error);
                             }, 60 * 60 * 1000); // 每小時檢查一次
                         }
+                    },
+                    onRegisterError(error) {
+                        console.error("Service Worker 註冊錯誤:", error);
                     }
                 });
-            }).catch(console.error);
-        };
 
-        checkForUpdates();
+                // 保存回調以防需要手動更新
+                setUpdateCallback(() => updateSW);
+            }).catch(error => {
+                console.error("PWA 註冊錯誤:", error);
+            });
+        } catch (error) {
+            console.error("設置 PWA 更新邏輯時出錯:", error);
+        }
     }, []);
 
+    // 手動更新方法 - 雖然現在主要是自動更新，但保留此方法以備用戶需要手動操作
     const updateApp = useCallback(async () => {
         if (updateCallback) {
             try {
@@ -128,6 +153,7 @@ export function usePWAStatus(): UsePWAStatusReturn {
         return Promise.resolve();
     }, [updateCallback]);
 
+    // 安裝應用
     const installApp = useCallback(async () => {
         if (installPrompt) {
             try {

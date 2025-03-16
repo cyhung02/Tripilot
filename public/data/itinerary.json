@@ -1,6 +1,6 @@
 [
     {
-        "date": "3/28",
+        "date": "2025-03-28",
         "day": "星期五",
         "title": "出發日",
         "itinerary": [
@@ -40,7 +40,7 @@
         "shoppingRecommendations": []
     },
     {
-        "date": "3/29",
+        "date": "2025-03-29",
         "day": "星期六",
         "title": "大阪探索日",
         "itinerary": [
@@ -126,7 +126,7 @@
         }
     },
     {
-        "date": "3/30",
+        "date": "2025-03-30",
         "day": "星期日",
         "title": "溫泉放鬆日",
         "itinerary": [
@@ -165,7 +165,7 @@
         }
     },
     {
-        "date": "3/31",
+        "date": "2025-03-31",
         "day": "星期一",
         "title": "廣島文化巡禮",
         "itinerary": [
@@ -200,7 +200,7 @@
             {
                 "type": "景點",
                 "name": "廣島和平紀念公園 & 原爆圓頂",
-                "time": "13:00-15:00",
+                "time": "",
                 "description": "象徵和平的世界文化遺產，原爆圓頂是唯一保留的原子彈爆炸痕跡建築。",
                 "tips": "參觀和平紀念資料館需要1-2小時，請預留足夠時間。",
                 "location": "https://goo.gl/maps/Z9YJ5qfqWBrTGdH36"
@@ -208,7 +208,7 @@
             {
                 "type": "景點",
                 "name": "縮景園",
-                "time": "15:30-16:30",
+                "time": "",
                 "description": "江戶時代的日本傳統庭園，四季景色各異。",
                 "tips": "園內有茶屋，可以在此休息品茶。",
                 "location": "https://goo.gl/maps/QcTTfHUbdiFVkdBJ6"
@@ -216,7 +216,7 @@
             {
                 "type": "景點",
                 "name": "廣島城",
-                "time": "17:00-18:00",
+                "time": "",
                 "description": "廣島地標性的城堡，被稱為「鯉城」，現為歷史博物館。",
                 "tips": "城內展示有武士盔甲和歷史文物，從頂層可俯瞰廣島市區。",
                 "location": "https://goo.gl/maps/UX87dJPUH3HoJBsQ8"
@@ -224,7 +224,7 @@
             {
                 "type": "購物",
                 "name": "本通商店街 & 廣島 PARCO",
-                "time": "18:30-20:30",
+                "time": "",
                 "description": "廣島主要購物區，有多家百貨公司和特色商店。",
                 "tips": "可在本通商店街尋找廣島特產和伴手禮。",
                 "location": "https://goo.gl/maps/zSM71S7dYJFVHVnY7"
@@ -247,7 +247,7 @@
         }
     },
     {
-        "date": "4/1",
+        "date": "2025-04-01",
         "day": "星期二",
         "title": "神秘宮島之旅",
         "itinerary": [
@@ -358,7 +358,7 @@
         }
     },
     {
-        "date": "4/2",
+        "date": "2025-04-02",
         "day": "星期三",
         "title": "浪漫尾道漫步",
         "itinerary": [
@@ -393,13 +393,13 @@
             {
                 "type": "其他",
                 "name": "寄放行李",
-                "time": "10:50-11:10",
+                "time": "",
                 "description": "在尾道站附近寄放行李，方便輕裝遊覽"
             },
             {
                 "type": "餐廳",
                 "name": "尾道拉麵 壱番館本店",
-                "time": "11:30-12:30",
+                "time": "",
                 "description": "尾道著名的拉麵店，以醬油湯底和背脂拉麵聞名。",
                 "recommendedDishes": "尾道拉麵、尾道背脂拉麵、叉燒飯",
                 "location": "https://goo.gl/maps/8eypEvTsj9XQg3Fy5"
@@ -407,7 +407,7 @@
             {
                 "type": "景點",
                 "name": "千光寺纜車 & 千光寺公園",
-                "time": "13:00-14:30",
+                "time": "",
                 "description": "搭乘纜車前往山頂的千光寺，可俯瞰尾道市區和瀨戶內海美景。",
                 "tips": "千光寺公園的櫻花和楓葉季節特別美麗，山頂有多個觀景台。",
                 "location": "https://goo.gl/maps/L7UZsGnqDYUVN7cn6"
@@ -415,7 +415,7 @@
             {
                 "type": "景點",
                 "name": "貓之細道 & 艮神社",
-                "time": "15:00-16:30",
+                "time": "",
                 "description": "蜿蜒於山坡間的小徑，以眾多流浪貓而聞名，途經古樸的艮神社。",
                 "tips": "道路較陡，請穿著舒適的鞋子。沿途有許多文藝小店和咖啡館。",
                 "location": "https://goo.gl/maps/JNgQxwZgHZkTEXLG6"
@@ -423,7 +423,7 @@
             {
                 "type": "景點",
                 "name": "尾道本通商店街",
-                "time": "17:00-19:00",
+                "time": "",
                 "description": "尾道主要商店街，有各種特色小店和美食。",
                 "tips": "推薦品嚐尾道特色甜點和文青麵包店。",
                 "location": "https://goo.gl/maps/qJcxs7JaX5bBTdEH7"
@@ -431,7 +431,7 @@
             {
                 "type": "其他",
                 "name": "領行李",
-                "time": "19:30-19:50",
+                "time": "",
                 "description": "取回寄放的行李"
             },
             {
@@ -471,7 +471,7 @@
         }
     },
     {
-        "date": "4/3",
+        "date": "2025-04-03",
         "day": "星期四",
         "title": "津山歷史文化探索",
         "itinerary": [
@@ -548,7 +548,7 @@
         }
     },
     {
-        "date": "4/4",
+        "date": "2025-04-04",
         "day": "星期五",
         "title": "姬路城歷史探訪",
         "itinerary": [
@@ -625,7 +625,7 @@
         }
     },
     {
-        "date": "4/5",
+        "date": "2025-04-05",
         "day": "星期六",
         "title": "倉敷美觀探索",
         "itinerary": [
@@ -711,7 +711,7 @@
         }
     },
     {
-        "date": "4/6",
+        "date": "2025-04-06",
         "day": "星期日",
         "title": "岡山名勝巡禮 & 回程",
         "itinerary": [
