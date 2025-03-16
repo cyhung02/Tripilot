@@ -3,7 +3,7 @@ import { DayInfo } from '../data/types';
 import ItineraryItemCard from './ItineraryItemCard';
 import RecommendationSection from './RecommendationSection';
 import AccommodationInfo from './AccommodationInfo';
-import { useItinerary } from '../context/ItineraryContext';
+import { useUIState } from '../context/UIStateContext';
 import { ArrowUpIcon, SakuraIcon, TipIcon } from './common/SvgIcons';
 
 interface DayDetailProps {
@@ -12,16 +12,8 @@ interface DayDetailProps {
 }
 
 const DayDetail: React.FC<DayDetailProps> = ({ day, isToday }) => {
-    // 使用 Context 中的展開狀態
-    const { expandedItems, setExpandedItems } = useItinerary();
-
-    // 切換展開狀態
-    const toggleExpand = (id: string) => {
-        setExpandedItems(prev => ({
-            ...prev,
-            [id]: !prev[id]
-        }));
-    };
+    // 使用新的 Context 獲取 UI 狀態
+    const { expandedItems, toggleExpand } = useUIState();
 
     return (
         <div className="relative z-[2]">

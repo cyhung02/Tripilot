@@ -1,29 +1,20 @@
 // src/App.tsx
 import { lazy, Suspense, useState, useEffect } from 'react';
 import JournifyApp from './components/JournifyApp';
-import { ItineraryProvider } from './context/ItineraryContext';
+import AppProviders from './providers/AppProviders';
 import PWAManager from './components/PWAManager';
 import ErrorBoundary from './components/ErrorBoundary';
 import OfflineFallback from './components/OfflineFallback';
-import { useItinerary } from './context/ItineraryContext';
 import { usePWAStatus } from './hooks/usePWAStatus';
+import { useItineraryData } from './context/DataContext';
 import Toast from './components/common/Toast';
 
 // 懶加載非關鍵組件
 const CherryBlossomFall = lazy(() => import('./components/CherryBlossomFall'));
 
-// 包裝 App 元件，提供 ItineraryProvider 上下文
-function AppWithProvider() {
-    return (
-        <ItineraryProvider>
-            <AppContent />
-        </ItineraryProvider>
-    );
-}
-
-// 主要 App 內容元件，使用 ItineraryContext
+// 主要 App 內容元件
 function AppContent() {
-    const { itineraryData, isLoading } = useItinerary();
+    const { itineraryData, isLoading } = useItineraryData();
     const { isOnline } = usePWAStatus();
     const [isLoaded, setIsLoaded] = useState(false);
     const [showInitialOfflineToast, setShowInitialOfflineToast] = useState(!isOnline);
@@ -111,7 +102,11 @@ function AppContent() {
 
 // 導出最外層的 App 元件
 function App() {
-    return <AppWithProvider />;
+    return (
+        <AppProviders>
+            <AppContent />
+        </AppProviders>
+    );
 }
 
 export default App;

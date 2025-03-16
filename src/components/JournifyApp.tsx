@@ -1,6 +1,8 @@
 // src/components/JournifyApp.tsx
 import { useMemo, lazy, Suspense, useState, useEffect } from 'react';
-import { useItinerary } from '../context/ItineraryContext';
+import { useUIState } from '../context/UIStateContext';
+import { useItineraryData } from '../context/DataContext';
+import { useFormatter } from '../context/FormatterContext';
 import { usePWAStatus } from '../hooks/usePWAStatus';
 import DayDetail from './DayDetail';
 import ErrorBoundary from './ErrorBoundary';
@@ -48,7 +50,10 @@ const Header = () => {
 
 // 日期導航列元件
 const DateNavigation = () => {
-    const { itineraryData, selectedDayIndex, setSelectedDayIndex, isToday, formatDisplayDate } = useItinerary();
+    // 使用分離後的 Context
+    const { itineraryData } = useItineraryData();
+    const { selectedDayIndex, setSelectedDayIndex, isToday } = useUIState();
+    const { formatDisplayDate } = useFormatter();
 
     // 使用 useMemo 緩存導航按鈕
     const dateButtons = useMemo(() => {
@@ -139,10 +144,9 @@ const EmptyState = () => {
 
 // 主應用元件
 const JournifyApp: React.FC = () => {
-    // 使用 Context API 獲取狀態
-    const { itineraryData, selectedDayIndex, isToday, isLoading, error } = useItinerary();
-    // 注意：主組件不需要直接使用網路狀態
-    // EmptyState 組件內部已經使用 usePWAStatus 來獲取 isOnline
+    // 使用分離後的 Context
+    const { itineraryData, isLoading, error } = useItineraryData();
+    const { selectedDayIndex, isToday } = useUIState();
 
     // 新增狀態控制何時顯示櫻花效果
     const [showEffects, setShowEffects] = useState(false);
