@@ -60,7 +60,7 @@ const CherryBlossomFall = () => {
     const [petals, setPetals] = useState<CherryBlossomStyle[]>([]);
 
     useEffect(() => {
-        const numberOfPetals = 12; // 花瓣數量
+        const numberOfPetals = 8; // 花瓣數量
 
         const colors = ["#FBCFE8", "#F9A8D4", "#F472B6", "#FDF2F8"]; // 多種粉色調
         const MAX_PETAL_SIZE = 20; // 最大尺寸限制
