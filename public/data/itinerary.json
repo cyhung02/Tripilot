@@ -175,25 +175,17 @@
                 "name": "前往有馬溫泉",
                 "time": "",
                 "transportation": {
-                    "from": "大阪",
+                    "from": "大阪（阪急三番街）",
                     "to": "有馬溫泉",
-                    "departureTime": "09:00",
-                    "arrivalTime": "11:00",
+                    "departureTime": "11:50",
+                    "arrivalTime": "12:50",
                     "segments": [
                         {
-                            "vehicleNumber": "JR特急列車",
-                            "from": "大阪站",
-                            "to": "新神戶站",
-                            "departureTime": "09:00",
-                            "arrivalTime": "09:30",
-                            "isReserved": true
-                        },
-                        {
-                            "vehicleNumber": "有馬溫泉直達巴士",
-                            "from": "新神戶站",
-                            "to": "有馬溫泉巴士站",
-                            "departureTime": "09:45",
-                            "arrivalTime": "10:30",
+                            "vehicleNumber": "高速バス・阪急観光バス・大阪−有馬温泉線",
+                            "from": "大阪（阪急三番街）",
+                            "to": "有馬溫泉",
+                            "departureTime": "11:50",
+                            "arrivalTime": "12:50",
                             "isReserved": false
                         }
                     ]
