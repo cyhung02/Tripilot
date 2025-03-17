@@ -41,8 +41,8 @@ const Header = () => {
                 </div>
             </div>
             <div className="container mx-auto relative z-10">
-                <h1 className="text-2xl md:text-3xl font-bold text-pink-800">日本關西中國地方旅遊手冊</h1>
-                <p className="text-sm md:text-base text-pink-600 font-medium">2025年3月28日至4月6日</p>
+                <h1 className="text-2xl md:text-3xl font-bold text-pink-800">Tripilot</h1>
+                <p className="text-sm md:text-base text-pink-600 font-medium">您的隨行旅遊指南</p>
             </div>
         </header>
     );
@@ -98,7 +98,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="container mx-auto text-center text-pink-600 text-sm relative z-10">
-                © 2025 日本關西中國地方旅遊手冊
+                © 2025 Tripilot
             </div>
         </footer>
     );

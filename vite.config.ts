@@ -11,9 +11,9 @@ export default defineConfig({
             registerType: 'autoUpdate',
             includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg', 'sakura-icon.svg'],
             manifest: {
-                name: '日本關西中國地方旅遊手冊',
-                short_name: '日本旅遊手冊',
-                description: '2025年3月28日至4月6日日本關西中國地方旅遊行程',
+                name: 'Tripilot',
+                short_name: 'Tripilot',
+                description: '您的智慧旅行助手，幫助您管理行程、查看景點和規劃旅途。',
                 theme_color: '#F9A8D4',
                 background_color: '#FDF2F8',
                 display: 'standalone',

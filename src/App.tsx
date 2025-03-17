@@ -1,6 +1,6 @@
 // src/App.tsx
 import { lazy, Suspense, useState, useEffect } from 'react';
-import JournifyApp from './components/JournifyApp';
+import JournifyApp from './components/TripilotApp';
 import AppProviders from './providers/AppProviders';
 import PWAManager from './components/PWAManager';
 import ErrorBoundary from './components/ErrorBoundary';
