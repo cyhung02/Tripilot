@@ -5,6 +5,7 @@ import RecommendationSection from './RecommendationSection';
 import AccommodationInfo from './AccommodationInfo';
 import { useUIState } from '../context/UIStateContext';
 import { ArrowUpIcon, SakuraIcon, TipIcon } from './common/SvgIcons';
+import { formatDisplayDate } from '../utils/dateUtils';
 
 interface DayDetailProps {
     day: DayInfo;
@@ -30,7 +31,7 @@ const DayDetail: React.FC<DayDetailProps> = ({ day, isToday }) => {
                         </span>
                     )}
                 </div>
-                <p className="text-pink-600">{day.date} {day.day}</p>
+                <p className="text-pink-600">{formatDisplayDate(day.date)} {day.day}</p>
 
                 {/* 針對宮島行程顯示潮汐時間 */}
                 {day.title === '神秘宮島之旅' && (

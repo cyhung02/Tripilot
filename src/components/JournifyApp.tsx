@@ -70,7 +70,7 @@ const DateNavigation = () => {
                 aria-label={`${formatDisplayDate(day.date)} ${day.title}`}
             >
                 <div className="flex flex-col items-center">
-                    <span>{day.date}</span>
+                    <span>{formatDisplayDate(day.date)}</span>
                     <span className="text-xs font-medium">{day.day}</span>
                 </div>
             </button>

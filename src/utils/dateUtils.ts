@@ -1,6 +1,5 @@
 // src/utils/dateUtils.ts
 import { differenceInDays, isWithinInterval, format, parseISO } from 'date-fns';
-import { zhTW } from 'date-fns/locale';
 import { DayInfo } from '../data/types';
 
 /**
@@ -70,15 +69,15 @@ export const getTripDates = (itineraryData: DayInfo[]) => {
 
 /**
  * 將日期格式化為顯示格式
- * 將 "YYYY-MM-DD" 格式轉換為 "M月d日 (週五)" 格式
+ * 將 "YYYY-MM-DD" 格式轉換為 "M/D" 格式
  */
 export const formatDisplayDate = (dateStr: string): string => {
     try {
         // 使用 parseISO 解析 YYYY-MM-DD 格式的日期字串
         const parsedDate = parseISO(dateStr);
 
-        // 格式化為 "3月28日 (週五)" 格式
-        return format(parsedDate, 'M月d日 (EEE)', { locale: zhTW });
+        // 格式化為 "M/D" 格式，例如 "3/28"
+        return format(parsedDate, 'M/d');
     } catch (error) {
         console.error('日期格式化錯誤:', error);
         return dateStr;

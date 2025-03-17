@@ -1,5 +1,6 @@
 // src/hooks/usePWAStatus.ts
 import { useState, useEffect, useCallback } from 'react';
+import { registerSW } from 'virtual:pwa-register';
 
 interface UsePWAStatusReturn {
     isOnline: boolean;
@@ -86,53 +87,48 @@ export function usePWAStatus(): UsePWAStatusReturn {
     useEffect(() => {
         try {
             // 註冊 PWA 並處理更新
-            import('virtual:pwa-register').then(({ registerSW }) => {
-                // 自動更新處理
-                const updateSW = registerSW({
-                    onNeedRefresh() {
-                        // 檢測到新版本時自動更新
-                        console.log("發現新版本，正在自動更新...");
-                        // 仍設置狀態，以便其他組件可能使用
-                        setIsUpdateAvailable(true);
+            const updateSW = registerSW({
+                onNeedRefresh() {
+                    // 檢測到新版本時自動更新
+                    console.log("發現新版本，正在自動更新...");
+                    // 仍設置狀態，以便其他組件可能使用
+                    setIsUpdateAvailable(true);
 
-                        // 立即執行更新
-                        updateSW()
-                            .then(() => {
-                                console.log("更新已成功應用");
-                                setIsUpdateAvailable(false);
-                                // 觸發自定義事件通知應用已更新
-                                window.dispatchEvent(new CustomEvent('pwa:update-applied'));
-                            })
-                            .catch((error) => {
-                                console.error("自動更新失敗:", error);
-                                // 保持更新可用狀態，以便用戶可以手動更新
-                                setUpdateCallback(() => updateSW);
-                            });
-                    },
-                    onOfflineReady() {
-                        // 離線就緒
-                        window.dispatchEvent(new CustomEvent('pwa:offline-ready'));
-                    },
-                    onRegistered(registration) {
-                        // 檢查更新
-                        if (registration) {
-                            // 設置定期檢查 - 每小時檢查一次更新
-                            setInterval(() => {
-                                console.log("檢查 Service Worker 更新...");
-                                registration.update().catch(console.error);
-                            }, 60 * 60 * 1000); // 每小時檢查一次
-                        }
-                    },
-                    onRegisterError(error) {
-                        console.error("Service Worker 註冊錯誤:", error);
+                    // 立即執行更新
+                    updateSW()
+                        .then(() => {
+                            console.log("更新已成功應用");
+                            setIsUpdateAvailable(false);
+                            // 觸發自定義事件通知應用已更新
+                            window.dispatchEvent(new CustomEvent('pwa:update-applied'));
+                        })
+                        .catch((error) => {
+                            console.error("自動更新失敗:", error);
+                            // 保持更新可用狀態，以便用戶可以手動更新
+                            setUpdateCallback(() => updateSW);
+                        });
+                },
+                onOfflineReady() {
+                    // 離線就緒
+                    window.dispatchEvent(new CustomEvent('pwa:offline-ready'));
+                },
+                onRegistered(registration) {
+                    // 檢查更新
+                    if (registration) {
+                        // 設置定期檢查 - 每小時檢查一次更新
+                        setInterval(() => {
+                            console.log("檢查 Service Worker 更新...");
+                            registration.update().catch(console.error);
+                        }, 60 * 60 * 1000); // 每小時檢查一次
                     }
-                });
-
-                // 保存回調以防需要手動更新
-                setUpdateCallback(() => updateSW);
-            }).catch(error => {
-                console.error("PWA 註冊錯誤:", error);
+                },
+                onRegisterError(error) {
+                    console.error("Service Worker 註冊錯誤:", error);
+                }
             });
+
+            // 保存回調以防需要手動更新
+            setUpdateCallback(() => updateSW);
         } catch (error) {
             console.error("設置 PWA 更新邏輯時出錯:", error);
         }
