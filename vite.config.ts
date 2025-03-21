@@ -44,20 +44,6 @@ export default defineConfig({
                         purpose: 'maskable'
                     }
                 ],
-                screenshots: [
-                    {
-                        src: 'screenshot-narrow.png',
-                        sizes: '540x720',
-                        type: 'image/png',
-                        form_factor: 'narrow'
-                    },
-                    {
-                        src: 'screenshot-wide.png',
-                        sizes: '720x540',
-                        type: 'image/png',
-                        form_factor: 'wide'
-                    }
-                ],
                 shortcuts: [
                     {
                         name: '今日行程',
