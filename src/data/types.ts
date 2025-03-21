@@ -16,6 +16,7 @@ export interface Transportation {
     to?: string;               // 目的地
     departureTime?: string;    // 出發時間
     arrivalTime?: string;      // 抵達時間
+    routingURL?: string;       // 乗換案内URL
     segments?: Segment[];      // 交通路段
 }
 

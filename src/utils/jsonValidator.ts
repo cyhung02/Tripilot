@@ -206,7 +206,7 @@ function validateTransportation(transportation: any, itemName: string): string[]
 
     // 檢查是否有未定義的欄位
     const allowedFields = [
-        'from', 'to', 'departureTime', 'arrivalTime', 'segments'
+        'from', 'to', 'departureTime', 'arrivalTime', 'routingURL', 'segments'
     ];
 
     const extraFields = Object.keys(transportation).filter(key => !allowedFields.includes(key));

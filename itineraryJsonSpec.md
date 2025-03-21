@@ -78,17 +78,19 @@
   "to": "目的地",
   "departureTime": "HH:MM",
   "arrivalTime": "HH:MM",
+  "routingURL": "乗換案内URL",
   "segments": []
 }
 ```
 
-| 欄位名稱      | 類型             | 必填 | 說明                     |
-| ------------- | ---------------- | ---- | ------------------------ |
-| from          | 字串             |      | 起始地點                 |
-| to            | 字串             |      | 目的地點                 |
-| departureTime | 字串             |      | 預計出發時間，格式 HH:MM |
-| arrivalTime   | 字串             |      | 預計抵達時間，格式 HH:MM |
-| segments      | Segment 物件陣列 |      | 多段交通路線資訊         |
+| 欄位名稱      | 類型             | 必填 | 說明                          |
+| ------------- | ---------------- | ---- | ----------------------------- |
+| from          | 字串             |      | 起始地點                      |
+| to            | 字串             |      | 目的地點                      |
+| departureTime | 字串             |      | 預計出發時間，格式 HH:MM      |
+| arrivalTime   | 字串             |      | 預計抵達時間，格式 HH:MM      |
+| routingURL    | 字串             |      | 乗換案内URL，查詢詳細交通路線 |
+| segments      | Segment 物件陣列 |      | 多段交通路線資訊              |
 
 ### 交通路段（Segment 物件）
 
@@ -158,6 +160,7 @@
           "to": "台北101/世貿站",
           "departureTime": "12:00",
           "arrivalTime": "12:30",
+          "routingURL": "https://www.metro.taipei/route-planning",
           "segments": [
             {
               "vehicleNumber": "淡水信義線",
@@ -204,6 +207,7 @@
           "to": "新竹站",
           "departureTime": "18:00",
           "arrivalTime": "18:30",
+          "routingURL": "https://www.thsrc.com.tw/trip/search",
           "segments": [
             {
               "vehicleNumber": "高鐵123次",
@@ -291,6 +295,7 @@
           "to": "台北火車站",
           "departureTime": "18:30",
           "arrivalTime": "19:45",
+          "routingURL": "https://www.railway.gov.tw/tw/index.html",
           "segments": [
             {
               "vehicleNumber": "自強號123車次",

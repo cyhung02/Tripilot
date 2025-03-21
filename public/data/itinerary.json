@@ -54,6 +54,7 @@
                     "to": "心斎橋",
                     "departureTime": "09:16",
                     "arrivalTime": "10:05",
+                    "routingURL": "https://maps.app.goo.gl/5anU6zyLfSBS4yX39",
                     "segments": [
                         {
                             "vehicleNumber": "ＪＲ特急はるか10号",

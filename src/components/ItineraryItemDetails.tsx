@@ -72,7 +72,7 @@ const TransportDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
         );
     }
 
-    const { from, to, departureTime, arrivalTime, segments } = item.transportation;
+    const { from, to, departureTime, arrivalTime, segments, routingURL } = item.transportation;
 
     return (
         <div className="space-y-4">
@@ -93,6 +93,22 @@ const TransportDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
 
             {/* 列車時間軸 */}
             {segments && segments.length > 0 && <TransportTimeline segments={segments} />}
+
+            {/* 乗換案内URL */}
+            {routingURL && (
+                <div className="flex items-center text-xs text-purple-500 mt-2">
+                    <LocationIcon size={12} className="mr-1" />
+                    <a
+                        href={routingURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:text-purple-700 transition-colors font-medium"
+                        aria-label={`查看 ${from} 到 ${to} 的位置`}
+                    >
+                        查看路線詳情
+                    </a>
+                </div >
+            )}
 
             {/* 額外說明 */}
             {item.description && (
