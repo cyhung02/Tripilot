@@ -214,6 +214,15 @@ function validateTransportation(transportation: any, itemName: string): string[]
         errors.push(`${itemName} 交通資訊: 包含未定義的欄位: ${extraFields.join(', ')}`);
     }
 
+    // 檢查必填欄位: from 和 to 是必須的
+    if (!transportation.from) {
+        errors.push(`${itemName} 交通資訊: 缺少必要欄位 'from'`);
+    }
+
+    if (!transportation.to) {
+        errors.push(`${itemName} 交通資訊: 缺少必要欄位 'to'`);
+    }
+
     // 檢查時間格式 (如存在，必須是 HH:MM 格式)
     if (transportation.departureTime) {
         const timeFormatRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
