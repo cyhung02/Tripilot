@@ -381,8 +381,8 @@
         "itinerary": [
             {
                 "type": "交通",
-                "name": "前往宮島",
-                "time": "08:15",
+                "name": "前往宮島（要提早 15 分鐘抵達）",
+                "time": "",
                 "description": "1. 提早 15 分鐘抵達\n2. 搭船地圖 https://bit.ly/4hBUVc3 \n3. 潮汐表 https://bit.ly/4kQkqt1",
                 "tips": "",
                 "transportation": {
