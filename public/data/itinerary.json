@@ -383,29 +383,21 @@
                 "type": "交通",
                 "name": "前往宮島",
                 "time": "08:30",
-                "description": "從廣島前往宮島的交通行程",
-                "tips": "建議查詢當日潮汐表(https://www.miyajima-wm.jp/tide/)，選擇大鳥居「漲潮時間」前往，可看到大鳥居被海水環繞的美景。JR周遊券可免費搭乘宮島渡輪。",
+                "description": "1. 搭船地圖 https://www.aqua-net-h.co.jp/heritage/reservation/download/map_toilet.pdf \n2. 建議查詢當日潮汐表",
+                "tips": "",
                 "transportation": {
-                    "from": "廣島",
-                    "to": "宮島",
+                    "from": "平和公園元安桟橋",
+                    "to": "宮島港",
                     "departureTime": "08:30",
-                    "arrivalTime": "09:30",
+                    "arrivalTime": "09:15",
                     "segments": [
                         {
-                            "vehicleNumber": "JR山陽本線",
-                            "from": "廣島站",
-                            "to": "宮島口站",
-                            "departureTime": "08:30",
-                            "arrivalTime": "09:00",
-                            "isReserved": false
-                        },
-                        {
                             "vehicleNumber": "宮島渡輪",
-                            "from": "宮島口碼頭",
-                            "to": "宮島碼頭",
-                            "departureTime": "09:10",
-                            "arrivalTime": "09:30",
-                            "isReserved": false
+                            "from": "平和公園元安桟橋",
+                            "to": "宮島港",
+                            "departureTime": "08:30",
+                            "arrivalTime": "09:15",
+                            "isReserved": true
                         }
                     ]
                 }

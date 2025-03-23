@@ -32,16 +32,6 @@ const DayDetail: React.FC<DayDetailProps> = ({ day, isToday }) => {
                     )}
                 </div>
                 <p className="text-pink-600">{formatDisplayDate(day.date)} {day.day}</p>
-
-                {/* 針對宮島行程顯示潮汐時間 */}
-                {day.title === '神秘宮島之旅' && (
-                    <div className="mt-3 p-3 bg-pink-100 rounded-lg border border-pink-200">
-                        <p className="text-sm flex items-center text-pink-800">
-                            <TipIcon size={16} className="mr-2 text-pink-500" />
-                            今日潮汐時間: 請事先查詢，以便安排大鳥居觀賞的最佳時機
-                        </p>
-                    </div>
-                )}
             </div>
 
             {/* 時間軸 */}
