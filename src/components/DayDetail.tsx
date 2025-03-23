@@ -4,7 +4,7 @@ import ItineraryItemCard from './ItineraryItemCard';
 import RecommendationSection from './RecommendationSection';
 import AccommodationInfo from './AccommodationInfo';
 import { useUIState } from '../context/UIStateContext';
-import { ArrowUpIcon, SakuraIcon, TipIcon } from './common/SvgIcons';
+import { ArrowUpIcon, SakuraIcon } from './common/SvgIcons';
 import { formatDisplayDate } from '../utils/dateUtils';
 
 interface DayDetailProps {
