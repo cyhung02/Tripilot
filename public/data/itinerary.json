@@ -382,8 +382,8 @@
             {
                 "type": "交通",
                 "name": "前往宮島",
-                "time": "08:30",
-                "description": "1. 搭船地圖 https://www.aqua-net-h.co.jp/heritage/reservation/download/map_toilet.pdf \n2. 建議查詢當日潮汐表",
+                "time": "08:15",
+                "description": "1. 提早 15 分鐘抵達\n2. 搭船地圖 https://bit.ly/4hBUVc3 \n3. 潮汐表 https://bit.ly/4kQkqt1",
                 "tips": "",
                 "transportation": {
                     "from": "平和公園元安桟橋",
@@ -392,7 +392,7 @@
                     "arrivalTime": "09:15",
                     "segments": [
                         {
-                            "vehicleNumber": "宮島渡輪",
+                            "vehicleNumber": "アクアネット広島・高速船",
                             "from": "平和公園元安桟橋",
                             "to": "宮島港",
                             "departureTime": "08:30",
