@@ -264,10 +264,10 @@
                 "description": "開始使用 JR Pass",
                 "transportation": {
                     "from": "有馬温泉",
-                    "to": "八丁堀",
+                    "to": "広島",
                     "departureTime": "09:39",
-                    "arrivalTime": "12:02",
-                    "routingURL": "https://yahoo.jp/tMSyHR",
+                    "arrivalTime": "11:38",
+                    "routingURL": "https://yahoo.jp/ZeUvKE",
                     "segments": [
                         {
                             "vehicleNumber": "神鉄有馬線",
@@ -300,23 +300,32 @@
                             "departureTime": "10:30",
                             "arrivalTime": "11:38",
                             "isReserved": true
-                        },
-                        {
-                            "vehicleNumber": "広島電鉄２号線",
-                            "from": "広島駅",
-                            "to": "八丁堀",
-                            "departureTime": "11:53",
-                            "arrivalTime": "12:02",
-                            "isReserved": false
                         }
                     ]
                 }
             },
             {
+                "type": "購物",
+                "name": "熊野筆セレクトショップ 広島店",
+                "time": "",
+                "description": "熊野筆是日本傳統的筆具品牌，以手工製作的化妝刷聞名，廣島店提供多款熊野筆產品與限定商品。",
+                "tips": "1. 熊野筆是日本高品質化妝刷的代表品牌，適合作為伴手禮或自用。\n2. 店內有專業店員提供化妝刷選購建議，可依需求選擇適合的產品。",
+                "location": "https://maps.app.goo.gl/zCq38at3WhJaiatv9"
+            },
+            {
                 "type": "其他",
                 "name": "前往飯店寄放行李",
                 "time": "",
-                "description": "前往飯店寄放行李"
+                "description": "可乘坐廣島路面電車前往飯店。"
+            },
+            {
+                "type": "餐廳",
+                "name": "廣島燒午餐",
+                "time": "",
+                "description": "品嚐廣島著名的廣島燒料理",
+                "tips": "推薦「八昌本店」或「お好み村」品嚐正宗廣島燒。廣島燒與大阪燒不同，廣島燒是分層疊加而非混合在一起。",
+                "location": "https://goo.gl/maps/qY5gHMXUe9C8RtaP9",
+                "recommendedDishes": "廣島燒（基本款）、海鮮廣島燒、起司廣島燒"
             },
             {
                 "type": "景點",
@@ -327,42 +336,25 @@
                 "location": "https://maps.app.goo.gl/S5bmw38qA12sxxA16"
             },
             {
-                "type": "餐廳",
-                "name": "廣島燒午餐",
-                "time": "14:30",
-                "description": "品嚐廣島著名的廣島燒料理",
-                "tips": "推薦「八昌本店」或「お好み村」品嚐正宗廣島燒。廣島燒與大阪燒不同，廣島燒是分層疊加而非混合在一起。",
-                "location": "https://goo.gl/maps/qY5gHMXUe9C8RtaP9",
-                "recommendedDishes": "廣島燒（基本款）、海鮮廣島燒、起司廣島燒"
-            },
-            {
-                "type": "景點",
-                "name": "縮景園",
-                "time": "16:00",
-                "description": "江戶時代的日本傳統庭園，四季景色各異。",
-                "tips": "開放時間: 9:00-17:00，門票¥260。從和平公園可搭乘路面電車至縮景園前站。園內有茶屋，可以在此休息品茶。",
-                "location": "https://goo.gl/maps/QcTTfHUbdiFVkdBJ6"
-            },
-            {
                 "type": "景點",
                 "name": "廣島城",
-                "time": "17:30",
+                "time": "",
                 "description": "廣島地標性的城堡，被稱為「鯉城」，現為歷史博物館。",
-                "tips": "開放時間: 9:00-17:00（最後入場16:30），門票¥370。從縮景園步行約15分鐘可達。城內展示有武士盔甲和歷史文物，從頂層可俯瞰廣島市區。",
-                "location": "https://goo.gl/maps/UX87dJPUH3HoJBsQ8"
+                "tips": "",
+                "location": "https://maps.app.goo.gl/LhVXhquNh44py2go7"
             },
             {
                 "type": "購物",
-                "name": "本通商店街 & 廣島 PARCO",
-                "time": "19:00",
+                "name": "本通商店街",
+                "time": "",
                 "description": "廣島主要購物區，有多家百貨公司和特色商店。",
-                "tips": "可在本通商店街尋找廣島特產和伴手禮。白鳳堂化妝刷專門店位於PARCO百貨內，是購買高品質化妝刷的好地方。商店通常營業至20:00-21:00。",
-                "location": "https://goo.gl/maps/zSM71S7dYJFVHVnY7"
+                "tips": "可在本通商店街尋找廣島特產和伴手禮。白鳳堂化妝刷專門店位於廣島三越內，是購買高品質化妝刷的好地方。",
+                "location": "https://maps.app.goo.gl/Jamnrp8tUVRhHyBDA"
             },
             {
                 "type": "餐廳",
                 "name": "牡蠣料理晚餐",
-                "time": "20:00",
+                "time": "",
                 "description": "享用廣島著名的新鮮牡蠣料理",
                 "tips": "推薦「蠔樂」或「かき松」品嚐各式牡蠣料理。廣島牡蠣肥美鮮甜，是當地必嚐美食。",
                 "location": "https://goo.gl/maps/K6N9TvY2UYZ2e7YR6",
