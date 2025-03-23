@@ -260,48 +260,71 @@
             {
                 "type": "交通",
                 "name": "前往廣島",
-                "time": "09:00",
-                "description": "從有馬溫泉前往廣島的交通行程",
-                "tips": "出發前建議退房並確認未遺留物品。提前查詢新幹線時刻表，可在新神戶站預訂便當享用。",
+                "time": "",
+                "description": "開始使用 JR Pass",
                 "transportation": {
-                    "from": "有馬溫泉",
-                    "to": "廣島",
-                    "departureTime": "09:00",
-                    "arrivalTime": "11:30",
+                    "from": "有馬温泉",
+                    "to": "八丁堀",
+                    "departureTime": "09:39",
+                    "arrivalTime": "12:02",
+                    "routingURL": "https://yahoo.jp/tMSyHR",
                     "segments": [
                         {
-                            "vehicleNumber": "神戶巴士52号",
-                            "from": "有馬溫泉",
-                            "to": "新神戶站",
-                            "departureTime": "09:00",
-                            "arrivalTime": "09:40",
-                            "isReserved": true
+                            "vehicleNumber": "神鉄有馬線",
+                            "from": "有馬温泉",
+                            "to": "有馬口",
+                            "departureTime": "09:39",
+                            "arrivalTime": "09:43",
+                            "isReserved": false
+                        },
+                        {
+                            "vehicleNumber": "神鉄有馬線",
+                            "from": "有馬口",
+                            "to": "谷上",
+                            "departureTime": "09:44",
+                            "arrivalTime": "09:55",
+                            "isReserved": false
+                        },
+                        {
+                            "vehicleNumber": "神戸市営地下鉄北神線",
+                            "from": "谷上",
+                            "to": "新神戸",
+                            "departureTime": "09:57",
+                            "arrivalTime": "10:05",
+                            "isReserved": false
                         },
                         {
                             "vehicleNumber": "ＪＲ新幹線のぞみ13号",
-                            "from": "新神戶站",
-                            "to": "廣島站",
-                            "departureTime": "10:00",
-                            "arrivalTime": "11:30",
+                            "from": "新神戸",
+                            "to": "広島",
+                            "departureTime": "10:30",
+                            "arrivalTime": "11:38",
                             "isReserved": true
+                        },
+                        {
+                            "vehicleNumber": "広島電鉄２号線",
+                            "from": "広島駅",
+                            "to": "八丁堀",
+                            "departureTime": "11:53",
+                            "arrivalTime": "12:02",
+                            "isReserved": false
                         }
                     ]
                 }
             },
             {
                 "type": "其他",
-                "name": "寄放行李",
-                "time": "11:40",
-                "description": "在廣島站寄放行李，方便輕裝遊覽",
-                "tips": "廣島站內有投幣式置物櫃，大型行李可在站內行李寄存處辦理。也可直接前往住宿地點寄放行李。"
+                "name": "前往飯店寄放行李",
+                "time": "",
+                "description": "前往飯店寄放行李"
             },
             {
                 "type": "景點",
                 "name": "廣島和平紀念公園 & 原爆圓頂",
-                "time": "12:30",
-                "description": "象徵和平的世界文化遺產，原爆圓頂是唯一保留的原子彈爆炸痕跡建築。",
-                "tips": "從廣島站可搭乘路面電車前往和平紀念公園站，票價¥180。和平紀念資料館開放時間: 8:30-18:00，門票¥200。展覽內容較為沉重，請做好心理準備。",
-                "location": "https://goo.gl/maps/Z9YJ5qfqWBrTGdH36"
+                "time": "",
+                "description": "1. 和平紀念公園是為了紀念第二次世界大戰中廣島原子彈爆炸的受害者而建立的公園，園內有和平紙鶴展示、和平紀念館、原爆圓頂等紀念設施。\n2. 櫻花百選之一的公園，春天櫻花盛開時美不勝收。\n3. 原爆圓頂是廣島原爆後僅存的建築，是世界文化遺產。",
+                "tips": "可參觀和平紀念館，了解廣島原爆的歷史與影響。",
+                "location": "https://maps.app.goo.gl/S5bmw38qA12sxxA16"
             },
             {
                 "type": "餐廳",
@@ -347,21 +370,17 @@
             }
         ],
         "foodRecommendations": [
-            "廣島燒 - 推薦「八昌本店」",
-            "牡蠣料理 - 推薦「蠔樂」",
-            "紅葉饅頭 - 廣島著名土產",
-            "廣島沾麵 - 推薦「元祖沾麵專門店」"
+            "廣島燒",
+            "牡蠣料理"
         ],
         "shoppingRecommendations": [
-            "廣島牡蠣醬油 - 「川中醬油」是知名品牌",
-            "白鳳堂化妝刷 - 位於PARCO百貨內的專門店",
-            "竹宝堂化妝刷 - 位於本通商店街",
-            "廣島燒調味料組合 - 可在百貨超市購買"
+            "廣島牡蠣醬油",
+            "熊野筆化妝刷"
         ],
         "accommodation": {
             "city": "廣島",
             "name": "広島ワシントンホテル",
-            "locationURL": "https://goo.gl/maps/yVRQwThU7JLU9bgU7"
+            "locationURL": "https://maps.app.goo.gl/jdCY28NxH8RuxY5U7"
         }
     },
     {
@@ -482,10 +501,9 @@
             }
         ],
         "foodRecommendations": [
-            "烤牡蠣 - 宮島表參道上多家店鋪販售",
-            "紅葉饅頭 - 推薦「藤い屋」",
-            "星鰻飯 - 推薦「うえの」",
-            "紅葉天婦羅 - 季節限定美食"
+            "烤牡蠣",
+            "星鰻飯",
+            "紅葉饅頭"
         ],
         "shoppingRecommendations": [
             "宮島木製杓子 - 推薦「杓子の家」",
