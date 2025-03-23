@@ -14,6 +14,7 @@
                     "to": "大阪關西機場 T1",
                     "departureTime": "19:35",
                     "arrivalTime": "23:00",
+                    "routingURL": "https://yahoo.jp/7eLuMA",
                     "segments": [
                         {
                             "vehicleNumber": "IT220",
@@ -164,29 +165,54 @@
         "title": "有馬溫泉放鬆日",
         "itinerary": [
             {
-                "type": "購物",
-                "name": "uka store Osaka LUCUA 1100",
-                "time": "",
-                "description": "uka 是專注於美甲、美髮與身體護理的時尚品牌，販售天然保養品與香氛。店內設計簡約高級，適合購買個人護理用品或伴手禮。",
-                "tips": "1. 可試聞香氛、護手霜與護髮油，選擇最適合自己的氣味。\n2. 部分商品提供體驗，建議向店員詢問試用方式。\n3. 可事先查詢日本限定款或優惠活動。",
-                "location": "https://maps.app.goo.gl/Gr4E5kRZbANmw5aQ7"
-            },
-            {
                 "type": "交通",
                 "name": "前往有馬溫泉",
                 "time": "",
                 "transportation": {
-                    "from": "大阪（阪急三番街）",
-                    "to": "有馬溫泉",
-                    "departureTime": "11:50",
-                    "arrivalTime": "12:50",
+                    "from": "心斎橋",
+                    "to": "有馬温泉",
+                    "departureTime": "09:30",
+                    "arrivalTime": "10:52",
+                    "routingURL": "https://yahoo.jp/8mEFzY",
                     "segments": [
                         {
-                            "vehicleNumber": "高速バス・阪急観光バス・大阪−有馬温泉線",
-                            "from": "大阪（阪急三番街）",
-                            "to": "有馬溫泉",
-                            "departureTime": "11:50",
-                            "arrivalTime": "12:50",
+                            "vehicleNumber": "OsakaMetro御堂筋線",
+                            "from": "心斎橋",
+                            "to": "梅田(地下鉄)",
+                            "departureTime": "09:30",
+                            "arrivalTime": "09:37",
+                            "isReserved": false
+                        },
+                        {
+                            "vehicleNumber": "阪急神戸本線特急",
+                            "from": "大阪梅田(阪急線)",
+                            "to": "神戸三宮(阪急・神戸高速)",
+                            "departureTime": "09:50",
+                            "arrivalTime": "10:17",
+                            "isReserved": false
+                        },
+                        {
+                            "vehicleNumber": "神戸市営地下鉄西神・山手線",
+                            "from": "三宮(神戸市営)",
+                            "to": "谷上",
+                            "departureTime": "10:25",
+                            "arrivalTime": "10:35",
+                            "isReserved": false
+                        },
+                        {
+                            "vehicleNumber": "神鉄有馬線準急",
+                            "from": "谷上",
+                            "to": "有馬口",
+                            "departureTime": "10:36",
+                            "arrivalTime": "10:47",
+                            "isReserved": false
+                        },
+                        {
+                            "vehicleNumber": "神鉄有馬線",
+                            "from": "有馬口",
+                            "to": "有馬温泉",
+                            "departureTime": "10:49",
+                            "arrivalTime": "10:52",
                             "isReserved": false
                         }
                     ]
@@ -200,42 +226,31 @@
             },
             {
                 "type": "景點",
-                "name": "有馬溫泉（金湯、銀湯）",
-                "time": "",
-                "description": "日本最古老的溫泉之一，以富含鐵質的「金湯」和富含碳酸的「銀湯」聞名。",
-                "tips": "1. 金湯與銀湯營業時間 8:00-22:00，門票各 ¥650。\n2. 入浴前請先淋浴清潔身體，並避免將毛巾浸入浴池。\n3. 金湯水溫較高，建議逐步適應，並注意補充水分。",
-                "location": "https://goo.gl/maps/XUKzNJ2v4kE8xqtR9"
-            },
-            {
-                "type": "景點",
                 "name": "有馬本街道（湯本坂）逛街散策",
                 "time": "",
                 "description": "充滿傳統氛圍的溫泉街道，有各種特色商店與小吃，適合慢遊探索。",
                 "tips": "1. 可購買當地特產炭酸煎餅與金泉饅頭作為伴手禮。\n2. 街道坡度較大，建議穿著舒適的鞋子。\n3. 有馬玩具博物館值得一遊，適合喜愛傳統工藝與懷舊玩具的旅客。",
-                "location": "https://goo.gl/maps/ckCURdQ7d2qRHMLv5"
+                "location": "https://maps.app.goo.gl/3cwEZaGQufqJmNpH7"
             },
             {
                 "type": "景點",
                 "name": "溫泉旅館晚餐與泡湯",
-                "time": "18:00",
+                "time": "17:00",
                 "description": "返回旅館享用傳統會席料理晚餐，之後體驗夜間泡湯。",
-                "tips": "1. 日式旅館晚餐通常安排在 18:00-19:00，請依旅館規定時間準時用餐。\n2. 夜間泡湯人較少，適合放鬆身心，享受靜謐的溫泉體驗。"
+                "tips": "1. 必須在 18:00 前 check-in。\n2. 提供私人「金泉」溫泉體驗，需預約，費用 4,400 日圓，使用時間為 6:30～22:30。",
+                "location": "https://maps.app.goo.gl/cqnQ7XLcnER2s4o37"
             }
         ],
         "foodRecommendations": [
             "炭酸煎餅",
-            "神戶牛料理",
-            "溫泉蛋",
             "金泉饅頭"
         ],
         "shoppingRecommendations": [
-            "有馬溫泉化妝水",
-            "有馬人形筆"
         ],
         "accommodation": {
             "city": "有馬溫泉",
             "name": "中の坊 瑞苑",
-            "locationURL": "https://goo.gl/maps/KL4xg2XjxPz8nSrB6"
+            "locationURL": "https://maps.app.goo.gl/cqnQ7XLcnER2s4o37"
         }
     },
     {
