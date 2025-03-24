@@ -343,7 +343,7 @@
                 "type": "景點",
                 "name": "廣島和平紀念公園 & 原爆圓頂",
                 "time": "",
-                "description": "![廣島和平紀念公園 & 原爆圓頂](https://res-3.cloudinary.com/jnto/image/upload/w_2064,h_1300,c_fill,f_auto,fl_lossy,q_auto/v1645000949/hiroshima/Hiroshima2202_main.jpg)1. 和平紀念公園是為了紀念第二次世界大戰中廣島原子彈爆炸的受害者而建立的公園，園內有和平紙鶴展示、和平紀念館、原爆圓頂等紀念設施。\n2. 櫻花百選之一的公園，春天櫻花盛開時美不勝收。\n3. 原爆圓頂是廣島原爆後僅存的建築，是世界文化遺產。",
+                "description": "![廣島和平紀念公園 & 原爆圓頂](https://res-3.cloudinary.com/jnto/image/upload/w_2064,h_1300,c_fill,f_auto,fl_lossy,q_auto/v1645000949/hiroshima/Hiroshima2202_main.jpg)  \n廣島和平紀念公園是為了紀念二戰期間廣島原子彈爆炸的受害者而建立的公園，園內設有和平紙鶴展示、和平紀念館及原爆圓頂等紀念設施。原爆圓頂作為廣島原爆後僅存的建築，被列為世界文化遺產。此外，公園也是日本櫻花百選之一，每逢春天櫻花盛開，景色壯麗動人。",
                 "tips": "可參觀和平紀念館，了解廣島原爆的歷史與影響。",
                 "location": "https://maps.app.goo.gl/S5bmw38qA12sxxA16"
             },
@@ -367,7 +367,7 @@
                 "type": "餐廳",
                 "name": "ふみちゃん 流川店",
                 "time": "",
-                "description": "**「ふみちゃん」——廣島流川巷弄間的經典廣島燒老店**  \n創立於 1995 年的「ふみちゃん」，是廣島市流川地區深受當地人喜愛的廣島燒專門店。店內以清爽的經典廣島燒聞名，招牌「豬肉蛋廣島燒」講究食材搭配與烹調細節，使用低甜度的三和醬汁，帶來層次豐富又不膩口的美味體驗。此外，店內還提供醬香濃郁的自家製柚子醋燉煮牛筋等下酒菜，完美搭配廣島燒享用。無論是當地居民還是遊客，都能在這裡品嚐道地的廣島風味，一嚐令人難忘的美食魅力！",
+                "description": "**「ふみちゃん」——廣島流川巷弄間的經典廣島燒老店**\n\n創立於 1995 年的「ふみちゃん」，是廣島市流川地區深受當地人喜愛的廣島燒專門店。店內以清爽的經典廣島燒聞名，招牌「豬肉蛋廣島燒」講究食材搭配與烹調細節，使用低甜度的三和醬汁，帶來層次豐富又不膩口的美味體驗。此外，店內還提供醬香濃郁的自家製柚子醋燉煮牛筋等下酒菜，完美搭配廣島燒享用。無論是當地居民還是遊客，都能在這裡品嚐道地的廣島風味，一嚐令人難忘的美食魅力！",
                 "tips": "",
                 "location": "https://maps.app.goo.gl/rLZXUwtZHUfcQ7J37",
                 "recommendedDishes": "そば肉玉お好み焼"
@@ -378,7 +378,7 @@
             "牡蠣料理"
         ],
         "shoppingRecommendations": [
-            "廣島牡蠣醬油",
+            "廣島牡蠣醬油（かき醤油） - 推薦 アサムラサキ",
             "熊野筆化妝刷"
         ],
         "accommodation": {
@@ -393,8 +393,8 @@
         "itinerary": [
             {
                 "type": "交通",
-                "name": "前往宮島（要提早 15 分鐘抵達）",
-                "time": "",
+                "name": "前往宮島",
+                "time": "08:15",
                 "description": "",
                 "tips": "1. **提早 15 分鐘抵達**\n\n2. [搭船地圖](https://www.aqua-net-h.co.jp/heritage/reservation/download/map_toilet.pdf)",
                 "transportation": {
@@ -417,95 +417,97 @@
             {
                 "type": "景點",
                 "name": "嚴島神社 & 大鳥居",
-                "time": "09:45",
+                "time": "",
                 "description": "![大鳥居](https://www.itsukushimajinja.jp/jp/images/010_home/homeimg/top030.jpg)\n\n**嚴島神社**是日本最著名的神社之一，也是世界文化遺產。神社建立在海上，高潮時宛如漂浮在海面上，創造出獨特的視覺效果。\n\n### 主要景點\n- 大鳥居 - 日本最著名的景觀之一\n- 本殿 - 建於平安時代的國寶建築\n- 高舞台 - 能樂表演場地\n\n神社歷史可追溯至**593年**，現存建築主要建於12世紀。",
                 "tips": "漲潮時可看到神社「漂浮」在海上的效果；退潮時可步行至大鳥居附近拍照。  \n[潮汐表](https://www.miyajima.or.jp/sio/sio01.php)",
                 "location": "https://goo.gl/maps/s3Jf93MfuK2CXBwW7"
             },
             {
+                "type": "餐廳",
+                "name": "あなごめし ふじたや",
+                "time": "",
+                "description": "這家位於宮島的「あなごめし ふじたや」是廣島唯一獲得米其林一星殊榮的星級穴子飯名店。以炭火細緻燒烤的穴子，搭配精心調製的醬汁，入口即化，風味獨特且層次豐富。店家採現點現烤的方式，確保每一碗穴子飯都能呈現最佳口感，因此用餐時間需預留充足。由於「ふじたや」深受遊客喜愛，特別是在連假期間，建議提前到店登記候位，以免長時間排隊。來到宮島，除了參拜嚴島神社，千萬別錯過這道當地極具代表性的美味佳餚。",
+                "tips": "",
+                "location": "https://maps.app.goo.gl/3ZKi8NGcaPajWWxb8",
+                "recommendedDishes": "穴子飯（あなごめし）"
+            },
+            {
                 "type": "景點",
                 "name": "etto宮島交流館",
-                "time": "11:30",
+                "time": "",
                 "description": "展示巨大杓子的交流館，可了解宮島木製杓子的歷史。",
                 "tips": "入場免費，館內有介紹宮島傳統工藝的展示。就在表參道商店街附近，交通便利。",
-                "location": "https://goo.gl/maps/32FHnUZzQTBhGJz56"
+                "location": "https://maps.app.goo.gl/zL7ruAtwsd8aJQrL9"
             },
             {
                 "type": "餐廳",
-                "name": "宮島海鮮午餐",
-                "time": "12:30",
-                "description": "品嚐宮島著名的海鮮美食",
-                "tips": "推薦「岩村もみじ屋」或「紅葉堂」的烤牡蠣與星鰻飯。用餐高峰期可能需要排隊，建議避開12:00-13:00的用餐高峰。",
-                "location": "https://goo.gl/maps/nVFppwkqVQPuwzC79",
-                "recommendedDishes": "烤牡蠣、星鰻飯、紅葉饅頭"
+                "name": "揚げもみじの紅葉堂 本店",
+                "time": "",
+                "description": "「紅葉堂本店」創立於明治45年（1912年），位於宮島商店街，提供獨創的「炸紅葉饅頭」，口味包括細豆沙、卡士達奶油、起司及瀨戶內檸檬。店內明亮乾淨，可內用並享免費茶水，還能購買伴手禮，是品嚐這款宮島限定美食的絕佳地點。",
+                "tips": "",
+                "location": "https://maps.app.goo.gl/FzhvhvV7MY52AX7j6",
+                "recommendedDishes": "炸紅葉饅頭"
             },
             {
-                "type": "景點",
-                "name": "宮島表參道商店街",
-                "time": "14:00",
-                "description": "宮島主要購物街，有多家特產店和美食店。",
-                "tips": "此處可品嚐著名的烤牡蠣和紅葉饅頭。商店街較有人氣的店家包括「藤い屋」的楓葉饅頭和「やまだ屋」的鯛魚燒。",
-                "location": "https://goo.gl/maps/nVFppwkqVQPuwzC79"
-            },
-            {
-                "type": "景點",
+                "type": "購物",
                 "name": "杓子の家",
-                "time": "15:30",
+                "time": "",
                 "description": "可以觀賞書法老師現場在木杓上寫字的特色店鋪。",
-                "tips": "可以請書法老師在木杓上寫下自己喜歡的文字作為紀念品（約¥1,500起）。如希望體驗書寫，建議提前一日預約（店鋪電話: +81-829-44-2018）。",
-                "location": "https://goo.gl/maps/Tj1XcLKnqPfnr69d7"
+                "tips": "可以請書法老師在木杓上寫下自己喜歡的文字作為紀念品。",
+                "location": "https://maps.app.goo.gl/Ft4G7gPEX14LU5CU7"
+            },
+            {
+                "type": "購物",
+                "name": "宮島表參道商店街",
+                "time": "",
+                "description": "宮島的主要商店街，有許多特色店家和紀念品店。",
+                "tips": "- 商店通常在早上 9:30 至 10:00 開門，下午 5:30 左右關門。  \n- 可在此購買宮島特色伴手禮，如宮島杓子、宮島雕、紅葉饅頭。",
+                "location": "https://maps.app.goo.gl/wFSbLJWu9npMwDj99"
+            },
+            {
+                "type": "餐廳",
+                "name": "牡蠣屋",
+                "time": "",
+                "description": "牡蠣屋位於世界遺產宮島，是一家專注於牡蠣的特色餐廳。選用広島縣嚴選牡蠣，以最少的調味保留其天然鮮美，呈現原始風味。從養殖到料理，皆由宮島本地完成，憑藉多年經驗，致力於追求牡蠣的極致美味。招牌菜包括燒牡蠣、生牡蠣及牡蠣飯，搭配精選葡萄酒，讓人盡享海的饗宴。",
+                "tips": "",
+                "location": "https://maps.app.goo.gl/YrtkHUNRMTpPeEJr8",
+                "recommendedDishes": ""
             },
             {
                 "type": "交通",
                 "name": "返回廣島",
-                "time": "17:00",
-                "description": "從宮島返回廣島市區",
-                "tips": "最後渡輪大約22:00，但建議傍晚前返回廣島市區以避開人潮。",
+                "time": "",
+                "tips": "可使用 JR Pass 搭乘 JR 渡輪和 JR 山陽本線返回廣島。",
                 "transportation": {
-                    "from": "宮島",
-                    "to": "廣島",
-                    "departureTime": "17:00",
-                    "arrivalTime": "18:00",
+                    "from": "宮島港",
+                    "to": "広島",
+                    "departureTime": "",
+                    "arrivalTime": "",
                     "segments": [
                         {
-                            "vehicleNumber": "宮島渡輪",
-                            "from": "宮島碼頭",
-                            "to": "宮島口碼頭",
-                            "departureTime": "17:00",
-                            "arrivalTime": "17:20",
+                            "vehicleNumber": "ＪＲ西日本宮島フェリー",
+                            "from": "宮島港",
+                            "to": "宮島口港",
                             "isReserved": false
                         },
                         {
-                            "vehicleNumber": "JR山陽本線",
-                            "from": "宮島口站",
-                            "to": "廣島站",
-                            "departureTime": "17:30",
-                            "arrivalTime": "18:00",
+                            "vehicleNumber": "ＪＲ山陽本線",
+                            "from": "宮島口",
+                            "to": "広島",
                             "isReserved": false
                         }
                     ]
                 }
-            },
-            {
-                "type": "餐廳",
-                "name": "廣島夜間美食探索",
-                "time": "19:00",
-                "description": "在廣島市區享用晚餐",
-                "tips": "可前往八丁堀或立町地區的餐廳群，嚐嚐廣島當地特色料理。",
-                "location": "https://goo.gl/maps/XZMJh9CRm72XHhkN6",
-                "recommendedDishes": "廣島燒、廣島沾麵、日式居酒屋料理"
             }
         ],
         "foodRecommendations": [
-            "烤牡蠣",
+            "牡蠣",
             "星鰻飯",
             "紅葉饅頭"
         ],
         "shoppingRecommendations": [
-            "宮島木製杓子 - 推薦「杓子の家」",
-            "嚴島神社御守 - 神社內授與所購買",
-            "星鰻相關食品 - 各商店有售",
-            "清酒伴手禮 - 推薦「宮島酒造」"
+            "宮島木製杓子",
+            "嚴島神社御守"
         ],
         "accommodation": {
             "city": "廣島",
