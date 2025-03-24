@@ -83,22 +83,20 @@
                 "description": "![大阪成天守閣](https://www.osakacastle.net/img/top/keyvisual_bg_01.jpg)\n大阪城是日本著名的歷史建築，象徵豐臣秀吉的權勢與大阪的歷史文化。大阪城公園四季景色宜人，春天可賞櫻，秋天可欣賞紅葉。天守閣內設有博物館，展示大阪的歷史與戰國時代的文物，登頂可俯瞰城市美景。",
                 "tips": "- 天守閣內有電梯可搭乘，登頂後可眺望大阪城市景。\n- 大阪城公園內有許多櫻花樹，春天櫻花盛開時是賞櫻的好去處。",
                 "location": "https://maps.app.goo.gl/a7SVZEMGwoGjJSCb6"
-            }
-            ,
+            },
             {
                 "type": "餐廳",
-                "name": "黑門市場",
+                "name": "無鉄砲 大阪店",
                 "time": "",
-                "description": "大阪最古老且知名的市場之一，以新鮮海鮮、蔬果和各種道地小吃聞名，被稱為『大阪的廚房』。市場內有許多知名攤位，適合邊走邊吃，體驗大阪庶民美食文化。",
-                "tips": "1. 早上至中午是市場最熱鬧的時段，建議避開人潮較多的午餐尖峰時間。\n2. 部分攤位可現點現吃，推薦試試新鮮生魚片與海膽。\n3. 可準備部分現金，部分小攤不支援電子支付。\n4. 若購買生鮮食品，部分店家提供現場處理與簡單包裝，方便即食。",
-                "location": "https://maps.app.goo.gl/cXtnNeUaWyCxUUG99",
-                "recommendedDishes": "海鮮丼飯、炸蝦串、日本和牛、章魚燒、生魚片、海膽"
+                "description": "濃厚系拉麵專賣店，以豚骨湯頭為主打，是大阪人氣拉麵店之一。",
+                "location": "https://maps.app.goo.gl/hnLAWpsXRyGgTG1m8",
+                "recommendedDishes": ""
             },
             {
                 "type": "景點",
                 "name": "通天閣 & 新世界區",
                 "time": "",
-                "description": "通天閣是大阪的地標之一，周圍的新世界區充滿懷舊昭和風情，擁有眾多特色餐廳與小吃，如串炸、河豚料理等。這裡融合了傳統與現代，是拍照與品嚐美食的絕佳地點。",
+                "description": "![通天閣](https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/New_Ts%C5%ABtenkaku%2C_Osaka_-_DSC05823.JPG/500px-New_Ts%C5%ABtenkaku%2C_Osaka_-_DSC05823.JPG)通天閣是大阪的地標之一，周圍的新世界區充滿懷舊昭和風情，擁有眾多特色餐廳與小吃，如串炸、河豚料理等。這裡融合了傳統與現代，是拍照與品嚐美食的絕佳地點。",
                 "tips": "1. 建議購買通天閣展望台門票，俯瞰大阪市景。\n2. 串炸是新世界的名物，推薦挑選人氣店家如『八重勝』或『壹福』。\n3. 晚上霓虹燈亮起時最有氛圍，適合拍攝復古風格照片。\n4. 此區較為熱鬧，建議留意個人物品安全。",
                 "location": "https://maps.app.goo.gl/APNy9GsbGH2DxquBA"
             },
@@ -142,6 +140,22 @@
                 "tips": "1. 晚上人潮眾多，建議避開用餐尖峰時段。\n2. 部分店家可使用電子支付，但建議準備部分現金。\n3. 章魚燒、燒肉、拉麵、壽司等店家選擇豐富，可事先查詢評價。",
                 "location": "https://maps.app.goo.gl/2oTDWt44iyXrfXoS9",
                 "recommendedDishes": "章魚燒、大阪燒、金龍拉麵、螃蟹料理、燒肉"
+            },
+            {
+                "type": "餐廳",
+                "name": "たこ焼道楽わなか 千日前本店",
+                "time": "",
+                "description": "大阪必吃的章魚燒專賣店，提供多種口味的章魚燒，是大阪美食的代表之一。",
+                "location": "https://maps.app.goo.gl/bBtRJiymZVZhMH7DA",
+                "recommendedDishes": "章魚燒"
+            },
+            {
+                "type": "餐廳",
+                "name": "福太郎 本店",
+                "time": "",
+                "description": "供應以新鮮肉品和魚類製成的大阪燒。",
+                "location": "https://maps.app.goo.gl/U7PJbKAAU3MhC3yZ6",
+                "recommendedDishes": "大阪燒"
             }
         ],
         "foodRecommendations": [
