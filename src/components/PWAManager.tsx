@@ -77,7 +77,7 @@ const PWAManager: React.FC = () => {
             await installApp();
             setShowInstallPrompt(false);
         } catch (error) {
-            console.error('安裝應用失敗:', error);
+            console.error('安裝應用程式失敗:', error);
         }
     };
 
@@ -147,10 +147,10 @@ const PWAManager: React.FC = () => {
                 show={showInstallPrompt}
                 type="info"
                 position="bottom"
-                title="將應用添加到主屏幕"
-                message="安裝此應用可以快速訪問您的行程，並支援離線使用"
+                title="將應用程式新增到主畫面"
+                message="安裝此應用程式可快速存取您的行程，並支援離線使用。"
                 icon={<SakuraIcon size={24} color="#60A5FA" />}
-                actionLabel="安裝應用"
+                actionLabel="安裝"
                 onAction={handleInstall}
                 secondaryActionLabel="不再提醒"
                 onSecondaryAction={dismissInstallPrompt}
@@ -162,7 +162,7 @@ const PWAManager: React.FC = () => {
                 type="warning"
                 position="top"
                 title="離線模式"
-                message="您目前處於離線狀態，但可以繼續瀏覽已載入的行程內容"
+                message="您目前處於離線狀態，但可以繼續瀏覽已載入的行程內容。"
                 icon={
                     <svg
                         className="w-6 h-6 text-amber-500"
