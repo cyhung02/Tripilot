@@ -151,7 +151,7 @@
         max-width: 100%;
         height: auto;
         border-radius: 0.375rem;
-        margin: 1rem 0;
+        margin-bottom: 1rem;
     }
 
     /* 任務列表樣式 (GFM 擴展) */
