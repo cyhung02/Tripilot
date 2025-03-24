@@ -14,7 +14,6 @@
                     "to": "大阪關西機場 T1",
                     "departureTime": "19:35",
                     "arrivalTime": "23:00",
-                    "routingURL": "https://yahoo.jp/7eLuMA",
                     "segments": [
                         {
                             "vehicleNumber": "IT220",
@@ -55,7 +54,7 @@
                     "to": "心斎橋",
                     "departureTime": "09:16",
                     "arrivalTime": "10:05",
-                    "routingURL": "https://maps.app.goo.gl/5anU6zyLfSBS4yX39",
+                    "routingURL": "https://yahoo.jp/pLStoF",
                     "segments": [
                         {
                             "vehicleNumber": "ＪＲ特急はるか10号",
