@@ -157,7 +157,7 @@ const RestaurantDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
     return (
         <>
             {item.description && (
-                <div className="text-sm mb-3 markdown-content">
+                <div className="text-sm mb-3 leading-relaxed markdown-content">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {item.description}
                     </ReactMarkdown>
