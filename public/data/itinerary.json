@@ -7,7 +7,7 @@
                 "type": "交通",
                 "name": "搭乘航班前往關西機場",
                 "time": "19:35",
-                "description": "從桃園機場出發前往大阪關西機場，航程約3小時。請提前2.5小時抵達機場辦理登機手續。",
+                "description": "",
                 "tips": "1. 攜帶護照、電子機票、旅遊保險證明等重要文件。\n2. 提前填寫 Visit Japan Web。\n3. 提前至少 2 小時抵達機場辦理登機手續",
                 "transportation": {
                     "from": "桃園機場 T1",
@@ -383,7 +383,7 @@
                 "type": "交通",
                 "name": "前往宮島（要提早 15 分鐘抵達）",
                 "time": "",
-                "description": "1. 提早 15 分鐘抵達\n2. 搭船地圖 https://bit.ly/4hBUVc3 \n3. 潮汐表 https://bit.ly/4kQkqt1",
+                "description": "**1. 提早 15 分鐘抵達**\n2. [搭船地圖](https://bit.ly/4hBUVc3)\n3. [潮汐表](https://bit.ly/4kQkqt1)",
                 "tips": "這是提示",
                 "transportation": {
                     "from": "平和公園元安桟橋",
