@@ -1,1 +1,136 @@
 @import "tailwindcss";
+
+/* Markdown 樣式 */
+.markdown-content {
+
+    /* 段落樣式 */
+    & p {
+        margin-bottom: 0.75rem;
+        background-color: blue;
+    }
+
+    /* 標題樣式 */
+    & h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        color: theme('colors.pink.800');
+    }
+
+    & h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-top: 1.25rem;
+        margin-bottom: 0.75rem;
+        color: theme('colors.pink.800');
+    }
+
+    & h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        color: theme('colors.pink.700');
+    }
+
+    /* 列表樣式 */
+    & ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    & ol {
+        list-style-type: decimal;
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    & li {
+        margin-bottom: 0.25rem;
+    }
+
+    /* 鏈接樣式 */
+    & a {
+        color: theme('colors.pink.600');
+        text-decoration: underline;
+        transition: color 0.2s;
+    }
+
+    & a:hover {
+        color: theme('colors.pink.800');
+    }
+
+    /* 強調樣式 */
+    & strong {
+        font-weight: 700;
+    }
+
+    & em {
+        font-style: italic;
+    }
+
+    /* 代碼樣式 */
+    & code {
+        font-family: monospace;
+        background-color: theme('colors.gray.100');
+        padding: 0.125rem 0.25rem;
+        border-radius: 0.25rem;
+        font-size: 0.875em;
+    }
+
+    & pre {
+        background-color: theme('colors.gray.100');
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        overflow-x: auto;
+        margin-bottom: 1rem;
+    }
+
+    & pre code {
+        background-color: transparent;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    /* 表格樣式 */
+    & table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+    }
+
+    & th {
+        background-color: theme('colors.pink.50');
+        border: 1px solid theme('colors.pink.200');
+        padding: 0.5rem;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    & td {
+        border: 1px solid theme('colors.pink.200');
+        padding: 0.5rem;
+    }
+
+    /* 分隔線樣式 */
+    & hr {
+        border: 0;
+        border-top: 1px solid theme('colors.pink.200');
+        margin: 1.5rem 0;
+    }
+
+    /* 圖片樣式 */
+    & img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.375rem;
+        margin: 1rem 0;
+    }
+
+    /* 任務列表樣式 (GFM 擴展) */
+    & input[type="checkbox"] {
+        margin-right: 0.5rem;
+    }
+}

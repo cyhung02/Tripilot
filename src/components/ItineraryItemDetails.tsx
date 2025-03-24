@@ -3,6 +3,8 @@ import { ItineraryItem } from '../data/types';
 import { typeConfig } from '../utils/ItemTypeConfig';
 import TransportTimeline from './TransportTimeline';
 import { LocationIcon } from './common/SvgIcons';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface ItineraryItemDetailsProps {
     item: ItineraryItem;
@@ -24,7 +26,13 @@ const ItineraryItemDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => 
         default:
             return (
                 <>
-                    {item.description && <p className="text-sm">{item.description}</p>}
+                    {item.description && (
+                        <div className="text-sm markdown-content">
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                {item.description}
+                            </ReactMarkdown>
+                        </div>
+                    )}
                 </>
             );
     }
@@ -34,12 +42,22 @@ const BasicDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
     const config = typeConfig[item.type] || typeConfig['其他'];
     return (
         <>
-            {item.description && <p className="text-sm mb-3 leading-relaxed whitespace-pre-wrap">{item.description}</p>}
+            {item.description && (
+                <div className="text-sm mb-3 leading-relaxed markdown-content">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {item.description}
+                    </ReactMarkdown>
+                </div>
+            )}
 
             {item.tips && (
                 <div className={`${config.detailPanel} p-3 rounded-lg mb-3 border`}>
                     <h4 className="text-sm font-bold mb-1 text-pink-800">小提示</h4>
-                    <p className="text-xs leading-relaxed whitespace-pre-wrap">{item.tips}</p>
+                    <div className="text-xs leading-relaxed markdown-content">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {item.tips}
+                        </ReactMarkdown>
+                    </div>
                 </div>
             )}
 
@@ -112,8 +130,22 @@ const TransportDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
 
             {/* 額外說明 */}
             {item.description && (
-                <div className={`mt-3 text-sm ${config.detailPanel} p-3 rounded-lg border`}>
-                    <p>{item.description}</p>
+                <div className={`mt-3 text-sm ${config.detailPanel} p-3 rounded-lg border markdown-content`}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {item.description}
+                    </ReactMarkdown>
+                </div>
+            )}
+
+            {/* 小提示 */}
+            {item.tips && (
+                <div className={`mt-3 ${config.detailPanel} p-3 rounded-lg mb-3 border`}>
+                    <h4 className="text-sm font-bold mb-1 text-purple-800">小提示</h4>
+                    <div className="text-xs leading-relaxed markdown-content">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {item.tips}
+                        </ReactMarkdown>
+                    </div>
                 </div>
             )}
         </div>
@@ -124,7 +156,13 @@ const RestaurantDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
     const config = typeConfig[item.type] || typeConfig['其他'];
     return (
         <>
-            {item.description && <p className="text-sm mb-3">{item.description}</p>}
+            {item.description && (
+                <div className="text-sm mb-3 markdown-content">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {item.description}
+                    </ReactMarkdown>
+                </div>
+            )}
 
             {item.recommendedDishes && (
                 <div className={`${config.detailPanel} p-3 rounded-lg mb-3 border`}>
