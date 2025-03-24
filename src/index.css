@@ -6,7 +6,11 @@
     /* 段落樣式 */
     & p {
         margin-bottom: 0.75rem;
-        background-color: blue;
+    }
+    
+    /* 最後一個段落不要底部邊距 */
+    & p:last-child {
+        margin-bottom: 0;
     }
 
     /* 標題樣式 */
@@ -37,18 +41,39 @@
     /* 列表樣式 */
     & ul {
         list-style-type: disc;
-        margin-left: 1.5rem;
+        margin-left: 1rem;
         margin-bottom: 1rem;
     }
 
     & ol {
         list-style-type: decimal;
-        margin-left: 1.5rem;
+        margin-left: 1rem;
         margin-bottom: 1rem;
+    }
+
+    /* 最後的清單不需要底部邊距 */
+    & ul:last-child, & ol:last-child {
+        margin-bottom: 0;
     }
 
     & li {
         margin-bottom: 0.25rem;
+    }
+
+    /* 清單中的最後一個項目不要底部邊距 */
+    & li:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* 清單項目內的最後一個元素不要底部邊距 */
+    & li > *:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* 處理嵌套清單的邊距 */
+    & li > ul, & li > ol {
+        margin-top: 0.25rem;
+        margin-bottom: 0;
     }
 
     /* 鏈接樣式 */

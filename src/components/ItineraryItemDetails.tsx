@@ -52,7 +52,7 @@ const BasicDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
 
             {item.tips && (
                 <div className={`${config.detailPanel} p-3 rounded-lg mb-3 border`}>
-                    <h4 className="text-sm font-bold mb-1 text-pink-800">小提示</h4>
+                    <h4 className="text-sm font-bold mb-2 text-pink-800">小提示</h4>
                     <div className="text-xs leading-relaxed markdown-content">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {item.tips}
@@ -94,6 +94,15 @@ const TransportDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
 
     return (
         <div className="space-y-4">
+            {/* 額外說明 */}
+            {item.description && (
+                <div className="text-sm mb-3 leading-relaxed markdown-content">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {item.description}
+                    </ReactMarkdown>
+                </div>
+            )}
+
             {/* 行程摘要 */}
             <div className="flex items-center bg-purple-50 p-3 rounded-lg">
                 <div className="flex-1">
@@ -128,19 +137,10 @@ const TransportDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
                 </div >
             )}
 
-            {/* 額外說明 */}
-            {item.description && (
-                <div className={`mt-3 text-sm ${config.detailPanel} p-3 rounded-lg border markdown-content`}>
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {item.description}
-                    </ReactMarkdown>
-                </div>
-            )}
-
             {/* 小提示 */}
             {item.tips && (
                 <div className={`mt-3 ${config.detailPanel} p-3 rounded-lg mb-3 border`}>
-                    <h4 className="text-sm font-bold mb-1 text-purple-800">小提示</h4>
+                    <h4 className="text-sm font-bold mb-2 text-purple-800">小提示</h4>
                     <div className="text-xs leading-relaxed markdown-content">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {item.tips}
@@ -166,7 +166,7 @@ const RestaurantDetails: React.FC<ItineraryItemDetailsProps> = ({ item }) => {
 
             {item.recommendedDishes && (
                 <div className={`${config.detailPanel} p-3 rounded-lg mb-3 border`}>
-                    <h4 className="text-sm font-medium mb-1 text-pink-800">推薦菜色</h4>
+                    <h4 className="text-sm font-bold mb-2 text-pink-800">推薦菜色</h4>
                     <p className="text-xs">{item.recommendedDishes}</p>
                 </div>
             )}
