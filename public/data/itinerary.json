@@ -5,6 +5,27 @@
         "itinerary": [
             {
                 "type": "交通",
+                "name": "前往機場",
+                "time": "16:15",
+                "description": "",
+                "tips": "",
+                "transportation": {
+                    "from": "Home",
+                    "to": "桃園機場 T1",
+                    "departureTime": "16:15",
+                    "segments": [
+                        {
+                            "vehicleNumber": "Tripool",
+                            "from": "Home",
+                            "to": "桃園機場 T1",
+                            "departureTime": "16:15",
+                            "isReserved": true
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "交通",
                 "name": "搭乘航班前往關西機場",
                 "time": "19:35",
                 "description": "",
@@ -85,10 +106,10 @@
             },
             {
                 "type": "餐廳",
-                "name": "無鉄砲 大阪店",
+                "name": "八重勝",
                 "time": "",
-                "description": "濃厚系拉麵專賣店，以豚骨湯頭為主打，是大阪人氣拉麵店之一。",
-                "location": "https://maps.app.goo.gl/hnLAWpsXRyGgTG1m8",
+                "description": "串炸專賣店，提供各式串炸料理，口味獨特，外酥內嫩，是大阪當地人推薦的美食之一。",
+                "location": "https://maps.app.goo.gl/58ytQ9VFUpQc4WF77",
                 "recommendedDishes": ""
             },
             {
@@ -246,6 +267,27 @@
                 "location": "https://maps.app.goo.gl/3cwEZaGQufqJmNpH7"
             },
             {
+                "type": "餐廳",
+                "name": "竹中肉店",
+                "time": "",
+                "description": "竹中肉店是一家專門經營國產黑毛和牛及神戶牛的肉品店，位於有馬溫泉。在店內，您可以輕鬆品嚐各種運用神戶牛製作的美味佳餚，如炸牛肉可樂餅、神戶牛排、神戶牛丼等，充分享受神戶牛的極致風味。",
+                "location": "https://maps.app.goo.gl/dV7MS5Dy2mnKU5n49"
+            },
+            {
+                "type": "餐廳",
+                "name": "アリマ ジェラテリア スタジオーネ",
+                "time": "",
+                "description": "曾榮獲「Gelato World Tour Japan 2019 日本大會」冠軍，日本第一的義式冰淇淋店，清爽不甜膩的口感真的超棒！",
+                "location": "https://maps.app.goo.gl/QwLWkJUABbwhZaXv8"
+            },
+            {
+                "type": "餐廳",
+                "name": "蕎麦 土山人 有馬店",
+                "time": "",
+                "description": "",
+                "location": "https://maps.app.goo.gl/vBWGEQYAm6FE38ov8"
+            },
+            {
                 "type": "景點",
                 "name": "溫泉旅館晚餐與泡湯",
                 "time": "17:00",
@@ -384,7 +426,7 @@
         "accommodation": {
             "city": "廣島",
             "name": "広島ワシントンホテル",
-            "locationURL": "https://maps.app.goo.gl/jdCY28NxH8RuxY5U7"
+            "locationURL": "https://maps.app.goo.gl/Qscq9yPry5k2tVkg6"
         }
     },
     {
@@ -512,7 +554,7 @@
         "accommodation": {
             "city": "廣島",
             "name": "広島ワシントンホテル",
-            "locationURL": "https://goo.gl/maps/yVRQwThU7JLU9bgU7"
+            "locationURL": "https://maps.app.goo.gl/Qscq9yPry5k2tVkg6"
         }
     },
     {
@@ -522,29 +564,46 @@
             {
                 "type": "交通",
                 "name": "前往尾道",
-                "time": "09:00",
-                "description": "從廣島前往尾道的交通行程",
-                "tips": "從廣島站出發前，建議購買便當在車上享用。行李建議寄放在尾道站的投幣式置物櫃（小型¥400，大型¥700）。",
+                "time": "",
+                "description": "",
+                "tips": "",
                 "transportation": {
-                    "from": "広島",
+                    "from": "八丁堀",
                     "to": "尾道",
-                    "departureTime": "09:00",
-                    "arrivalTime": "10:15",
+                    "departureTime": "09:12",
+                    "arrivalTime": "10:45",
+                    "routingURL": "https://yahoo.jp/McnSXT",
                     "segments": [
                         {
+                            "vehicleNumber": "広島電鉄１号線",
+                            "from": "八丁堀",
+                            "to": "広島駅",
+                            "departureTime": "09:12",
+                            "arrivalTime": "09:25",
+                            "isReserved": false
+                        },
+                        {
                             "vehicleNumber": "ＪＲ新幹線こだま844号",
-                            "from": "広島站",
-                            "to": "三原站",
-                            "departureTime": "09:00",
-                            "arrivalTime": "09:30",
+                            "from": "広島",
+                            "to": "三原",
+                            "departureTime": "09:38",
+                            "arrivalTime": "10:03",
                             "isReserved": true
                         },
                         {
                             "vehicleNumber": "ＪＲ山陽本線",
-                            "from": "三原站",
-                            "to": "尾道站",
-                            "departureTime": "09:45",
-                            "arrivalTime": "10:15",
+                            "from": "三原",
+                            "to": "糸崎",
+                            "departureTime": "10:30",
+                            "arrivalTime": "10:34",
+                            "isReserved": false
+                        },
+                        {
+                            "vehicleNumber": "ＪＲ山陽本線",
+                            "from": "糸崎",
+                            "to": "尾道",
+                            "departureTime": "10:38",
+                            "arrivalTime": "10:45",
                             "isReserved": false
                         }
                     ]
@@ -553,77 +612,73 @@
             {
                 "type": "其他",
                 "name": "寄放行李",
-                "time": "10:20",
-                "description": "在尾道站附近寄放行李，方便輕裝遊覽",
-                "tips": "尾道站內有投幣式置物櫃，大型行李可在站前的「ONOMICHI U2」寄放（¥500/天）。營業時間: 9:00-18:00。"
+                "time": "",
+                "description": "[Coin locker 查詢](https://coinlocker.click/onomichi-station.php)  \n需特別注意關門時間。"
+            },
+            {
+                "type": "餐廳",
+                "name": "おやつとやまねこ",
+                "time": "",
+                "description": "おやつとやまねこ是一家位於尾道的熱門甜點店，以可愛牛奶瓶裝的「尾道布丁」聞名。布丁選用當地的砂谷牛乳與尾道產新鮮雞蛋製作，口感細膩濃郁，並搭配國產檸檬糖漿增添風味。店內還提供使用自家小麥製作的各式烘焙點心，如餅乾、比斯考提與司康。特別推薦期間限定口味與咖啡布丁，風味濃厚、回味無窮，是甜點愛好者不可錯過的必訪名店！",
+                "location": "https://maps.app.goo.gl/r9Ny4zncm7uknZdE6"
+            },
+            {
+                "type": "餐廳",
+                "name": "尾道ラーメン 壱番館本店",
+                "time": "",
+                "description": "尾道著名的拉麵店，以醬油湯底和背脂拉麵聞名。",
+                "location": "https://maps.app.goo.gl/iu34ArwstzobyBuv8"
             },
             {
                 "type": "景點",
                 "name": "千光寺纜車 & 千光寺公園",
-                "time": "10:45",
+                "time": "",
                 "description": "搭乘纜車前往山頂的千光寺，可俯瞰尾道市區和瀨戶內海美景。",
-                "tips": "纜車往返票價¥500，也可選擇步行登山（約25分鐘）。千光寺公園的櫻花和楓葉季節特別美麗，山頂有多個觀景台。4月初可能正好趕上櫻花季，是絕佳的賞櫻景點。",
-                "location": "https://goo.gl/maps/L7UZsGnqDYUVN7cn6"
-            },
-            {
-                "type": "餐廳",
-                "name": "尾道拉麵 壱番館本店",
-                "time": "12:30",
-                "description": "尾道著名的拉麵店，以醬油湯底和背脂拉麵聞名。",
-                "tips": "從千光寺下山後走路約10分鐘可到達。店鋪可能有排隊現象，建議避開用餐高峰時段。",
-                "location": "https://goo.gl/maps/8eypEvTsj9XQg3Fy5",
-                "recommendedDishes": "尾道拉麵、尾道背脂拉麵、叉燒飯"
+                "location": "https://maps.app.goo.gl/ziXPy3hnScCPCjaS7"
             },
             {
                 "type": "景點",
-                "name": "貓之細道 & 艮神社",
-                "time": "14:00",
+                "name": "猫の細道 & 艮神社",
+                "time": "",
                 "description": "蜿蜒於山坡間的小徑，以眾多流浪貓而聞名，途經古樸的艮神社。",
                 "tips": "道路較陡，請穿著舒適的鞋子。沿途有許多文藝小店和咖啡館。「貓咪商店」有許多貓咪周邊商品，「尾道文學館」也值得一訪。",
-                "location": "https://goo.gl/maps/JNgQxwZgHZkTEXLG6"
+                "location": "https://maps.app.goo.gl/UYXB9sUdmFq7sMfDA"
             },
             {
                 "type": "餐廳",
-                "name": "U2 HOTEL 咖啡廳休息",
-                "time": "15:30",
-                "description": "在單車主題飯店內的咖啡廳休息",
-                "tips": "U2是改造自舊倉庫的複合設施，設計感十足。咖啡廳提供精緻甜點與咖啡，也可欣賞海景。",
-                "location": "https://goo.gl/maps/qJcxs7JaX5bBTdEH7",
-                "recommendedDishes": "柑橘蛋糕、咖啡、檸檬氣泡飲"
+                "name": "からさわ",
+                "time": "",
+                "description": "### 尾道名店「からさわ」：極致的蛋黃冰淇淋體驗  \n「からさわ」創立於昭和初期，最初是以和菓子行商起家，後來發展成咖啡店，並在1940年代透過參考法式冰淇淋（glace）技術，研發出獨特的「たまごアイス」（蛋黃冰淇淋）。這款冰淇淋使用來自廣島縣世羅町的優質雞蛋、北海道牛乳與甜菜製成的砂糖，口感柔滑細緻，甜而不膩，展現出職人精湛的技藝。  \n其中，黑芝麻口味更是融合香濃芝麻與蛋黃冰淇淋的濃郁風味，令人驚艷。店內環境溫馨，木質桌椅搭配柔和的洋樂，適合悠閒享受美味的甜品。一杯蛋黃冰淇淋加上紅豆湯（ぜんざい）只需460日圓，帶來極致幸福感，值得一試！",
+                "location": "https://maps.app.goo.gl/WZovUAK9Mr8BYqoZA"
             },
             {
                 "type": "景點",
-                "name": "尾道本通商店街",
-                "time": "16:30",
+                "name": "尾道本通り商店街",
+                "time": "",
                 "description": "尾道主要商店街，有各種特色小店和美食。",
-                "tips": "推薦「尾道浪漫珈琲」的咖啡與「ANAGO」的鰻魚飯。文青風格的書店「本と雑貨 リスキル」也很有特色。",
-                "location": "https://goo.gl/maps/qJcxs7JaX5bBTdEH7"
+                "tips": "",
+                "location": "https://maps.app.goo.gl/Sk6A764Ni9dsKfN68"
             },
             {
                 "type": "其他",
                 "name": "領行李",
-                "time": "18:00",
-                "description": "取回寄放的行李",
-                "tips": "記得在寄物處關門前（通常18:00或19:00）取回行李。"
+                "time": "",
+                "description": "取回寄放的行李"
             },
             {
                 "type": "交通",
                 "name": "前往岡山",
-                "time": "18:30",
-                "description": "從尾道前往岡山的交通行程",
-                "tips": "搭乘JR山陽本線前往岡山，旅程約90分鐘。可在車上休息或整理照片。",
+                "time": "",
+                "description": "車程大約 1 小時 20 分鐘。",
+                "tips": "",
                 "transportation": {
                     "from": "尾道",
                     "to": "岡山",
-                    "departureTime": "18:30",
-                    "arrivalTime": "20:00",
                     "segments": [
                         {
                             "vehicleNumber": "JR山陽本線",
-                            "from": "尾道站",
-                            "to": "岡山站",
-                            "departureTime": "18:30",
-                            "arrivalTime": "20:00",
+                            "from": "尾道",
+                            "to": "岡山",
                             "isReserved": false
                         }
                     ]
@@ -631,30 +686,24 @@
             },
             {
                 "type": "餐廳",
-                "name": "岡山站晚餐",
-                "time": "20:15",
-                "description": "在岡山站構內或周邊用餐",
-                "tips": "岡山站內有多家餐廳，也可選擇附近的「イオンモール岡山」購物中心內用餐。推薦嚐嚐岡山特色的桃太郎烏冬麵。",
-                "location": "https://goo.gl/maps/SYkKSgkzkUvFXeUm6",
-                "recommendedDishes": "桃太郎烏冬麵、岡山特色醬油拉麵、日式咖哩"
+                "name": "鳥好",
+                "time": "",
+                "description": "這是一間充滿活力的日式大眾居酒屋，氛圍熱鬧且令人愉快。餐點品質穩定，像是厚切的天然鰤魚刺身，口感鮮美且無過多油脂，適合各種口味的饕客；而搭配和芥末的魷魚納豆則帶來獨特風味，口感滑順。雖然價格稍高，但整體體驗值得。店內空間開放，沒有個室或隔間，讓人能夠感受到客人熱絡的談笑聲與店員的忙碌身影。",
+                "location": "https://maps.app.goo.gl/JVyhqDxcd9MY83aE8"
             }
         ],
         "foodRecommendations": [
-            "尾道拉麵 - 推薦「壱番館本店」",
-            "鯛魚料理 - 推薦「尾道中華そば」",
-            "文青麵包 - 推薦「R Baker」",
-            "檸檬甜點 - 尾道是柑橘產地"
+            "尾道拉麵",
+            "文青麵包",
+            "檸檬甜點"
         ],
         "shoppingRecommendations": [
-            "尾道文創商品 - 推薦「貓咪商店」",
-            "手作工藝品 - 推薦「HISHIO」",
-            "單車周邊商品 - 推薦「ONOMICHI U2」",
-            "尾道特色明信片 - 推薦「尾道商店街」"
+            "尾道文創商品"
         ],
         "accommodation": {
             "city": "岡山",
             "name": "ホテルアベストグランデ 岡山 なごみの湯",
-            "locationURL": "https://goo.gl/maps/SYkKSgkzkUvFXeUm6"
+            "locationURL": "https://maps.app.goo.gl/QuJapJjWuKAXMay29"
         }
     },
     {
@@ -664,108 +713,91 @@
             {
                 "type": "交通",
                 "name": "前往津山",
-                "time": "08:30",
-                "description": "從岡山前往津山的交通行程",
-                "tips": "建議購買「津山&鶴山公園1日券」（約¥3,000），包含往返車票及津山城入場券。",
+                "time": "",
+                "description": "",
+                "tips": "",
                 "transportation": {
                     "from": "岡山",
                     "to": "津山",
-                    "departureTime": "08:30",
-                    "arrivalTime": "09:40",
+                    "departureTime": "09:51",
+                    "arrivalTime": "11:01",
+                    "routingURL": "https://yahoo.jp/cmbzVg",
                     "segments": [
                         {
-                            "vehicleNumber": "JR津山線",
-                            "from": "岡山站",
-                            "to": "津山站",
-                            "departureTime": "08:30",
-                            "arrivalTime": "09:40",
+                            "vehicleNumber": "ＪＲ快速ことぶき",
+                            "from": "岡山",
+                            "to": "津山",
+                            "departureTime": "09:51",
+                            "arrivalTime": "11:01",
                             "isReserved": false
                         }
                     ]
                 }
+            },
+            {
+                "type": "餐廳",
+                "name": "いっぱい茶屋　東宝",
+                "time": "",
+                "description": "津山當地著名的食堂，以「津山ホルモンうどん」聞名。",
+                "location": "https://maps.app.goo.gl/2my3GFZD3TdyFKLFA",
+                "recommendedDishes": "津山ホルモンうどん"
             },
             {
                 "type": "景點",
                 "name": "津山城（鶴山公園）",
-                "time": "10:00",
+                "time": "",
                 "description": "保存完好的日本城郭遺址，位於鶴山公園內，春季櫻花特別美麗。",
-                "tips": "開放時間: 9:00-17:00，門票¥320。4月初可能剛好是櫻花季，公園內有約千棵櫻花樹，是岡山縣內著名賞櫻地點。登上天守台可俯瞰津山市區全景，公園內有許多歷史建築遺跡。",
-                "location": "https://goo.gl/maps/JRdLCL5h53bWvUuZ8"
-            },
-            {
-                "type": "餐廳",
-                "name": "津山特色午餐",
-                "time": "12:30",
-                "description": "品嚐津山地區特色美食",
-                "tips": "推薦嚐嚐「津山ホルモンうどん」（內臟烏龍麵）或「津山牛」料理，是當地特色。「津山バルクック」提供當地新鮮食材料理。",
-                "location": "https://goo.gl/maps/JRdLCL5h53bWvUuZ8",
-                "recommendedDishes": "津山ホルモンうどん、津山牛燒肉、日式咖哩"
-            },
-            {
-                "type": "景點",
-                "name": "吉備津神社",
-                "time": "14:30",
-                "description": "歷史悠久的神社，建築風格獨特，有著名的「鳴釜神事」。",
-                "tips": "從津山站可搭乘巴士前往，車程約25分鐘。參拜後可獲得「桃太郎」相關的護身符，神社迴廊非常壯觀。每月20日舉行「鳴釜神事」，為日本重要無形民俗文化財。",
-                "location": "https://goo.gl/maps/CStUPZ8yPvLu52zF9"
+                "tips": "4月初可能剛好是櫻花季，公園內有約千棵櫻花樹，是岡山縣內著名賞櫻地點。登上天守台可俯瞰津山市區全景，公園內有許多歷史建築遺跡。",
+                "location": "https://maps.app.goo.gl/uvi7kPaj4iaEAGJk6"
             },
             {
                 "type": "購物",
-                "name": "津山特產購物",
-                "time": "16:00",
+                "name": "アルネ・津山",
+                "time": "",
                 "description": "購買津山地區特色伴手禮",
-                "tips": "推薦購買「津山銘菓」如羊羹、津山牛肉乾或當地釀造的甘酒。「アルネ津山」購物中心有多家特產店。",
-                "location": "https://goo.gl/maps/CStUPZ8yPvLu52zF9"
+                "tips": "津山特產如「津山牛肉乾」可以在這裡找到。",
+                "location": "https://maps.app.goo.gl/F4m5cPvxr92mGHrg7"
             },
             {
                 "type": "交通",
                 "name": "返回岡山",
-                "time": "17:00",
-                "description": "從津山返回岡山的交通行程",
-                "tips": "返程時間約為70分鐘。可在車上休息或整理當日照片。",
+                "time": "",
+                "description": "",
                 "transportation": {
                     "from": "津山",
-                    "to": "岡山",
-                    "departureTime": "17:00",
-                    "arrivalTime": "18:10",
-                    "segments": [
-                        {
-                            "vehicleNumber": "JR津山線",
-                            "from": "津山站",
-                            "to": "岡山站",
-                            "departureTime": "17:00",
-                            "arrivalTime": "18:10",
-                            "isReserved": false
-                        }
-                    ]
+                    "to": "岡山"
                 }
             },
             {
+                "type": "景點",
+                "name": "吉備津神社",
+                "time": "",
+                "description": "歷史悠久的神社，建築風格獨特，有著名的「鳴釜神事」。",
+                "tips": "參拜後可獲得「桃太郎」相關的護身符，神社迴廊非常壯觀。每月20日舉行「鳴釜神事」，為日本重要無形民俗文化財。",
+                "location": "https://maps.app.goo.gl/BRyBSxxZTaZAzycU7"
+            },
+            {
                 "type": "餐廳",
-                "name": "岡山晚餐",
-                "time": "19:00",
-                "description": "在岡山市區享用晚餐",
-                "tips": "可以在酒店附近的餐廳用餐，或前往岡山站周邊的餐飲區。推薦嚐嚐岡山特色的「鰆魚料理」或「吉備鳥」（當地雞肉）。「なごみの湯」酒店內有溫泉設施，晚餐後可以泡湯放鬆。",
-                "location": "https://goo.gl/maps/SYkKSgkzkUvFXeUm6",
-                "recommendedDishes": "鰆魚料理、吉備鳥燒烤、岡山特色壽司"
+                "name": "カツ丼 野村",
+                "time": "",
+                "description": "創立於1931年的老字號炸豬排丼專門店，距JR岡山站步行約5分鐘。店內採食券制（現金支付），無停車場，建議步行前往。招牌德米醬炸豬排丼口感酥脆，搭配秘傳醬汁與燙青菜，風味濃郁不膩。另有玉子炸豬排丼與不同份量選擇，適合各種食量。座位以共桌為主，但用餐環境舒適。現炸口感最佳，推薦內用，為岡山必訪美食之一。",
+                "tips": "",
+                "location": "https://maps.app.goo.gl/tfVbTdP8NKgRNdRt6",
+                "recommendedDishes": ""
             }
         ],
         "foodRecommendations": [
-            "津山ホルモンうどん（內臟烏龍麵）- 推薦「元祖ホルモンうどん」",
-            "津山牛（燒烤、肉乾）- 推薦「津山ヘルシービーフ」",
-            "羊羹 - 推薦「長船屋」的栗羊羹",
-            "桃太郎饅頭 - 推薦「みはら」"
+            "津山ホルモンうどん（內臟烏龍麵）",
+            "津山牛（燒烤、肉乾）",
+            "羊羹"
         ],
         "shoppingRecommendations": [
-            "津山特產 - 推薦「アルネ津山」購物中心",
-            "吉備津神社護身符 - 神社內授與所購買",
-            "津山牛肉乾 - 推薦「津山ヘルシービーフ」",
-            "日本酒 - 推薦「辻本店」"
+            "津山牛肉乾"
         ],
         "accommodation": {
             "city": "岡山",
             "name": "ホテルアベストグランデ 岡山 なごみの湯",
-            "locationURL": "https://goo.gl/maps/SYkKSgkzkUvFXeUm6"
+            "locationURL": "https://maps.app.goo.gl/QuJapJjWuKAXMay29"
         }
     },
     {
@@ -876,7 +908,7 @@
         "accommodation": {
             "city": "岡山",
             "name": "ホテルアベストグランデ 岡山 なごみの湯",
-            "locationURL": "https://goo.gl/maps/SYkKSgkzkUvFXeUm6"
+            "locationURL": "https://maps.app.goo.gl/QuJapJjWuKAXMay29"
         }
     },
     {
@@ -1003,7 +1035,7 @@
         "accommodation": {
             "city": "岡山",
             "name": "ホテルアベストグランデ 岡山 なごみの湯",
-            "locationURL": "https://goo.gl/maps/SYkKSgkzkUvFXeUm6"
+            "locationURL": "https://maps.app.goo.gl/QuJapJjWuKAXMay29"
         }
     },
     {
